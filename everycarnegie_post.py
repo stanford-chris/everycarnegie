@@ -349,85 +349,112 @@ def pin_credits(dry_run=False):
 
 # --------------------------------------------------------------- launch day
 
-# The bot opens where the programme opened. Dunfermline is NOT in the roster —
-# Britain is held back, and this is a deliberate one-off rather than a leak —
-# so the row is written out here in full, with its own image and credit.
-#
-# Every claim in the text is from the Dunfermline Carnegie Library and Andrew
-# Carnegie articles: opened 29 August 1883, the world's first of the 2,509;
-# foundation stone laid 27 July 1881 by his mother Margaret; "The opening of
-# the library in 1883 was regarded as the most significant local event of the
-# year and a public holiday was declared".
-LAUNCH = {
+# The opening thread lives in launch_thread.py, which is also what renders the
+# preview page. One source of text: the thread you read is the thread that goes
+# out.
+_lt = importlib.util.spec_from_file_location('lt', HERE / 'launch_thread.py')
+launch_thread = importlib.util.module_from_spec(_lt)
+_lt.loader.exec_module(launch_thread)
+
+# Dunfermline is NOT in the roster — Britain is held back — so the row for the
+# photograph is written out here in full, with its own credit and description.
+LAUNCH_IMAGE = {
     'name': 'Dunfermline', 'city': 'Dunfermline', 'region': 'Fife',
-    'country': 'United Kingdom', 'address': 'Abbot Street',
-    'wikipedia_url': 'https://en.wikipedia.org/wiki/Dunfermline_Carnegie_Library',
-    'image_title': "File:The world's first Carnegie Library, in Dunfermline.JPG",
+    'country': 'United Kingdom',
+    'image_title': launch_thread.IMAGE_TITLE,
     'image_source': 'launch',
-    'photographer': 'Stephencdickson', 'licence': 'CC BY-SA 3.0',
+    'photographer': 'Stephencdickson',
     'credit_page': 'https://commons.wikimedia.org/wiki/'
                    "File:The_world's_first_Carnegie_Library,_in_Dunfermline.JPG",
-    # Carried here rather than in alt_text.json on purpose. That file is
-    # rewritten whole by carnegie_describe.py every 25 rows, so an entry added
-    # while a run is in flight is silently overwritten by the next checkpoint.
-    'alt': ('Pale stone building with rows of large rectangular windows and a '
-            'prominent corner tower adorned with turrets and ornamental spires. '
-            'Motorcycles parked at street level; clear skies with light cloud '
-            'cover.'),
+    'wikipedia_url': 'https://en.wikipedia.org/wiki/Dunfermline_Carnegie_Library',
+    'alt': launch_thread.ALT,
 }
 
-LAUNCH_TEXT = (
-    "Dunfermline, Fife 📚\n"
-    "Abbot Street\n\n"
-    "The first. It opened 143 years ago today, on 29 August 1883. Carnegie's "
-    "mother had laid the foundation stone; the town declared a public holiday."
-    "\n\n2,508 followed, over the next 46 years.\n\n"
-    "📷 Stephencdickson · CC BY-SA 3.0\n\n"
-    "#CarnegieLibraries #Dunfermline"
-)
 
+def build_thread_post(text):
+    """Attach the photographer's link where the credit line appears.
 
-def build_launch():
-    """The anniversary post, with both links attached the usual way."""
+    Only the root post carries a credit, so the rest come back as plain text.
+    """
     tb = client_utils.TextBuilder()
-    subject = 'Dunfermline'
-    rest = LAUNCH_TEXT
-    if rest.startswith(subject):
-        tb.link(subject, LAUNCH['wikipedia_url'])
-        rest = rest[len(subject):]
-    who = LAUNCH['photographer']
-    head, sep, tail = rest.partition(f'📷 {who}')
-    if sep:
-        tb.text(head + '📷 ')
-        tb.link(who, LAUNCH['credit_page'])
-        tb.text(tail)
-    else:
-        tb.text(rest)
+    who = LAUNCH_IMAGE['photographer']
+    head, sep, tail = text.partition(f'📷 {who}')
+    if not sep:
+        tb.text(text)
+        return tb
+    tb.text(head + '📷 ')
+    tb.link(who, LAUNCH_IMAGE['credit_page'])
+    tb.text(tail)
     return tb
 
 
 def post_launch(dry_run=False):
-    tb = build_launch()
-    text = tb.build_text()
-    alt = build_alt(LAUNCH)
+    """Post the opening thread: a root with the photograph, then replies.
+
+    ⚠️ Every reply carries BOTH refs. `parent` is the post immediately above it
+    and `root` stays the first post throughout — set root to the parent and
+    Bluesky renders a chain of separate conversations instead of one thread.
+
+    ⚠️ Guarded against double-posting. A thread cannot be re-run to fix a typo:
+    posts are not editable, and a second run would leave two opening threads on
+    a feed with nothing else in it. The state file records that it went out.
+    """
+    posts = launch_thread.POSTS
+    over = [i for i, (t, _) in enumerate(posts, 1) if len(t) > 300]
+    if over:
+        sys.exit(f'Posts over the 300-character limit: {over}')
+
+    print(f'{len(posts)} posts, longest {max(len(t) for t, _ in posts)} chars')
+    for i, (text, has_image) in enumerate(posts, 1):
+        print('-' * 60)
+        print(f'{i}/{len(posts)}  [{len(text)} chars]' + ('  + photograph' if has_image else ''))
+        print(text)
+        if has_image:
+            print(f'[alt] {AI_PREFIX} {LAUNCH_IMAGE["alt"]}')
     print('-' * 60)
-    print(text)
-    print(f'[{len(text)} chars]')
-    print(f'[alt] {alt}')
-    if len(text) > 300:
-        sys.exit('Launch post is over 300 characters.')
+
     if dry_run:
         print('\nDry run: nothing posted.')
         return
 
-    image = fetch_image(LAUNCH)
+    state = load_state()
+    if state.get('launch_thread_posted'):
+        sys.exit('The launch thread has already been posted. Refusing to post it twice.')
+
     client = login_client()
-    from PIL import Image
-    with Image.open(io.BytesIO(image)) as im:
-        ratio = models.AppBskyEmbedDefs.AspectRatio(width=im.width, height=im.height)
-    client.send_images(text=tb, images=[image], image_alts=[alt],
-                       image_aspect_ratios=[ratio], langs=['en'])
-    print('Posted.')
+    root = parent = None
+    for i, (text, has_image) in enumerate(posts, 1):
+        tb = build_thread_post(text)
+        reply = None
+        if parent is not None:
+            reply = models.AppBskyFeedPost.ReplyRef(root=root, parent=parent)
+
+        if has_image:
+            image = fetch_image(LAUNCH_IMAGE)
+            from PIL import Image
+            with Image.open(io.BytesIO(image)) as im:
+                ratio = models.AppBskyEmbedDefs.AspectRatio(width=im.width, height=im.height)
+            res = client.send_images(
+                text=tb, images=[image],
+                image_alts=[f'{AI_PREFIX} {LAUNCH_IMAGE["alt"]}'],
+                image_aspect_ratios=[ratio], langs=['en'], reply_to=reply)
+        else:
+            res = client.send_post(text=tb, langs=['en'], reply_to=reply)
+
+        ref = models.ComAtprotoRepoStrongRef.Main(uri=res.uri, cid=res.cid)
+        if root is None:
+            root = ref
+            # Recorded as soon as the root exists: if a reply fails halfway the
+            # thread must be repaired by hand, never restarted from the top.
+            state['launch_thread_posted'] = True
+            state['launch_thread_root'] = res.uri
+            save_state(state)
+        parent = ref
+        print(f'posted {i}/{len(posts)}  {res.uri.rsplit("/", 1)[-1]}')
+        if i < len(posts):
+            time.sleep(2)
+
+    print(f'\nThread posted. Root: {root.uri}')
 
 
 # ---------------------------------------------------------------------- main
