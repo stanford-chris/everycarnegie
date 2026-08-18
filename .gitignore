@@ -12,3 +12,6 @@ data/image_state.json
 data/image_state.json.tmp
 data/_tmp/
 data/describe.log
+
+# Rendered preview, regenerable with carnegie_sample_page.py.
+data/sample_posts.html

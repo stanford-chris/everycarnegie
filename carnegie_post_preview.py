@@ -63,6 +63,24 @@ def uk_date(raw):
     return raw if m else ""          # a bare year is fine; anything odder is dropped
 
 
+def grant_amount(raw):
+    """'$10,000' / '10,000' / '—' -> a printable amount, or nothing.
+
+    Wikipedia writes an em dash where the sum is unknown, which 106 rows carry,
+    and "— from Andrew Carnegie, 18 January 1910" is not a sentence. The 38
+    bare numbers are Canada's, whose column header says (US$) and so needs the
+    symbol adding rather than inventing a different currency.
+    """
+    s = re.sub(r"\[\s*\d+\s*\]", "", raw or "").strip()
+    if not re.search(r"\d", s):
+        return ""
+    s = s.strip("()")
+    s = re.sub(r"^US\$?\s*", "", s, flags=re.I)
+    if " " in s:                                  # "10,000 15,500": two grants, ambiguous
+        return ""
+    return s if s.startswith("$") else "$" + s
+
+
 def clean_note(s):
     """The Notes column arrives with the spacing artefacts of stripped markup."""
     s = re.sub(r"\[\s*\d+\s*\]", "", s or "")        # footnote markers
@@ -99,35 +117,75 @@ def place(row):
     # falls back to the country on the continental pages, so the guard stops
     # "Barberton, South Africa, South Africa".
     country = row["country"].strip()
-    if country and country != "United States" and country.lower() not in {p.lower() for p in parts}:
+    if country and country != "United States":
         parts.append(country)
-    return ", ".join(parts)
+
+    # "Blackrock, Dublin" in a region called Dublin gives "Blackrock, Dublin,
+    # Dublin". Drop repeats, keeping the first occurrence, because the name
+    # itself already carries the qualifier.
+    seen, out = set(), []
+    for part in parts:
+        if part and part.lower() not in seen:
+            seen.add(part.lower())
+            out.append(part)
+    return ", ".join(out)
 
 
 def credit_name(who):
-    """Commons stores uploader names with a namespace prefix. 'User:Magicpiano'
-    is not how you credit somebody in a sentence."""
-    who = re.sub(r"^\s*(User|user)\s*:\s*", "", who or "").strip()
-    return re.sub(r"\s+", " ", who)
+    """A person's name, out of whatever Commons holds in its Artist field.
+
+    Four shapes turn up and all of them read badly in a credit line:
+    'User:Magicpiano', 'Armona at en.wikipedia', 'The original uploader was GHe
+    at English Wikipedia.', and names trailed by a request to the reader —
+    'CZmarlin — Christopher Ziemnowicz, a photo credit would be appreciated'.
+    The name is kept; the plumbing around it is not. The licence still requires
+    the name, and the file page carries the unedited original.
+    """
+    who = (who or "").strip()
+    who = re.sub(r"^\s*the original uploader was\s+", "", who, flags=re.I)
+    who = re.sub(r"\s+at\s+(en\.wikipedia|english\s+wikipedia).*$", "", who, flags=re.I)
+    who = re.sub(r"^\s*(User|user)\s*:\s*", "", who)
+    who = re.split(r"\s+[—–-]\s+", who)[0]          # drop trailing real-name gloss/requests
+    who = re.sub(r",\s*(a\s+)?photo credit.*$", "", who, flags=re.I)
+    who = re.sub(r"\s*\(talk\)\s*", " ", who, flags=re.I)
+    # Commons sometimes stores the Artist field doubled, most often as
+    # "Unknown authorUnknown author": the template renders the value twice and
+    # a tag strip runs the two copies together.
+    m = re.fullmatch(r"(.{4,}?)\1", who.strip())
+    if m:
+        who = m.group(1)
+    who = re.sub(r"\s+", " ", who).strip(" .,;")
+    return who
 
 
 def compose(row, note, with_address=True):
-    lines = [place(row) + " 📚"]
-    if with_address and row["address"].strip():
-        lines.append(row["address"].strip())
+    head = place(row)
+    lines = [head + " 📚"]
+
+    # Irish entries are identified by their street, so name and address are the
+    # same string and the post said "Dingle" twice.
+    address = row["address"].strip()
+    if with_address and address and address.lower() != head.split(",")[0].strip().lower():
+        lines.append(address)
     lines.append("")
 
-    granted, grant = uk_date(row["date_granted"]), row["grant"].strip()
+    granted, grant = uk_date(row["date_granted"]), grant_amount(row["grant"])
+    middle = []
     if grant and granted:
-        lines.append(f"{grant} from Andrew Carnegie, {granted}")
+        middle.append(f"{grant} from Andrew Carnegie, {granted}")
     elif grant:
-        lines.append(f"{grant} from Andrew Carnegie")
+        middle.append(f"{grant} from Andrew Carnegie")
     elif granted:
-        lines.append(f"Granted {granted}")
+        middle.append(f"Granted {granted}")
     if note:
-        lines.append(note)
-
-    lines.append("")
+        middle.append(note)
+    # 19 rows have neither a grant nor a note. Without this the post carries an
+    # empty middle and goes out with a double blank line in it.
+    if middle:
+        lines.extend(middle)
+        lines.append("")
+    elif lines[-1] == "":
+        pass
     lines.append(f"📷 {credit_name(row['photographer'])} · {row['licence']}")
     tag = re.sub(r"[^A-Za-z]", "", region_of(row))
     lines.append("")

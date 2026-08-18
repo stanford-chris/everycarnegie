@@ -95,6 +95,14 @@ FIELDS = ["name", "kind", "city", "region", "country", "date_granted", "grant",
 CONTINENTS = {"Africa", "Europe", "Oceania", "the Caribbean"}
 COUNTRIES = {"Canada"}
 
+# Four college libraries sit in a state page's *public* table, so the
+# Institution/Library header split does not catch them. The misfiling is
+# Wikipedia's, not the parser's, and four is few enough to name.
+ACADEMIC_BY_NAME = {
+    "Hamline University", "University of Oklahoma", "Seattle University",
+    "College View",
+}
+
 
 def log(msg):
     print(msg, flush=True)
@@ -226,6 +234,8 @@ def parse_page(html, title):
 
             if not row["name"]:
                 row["name"] = row["city"] or row["address"]
+            if row["name"] in ACADEMIC_BY_NAME:
+                row["kind"] = "academic"
             # A continental page groups by country under its own headings, so
             # the section is the country when no column supplies one.
             if not row["country"]:

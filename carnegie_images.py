@@ -48,6 +48,16 @@ COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = ("everycarnegie-bot/0.1 (https://chris-stanford.com; "
               "stanfordc+claude@mac.com)")
 RADIUS_M = 250
+
+# ⚠️ Held back, not missing. Ireland's 56 rows come from the Europe page, whose
+# table has no library-name column: the identity is the "Location and street"
+# cell, so the names are streets rather than libraries ("Anglesea Street",
+# "Charleville Mall, North Strand"), two places repeat a component, the notes
+# are mostly bare footnote markers, and one entry is Kish Bank lighthouse, which
+# is not a library. That is a different standard of evidence from the American
+# tables, which carry a Library column, a grant and a date. 18 postable rows,
+# 1.4% of the corpus. Check them by hand against Irish sources and remove this.
+HELD_COUNTRIES = {"Ireland"}
 THUMB_WIDTH = 1600
 BATCH = 50
 DELAY = 0.15
@@ -206,7 +216,8 @@ def main():
             "licence": (meta or {}).get("licence", ""),
             "licence_url": (meta or {}).get("licence_url", ""),
             "credit_page": (meta or {}).get("page", ""),
-            "postable": "yes" if (source and who) else "no",
+            "postable": ("yes" if (source and who and r["country"] not in HELD_COUNTRIES)
+                         else "no"),
         })
 
     with open(OUT, "w", newline="", encoding="utf-8") as f:
