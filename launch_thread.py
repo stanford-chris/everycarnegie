@@ -41,7 +41,7 @@ Between 1883 and 1929 he paid for 2,509 public libraries. This was the first, op
 
  ("""They were not gifts, though.
 
-To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building's cost every year, out of public taxes, to run it. Each one is a town that voted to tax itself, and kept paying.""", False),
+To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building's cost every year, out of public taxes, to run it.""", False),
 
  ("""In the segregated South, Carnegie funded separate libraries for Black residents rather than requiring the existing ones to admit them. The one in Savannah, Ga., opened in 1914, for those whom the library had turned away.""", False),
 
