@@ -222,8 +222,9 @@ def build_alt(row):
     Worse than a description, better than nothing, and deliberately carrying no
     A.I. prefix, because nothing here was written by one.
     """
-    entry = alt_store().get(library_id(row), {})
-    visual = entry.get('visual')
+    visual = row.get('alt')                       # a row carrying its own
+    if not visual:                                # description, e.g. the launch post
+        visual = alt_store().get(library_id(row), {}).get('visual')
     if visual:
         return f'{AI_PREFIX} {visual}'[:ALT_MAX]
     return f'Photograph of the Carnegie library at {cp.place(row)}.'[:ALT_MAX]
@@ -346,6 +347,89 @@ def pin_credits(dry_run=False):
     print('Posted and pinned.')
 
 
+# --------------------------------------------------------------- launch day
+
+# The bot opens where the programme opened. Dunfermline is NOT in the roster —
+# Britain is held back, and this is a deliberate one-off rather than a leak —
+# so the row is written out here in full, with its own image and credit.
+#
+# Every claim in the text is from the Dunfermline Carnegie Library and Andrew
+# Carnegie articles: opened 29 August 1883, the world's first of the 2,509;
+# foundation stone laid 27 July 1881 by his mother Margaret; "The opening of
+# the library in 1883 was regarded as the most significant local event of the
+# year and a public holiday was declared".
+LAUNCH = {
+    'name': 'Dunfermline', 'city': 'Dunfermline', 'region': 'Fife',
+    'country': 'United Kingdom', 'address': 'Abbot Street',
+    'wikipedia_url': 'https://en.wikipedia.org/wiki/Dunfermline_Carnegie_Library',
+    'image_title': "File:The world's first Carnegie Library, in Dunfermline.JPG",
+    'image_source': 'launch',
+    'photographer': 'Stephencdickson', 'licence': 'CC BY-SA 3.0',
+    'credit_page': 'https://commons.wikimedia.org/wiki/'
+                   "File:The_world's_first_Carnegie_Library,_in_Dunfermline.JPG",
+    # Carried here rather than in alt_text.json on purpose. That file is
+    # rewritten whole by carnegie_describe.py every 25 rows, so an entry added
+    # while a run is in flight is silently overwritten by the next checkpoint.
+    'alt': ('Pale stone building with rows of large rectangular windows and a '
+            'prominent corner tower adorned with turrets and ornamental spires. '
+            'Motorcycles parked at street level; clear skies with light cloud '
+            'cover.'),
+}
+
+LAUNCH_TEXT = (
+    "Dunfermline, Fife 📚\n"
+    "Abbot Street\n\n"
+    "The first. It opened 143 years ago today, on 29 August 1883. Carnegie's "
+    "mother had laid the foundation stone; the town declared a public holiday."
+    "\n\n2,508 followed, over the next 46 years.\n\n"
+    "📷 Stephencdickson · CC BY-SA 3.0\n\n"
+    "#CarnegieLibraries #Dunfermline"
+)
+
+
+def build_launch():
+    """The anniversary post, with both links attached the usual way."""
+    tb = client_utils.TextBuilder()
+    subject = 'Dunfermline'
+    rest = LAUNCH_TEXT
+    if rest.startswith(subject):
+        tb.link(subject, LAUNCH['wikipedia_url'])
+        rest = rest[len(subject):]
+    who = LAUNCH['photographer']
+    head, sep, tail = rest.partition(f'📷 {who}')
+    if sep:
+        tb.text(head + '📷 ')
+        tb.link(who, LAUNCH['credit_page'])
+        tb.text(tail)
+    else:
+        tb.text(rest)
+    return tb
+
+
+def post_launch(dry_run=False):
+    tb = build_launch()
+    text = tb.build_text()
+    alt = build_alt(LAUNCH)
+    print('-' * 60)
+    print(text)
+    print(f'[{len(text)} chars]')
+    print(f'[alt] {alt}')
+    if len(text) > 300:
+        sys.exit('Launch post is over 300 characters.')
+    if dry_run:
+        print('\nDry run: nothing posted.')
+        return
+
+    image = fetch_image(LAUNCH)
+    client = login_client()
+    from PIL import Image
+    with Image.open(io.BytesIO(image)) as im:
+        ratio = models.AppBskyEmbedDefs.AspectRatio(width=im.width, height=im.height)
+    client.send_images(text=tb, images=[image], image_alts=[alt],
+                       image_aspect_ratios=[ratio], langs=['en'])
+    print('Posted.')
+
+
 # ---------------------------------------------------------------------- main
 
 
@@ -355,10 +439,16 @@ def main():
     ap.add_argument('--dry-run', action='store_true', help='print the post without posting')
     ap.add_argument('--count', type=int, default=1, help='how many to post (default 1)')
     ap.add_argument('--pin', action='store_true', help='post the credits note and pin it')
+    ap.add_argument('--launch', action='store_true',
+                    help='post the Dunfermline anniversary post (once, 29 August)')
     args = ap.parse_args()
 
     if args.pin:
         pin_credits(dry_run=args.dry_run)
+        return
+
+    if args.launch:
+        post_launch(dry_run=args.dry_run)
         return
 
     rows, postable, notes = load_rows()
