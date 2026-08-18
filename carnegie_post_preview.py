@@ -27,10 +27,12 @@ Usage:
 
 import argparse
 import csv
+import json
 import os
 import random
 import re
 from datetime import datetime
+from pathlib import Path
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
@@ -46,6 +48,52 @@ MONTHS = "January February March April May June July August September October No
 # "Washington (state)" disambiguates an article, and the continental pages give
 # a continent where the row's own country column is the useful thing.
 CONTINENTS = {"Africa", "Europe", "Oceania", "the Caribbean"}
+
+
+_CPI = None
+
+
+def cpi():
+    """Annual CPI, 1800 onward, cached from data/cpi.json.
+
+    CPI-U begins in 1913 and most of these grants predate it, so the series is
+    the Minneapolis Fed's, which splices the historical index onto CPI-U. The
+    file records its source and retrieval date: an inflation figure invented
+    from memory would be fluent, plausible and wrong, which is the failure this
+    project keeps finding.
+    """
+    global _CPI
+    if _CPI is None:
+        with (Path(__file__).resolve().parent / "data" / "cpi.json").open() as f:
+            d = json.load(f)
+        _CPI = ({int(k): v for k, v in d["index"].items()}, d["base_year"])
+    return _CPI
+
+
+def year_of(raw):
+    m = re.search(r"(18|19)\d{2}", raw or "")
+    return int(m.group(0)) if m else None
+
+
+def in_todays_money(grant, raw_date):
+    """'$10,000', 1903 -> 'about $358,000 today'. Empty when it cannot be done.
+
+    Deliberately vague wording. This is a CPI conversion, which is one of
+    several defensible ways to compare 1903 with now, and "about" is doing
+    honest work rather than hedging.
+    """
+    idx, base = cpi()
+    year = year_of(raw_date)
+    amount = re.sub(r"[^\d.]", "", grant or "")
+    if not year or not amount or year not in idx or base not in idx:
+        return ""
+    now = float(amount) * idx[base] / idx[year]
+    if now >= 1_000_000:
+        millions = now / 1_000_000
+        shown = f"${millions:.0f} million" if millions >= 10 else f"${millions:.1f} million"
+    else:
+        shown = f"${round(now, -3):,.0f}"
+    return f"about {shown} today"
 
 
 def uk_date(raw):
@@ -172,7 +220,9 @@ def compose(row, note, with_address=True):
     granted, grant = uk_date(row["date_granted"]), grant_amount(row["grant"])
     middle = []
     if grant and granted:
-        middle.append(f"{grant} from Andrew Carnegie, {granted}")
+        today = in_todays_money(grant, row["date_granted"])
+        middle.append(f"{grant} from Andrew Carnegie, {granted}"
+                      + (f" ({today})" if today else ""))
     elif grant:
         middle.append(f"{grant} from Andrew Carnegie")
     elif granted:

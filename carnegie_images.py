@@ -66,8 +66,9 @@ SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": USER_AGENT})
 
 FIELDS = ["name", "kind", "city", "region", "country", "date_granted", "grant",
-          "address", "lat", "lon", "image_source", "image_title", "image_url",
-          "photographer", "licence", "licence_url", "credit_page", "postable"]
+          "address", "lat", "lon", "wikipedia_url", "image_source", "image_title",
+          "image_url", "photographer", "licence", "licence_url", "credit_page",
+          "postable"]
 
 
 def log(m):
@@ -209,6 +210,7 @@ def main():
             "region": r["region"], "country": r["country"],
             "date_granted": r["date_granted"], "grant": r["grant"],
             "address": r["address"], "lat": r["lat"], "lon": r["lon"],
+            "wikipedia_url": r.get("wikipedia_url", ""),
             "image_source": source or "",
             "image_title": title or "",
             "image_url": (meta or {}).get("url", ""),

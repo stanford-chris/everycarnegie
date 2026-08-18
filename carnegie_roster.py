@@ -87,8 +87,8 @@ HEADER_MAP = {
 }
 
 FIELDS = ["name", "kind", "city", "region", "country", "date_granted", "grant",
-          "date_opened", "address", "lat", "lon", "image_file", "notes",
-          "section", "source_page"]
+          "date_opened", "address", "lat", "lon", "image_file", "wikipedia_url",
+          "notes", "section", "source_page"]
 
 # Everything the index links that is not one of these is a US state, city or
 # district, so the country can be inferred rather than left blank.
@@ -222,6 +222,23 @@ def parse_page(html, title):
                     row["address"] = clean(cell.get_text(" "))
                 else:
                     row[key] = clean(cell.get_text(" "))
+
+            # The article about the building, where one exists. Taken from the
+            # identifying cell only: the region and image cells link too, to a
+            # state article and a File: page, and neither is the subject.
+            # Only from a genuine library-name column. Falling back to the
+            # city cell looks like it lifts coverage to 91%, but those links go
+            # to the TOWN — "Curepipe" the place, not its library — and a post
+            # whose title links to a town article is quietly wrong.
+            for key in ("name",) if "name" in cols else ():
+                cell = cells[cols.index(key)] if cols.index(key) < len(cells) else None
+                if not cell:
+                    continue
+                a = cell.find("a", href=re.compile(r"^/wiki/"))
+                # A redlink points at an article that does not exist yet.
+                if a and "redlink=1" not in a.get("href", "") \
+                        and not a["href"].startswith("/wiki/File:"):
+                    row["wikipedia_url"] = "https://en.wikipedia.org" + a["href"]
 
             img = tr.select_one("img")
             if img and img.get("src"):

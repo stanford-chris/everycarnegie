@@ -37,6 +37,37 @@ python3 carnegie_roster.py --refetch   # ignore the page cache
 python3 carnegie_roster.py --stdout    # report only, write nothing
 ```
 
+## What a post carries
+
+```
+Eufaula Carnegie Library, Alabama 📚
+217 N Eufaula Ave.
+
+$10,000 from Andrew Carnegie, 2 February 1903 (about $358,000 today)
+Contributing building in Seth Lore and Irwinton Historic District
+
+📷 Rivers Langley; SaveRivers · CC BY-SA 3.0
+
+#CarnegieLibraries #Alabama
+```
+
+**The grant in today's money** comes from `data/cpi.json`, the Minneapolis
+Fed's annual index, which splices the historical series onto CPI-U. CPI-U
+begins in 1913 and most of these grants predate it, so a CPI-U-only table
+would silently fail on the majority. The file records its source and retrieval
+date; the wording is always "about", because a CPI conversion is one
+defensible comparison rather than the answer.
+
+**Two links, where everylibrary carries one.** The photographer's name points
+at the Commons file page, which satisfies CC BY-SA 4.0 s3(a)(2). The library's
+name points at its Wikipedia article on the 25% of rows that have one, and
+only the name is linked, never the region appended after it.
+
+⚠️ That 25% is the honest figure. Taking the link from the city cell as well
+lifts it to 91%, and those links go to the **town** — "Curepipe" the place,
+not its library. A post whose title links to a town article is quietly wrong,
+so the link is only ever taken from a genuine library-name column.
+
 ## ⚠️ Britain is missing, and not by oversight
 
 **The 660 British Carnegie libraries are not in this roster and cannot be got
