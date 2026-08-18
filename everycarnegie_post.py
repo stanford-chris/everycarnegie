@@ -41,6 +41,7 @@ import re
 import subprocess
 import sys
 import time
+from datetime import date
 from pathlib import Path
 
 import requests
@@ -61,6 +62,13 @@ USER_AGENT = ('everycarnegie-bot/0.1 (https://chris-stanford.com; '
 MAX_IMAGE_BYTES = 950_000    # under Bluesky's ~1 MB blob limit
 ALT_MAX = 1900
 SHUFFLE_SEED = 20260829      # the launch date, fixed so the order is reproducible
+
+# Nothing posts before the anniversary of Dunfermline opening. The job is loaded
+# ahead of time so the schedule can be verified in place rather than on the
+# morning, and a run before this date exits 0 in silence: bothealthcheck reports
+# launchd jobs that exit non-zero, and ten days of refusals would be ten days of
+# false alarms.
+LAUNCH_DATE = date(2026, 8, 29)
 
 AI_PREFIX = 'A.I.-written description:'
 CREDITS_HEADING = 'Sources and credits 📚'
@@ -478,6 +486,18 @@ def main():
 
     rows, postable, notes = load_rows()
     state = load_state()
+
+    if not args.dry_run:
+        today = date.today()
+        if today < LAUNCH_DATE:
+            print(f'Not until {LAUNCH_DATE:%-d %B %Y}. Nothing posted.')
+            return
+        # ⚠️ On or after the launch date, a missing thread IS a fault: the
+        # account would introduce itself with a library in Ohio and no
+        # explanation of what any of it is.
+        if not state.get('launch_thread_posted'):
+            sys.exit('The opening thread has not been posted. Run --launch first.')
+
     print(f'{len(postable)} postable of {len(rows)} libraries; '
           f'{len(state.get("posted", []))} already posted')
 
