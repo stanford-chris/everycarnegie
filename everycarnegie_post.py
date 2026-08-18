@@ -287,27 +287,25 @@ def build_credits():
     of it" line in every post is its prose, lightly trimmed, so CC BY-SA covers
     the text as well as the pictures.
     """
-    with ROSTER.open() as f:
-        roster = [r for r in csv.DictReader(f) if r['kind'] == 'public']
+    # ⚠️ Count what will actually be POSTED, not what the roster holds. The
+    # roster has 1,850 libraries outside the held countries, but only the ones
+    # with a photograph and a resolvable credit ever go out — 627 fewer. Stating
+    # the roster figure promises a reader two-thirds more libraries than the
+    # feed will ever contain.
     with MANIFEST.open() as f:
-        held = {r['country'] for r in csv.DictReader(f)
-                if r['postable'] != 'yes' and r['image_source']}
-    covered = sum(1 for r in roster if r['country'] not in {'Ireland'})
+        postable = sum(1 for r in csv.DictReader(f) if r['postable'] == 'yes')
 
     tb = client_utils.TextBuilder()
     tb.text(CREDITS_HEADING + '\n\n')
-    tb.text('Photographs: ')
+    tb.text('Photos: ')
     tb.link('Wikimedia Commons', 'https://commons.wikimedia.org')
-    tb.text(' contributors, credited by name on every post.\n\n')
-    tb.text('Libraries, grants and dates: ')
+    tb.text('\n\nGrants and dates: ')
     tb.link("Wikipedia's lists of Carnegie libraries",
             'https://en.wikipedia.org/wiki/'
             'List_of_Carnegie_libraries_in_the_United_States')
-    tb.text(' (CC BY-SA).\n\n')
-    # Counted, not typed: a hardcoded figure goes stale the moment the roster
-    # grows, and this one is a claim about completeness.
-    tb.text(f'{covered:,} of the 2,509 he built; the 660 in Britain and '
-            'Ireland are not yet included.')
+    tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n\n')
+    tb.text(f'Included: the {postable:,} of 2,509 libraries with a free photo. '
+            "Britain and Ireland's are not.")
     return tb
 
 
