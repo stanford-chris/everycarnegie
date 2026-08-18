@@ -88,9 +88,20 @@ def place(row):
     name, city = row["name"].strip(), row["city"].strip()
     region = region_of(row)
     head = name if name and name.lower() != city.lower() else city or name
+    parts = [head]
     if region and region.lower() != head.lower():
-        return f"{head}, {region}"
-    return head
+        parts.append(region)
+
+    # Name the country everywhere except the United States. "Ontario" alone is
+    # ambiguous with Ontario, California, and this corpus spans 16 countries.
+    # The US is exempted because its states are widely known and "Tecumseh,
+    # Michigan, United States" reads like a postal address. region_of() already
+    # falls back to the country on the continental pages, so the guard stops
+    # "Barberton, South Africa, South Africa".
+    country = row["country"].strip()
+    if country and country != "United States" and country.lower() not in {p.lower() for p in parts}:
+        parts.append(country)
+    return ", ".join(parts)
 
 
 def credit_name(who):

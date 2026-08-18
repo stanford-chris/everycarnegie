@@ -101,7 +101,13 @@ def log(msg):
 
 
 def clean(s):
-    return re.sub(r"\s+", " ", (s or "")).strip()
+    """Collapse whitespace, and undo the spacing that reading cells with a
+    separator introduces: "Bridgetown , ( St. Michael )". Same artefact as the
+    one that broke the headers, and it reaches the post text if left."""
+    s = re.sub(r"\s+", " ", (s or "")).strip()
+    s = re.sub(r"\s+([,.;:)\]])", r"\1", s)
+    s = re.sub(r"([(\[])\s+", r"\1", s)
+    return s.strip()
 
 
 def header_text(th):
