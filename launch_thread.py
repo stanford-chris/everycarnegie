@@ -35,7 +35,7 @@ Andrew Carnegie was born here in 1835. He later became the richest man in the wo
 
 Between 1883 and 1929 he paid for 2,509 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""His mother laid its foundation stone. He had left Scotland 35 years earlier, at 12, when his father's weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
+ ("""His mother laid its foundation stone. Carnegie left Scotland 35 years earlier, at 12, when his father's weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
 
  ("""Carnegie credited that library with his start, and when the steel money came he spent it building more of them.""", False),
 
@@ -45,13 +45,11 @@ To get one, a town had to provide the land, pay the staff, keep it free to every
 
  ("""In the segregated South, Carnegie funded separate libraries for Black residents rather than requiring the existing ones to admit them. The one in Savannah, Ga., opened in 1914, for those whom the library had turned away.""", False),
 
- ("""Most of the libraries (nearly 1,700) were in the U.S., with 660 in Britain and Ireland and 125 in Canada.
+ ("""Nearly 1,700 libraries were in the U.S., with 660 in Britain and Ireland and 125 in Canada.
 
-By 1992, 911 of the buildings in the U.S. were still libraries. The others had been converted to museums, town halls, offices, houses; some were gone.""", False),
+By the 1990s, about 900 of the buildings in the U.S. were still libraries. The others had been converted to museums, town halls, offices or houses. Some were gone.""", False),
 
- ("""This account posts them one at a time: the building, the grant, what that money is worth now and what became of it.
-
-1,850 of them. Britain and Ireland's 660 are not included yet.
+ ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now.
 
 Photos: Wikimedia Commons contributors, credited on every post.""", False),
 ]

@@ -122,6 +122,9 @@
  "14451b8dcbff": {
   "visual": "A brick library with a white portico inscribed 'Public Library,' flanked by tall arched windows. Snow covers the symmetrical forecourt with bollards beneath a clear blue sky."
  },
+ "14e4ba6e23ab": {
+  "visual": "Dark brick building with a symmetrical facade and single storey, featuring a central entrance framed by tall columns beneath a peaked gable. Multi-paned windows flank the entrance; trees frame the left side."
+ },
  "15185b400b25": {
   "visual": "Single-storey red brick building with cream stone trim and decorative carving above the central entrance. Double doors with metal railings and climbing plants; large windows flank the sides. Clear blue sky, bare branches above."
  },
@@ -188,11 +191,17 @@
  "209845834697": {
   "visual": "Red-brick building with red tile roof and a classical, cream-trimmed portico. Tall windows flank the entrance; golden-leaved trees and green shrubs border the building."
  },
+ "2165e294d37f": {
+  "visual": "A two-storey red brick building with light stone panels across the upper front, where 'LIBRARY' is inscribed. A central entrance flanked by pillars rises via broad steps, with tall windows arranged symmetrically on both storeys."
+ },
  "22559fd1dd6a": {
   "visual": "Brick building with columned front porch and central entrance. A domed cupola with cross crowns the roof. White-flowering shrub and mature trees front the lawn facing the street."
  },
  "22acf8209c45": {
   "visual": "Brick building with stone trim, classical pediment, and grey roof. A central entrance with glass doors stands at the top of wide steps with handrails; tall windows flank the façade. A paved forecourt lies before it."
+ },
+ "22e4c08aa8cb": {
+  "visual": "Symmetrical stone building with banded facade in warm and grey tones. Central arched wooden doors flanked by columns; tall windows frame the entrance. Wide stepped approach with metal rails and orange flowers in front."
  },
  "23076a7528d8": {
   "visual": "Stone-faced building with symmetrical gabled facade and central entrance approached by metal-railed steps. Three lower windows and decorative stonework above the dark door, surrounded by trees and overcast sky."
@@ -214,6 +223,9 @@
  },
  "2aec6d8af412": {
   "visual": "Red brick building with a pitched gable roof and multiple white-framed windows facing the street. An arched doorway with stone steps leads to the entrance, surrounded by mature trees and hedging."
+ },
+ "2b8215678d08": {
+  "visual": "Single-storey stone building with a central gabled pediment containing a circular window. Large arched windows flank an ornamental entrance with double doors beneath a semi-circular arch; a balustrade crowns the portico. A tall tree rises in front; grass surrounds the building."
  },
  "2c1e88c858bd": {
   "visual": "Single-storey stone building with arched entrance flanked by tall columns and cross-paned windows. Pitched roof with red tiles; purple flowering shrubs and wooden benches in the landscaped forecourt; flagpole to the right."
@@ -289,6 +301,9 @@
  },
  "34f689ef6557": {
   "visual": "Red brick building with tall windows and a peaked gable, set on a white-stone base. A white-painted arched entrance with steps is fronted by shrubs, beneath a dark-slate roof."
+ },
+ "35d46bff6a8c": {
+  "visual": "Single-storey brick building with hipped roof and white-columned portico with red double doors. Gold lettering adorns the pediment above; tall windows flank the entrance. A red car is parked at the front."
  },
  "360a3218145a": {
   "visual": "Substantial stone building with a peaked gable roof and multiple tall windows across its front. Red entrance door with steps, flagpole visible, set on landscaped grounds with mature trees."
@@ -431,6 +446,9 @@
  "4d04bbfb9690": {
   "visual": "Single-storey brick library building with a distinctive pitched roof of terracotta tiles. Tan brick walls, large windows, glass entrance door on the right side, and green shrubs along the base. Clear blue sky overhead."
  },
+ "4d79c0f344ff": {
+  "visual": "A two-storey redbrick building with a columned portico entrance, tall windows, a cupola on the roof and triangular pediments. Mature trees and ivy-covered walls frame the landscaped grounds under clear blue sky."
+ },
  "4e6f04b12a36": {
   "visual": "Symmetrical two-storey stone building with tall rectangular windows above, arched windows below, and a classical pediment. A flagpole stands to the right; shrubs and street lamps frame the stepped entrance."
  },
@@ -464,11 +482,17 @@
  "5329f11422f6": {
   "visual": "A single-storey red brick building with white-trimmed entrance portico and double doors. Mature deciduous trees shade the grass forecourt, and library signage is mounted above the covered entrance."
  },
+ "5343ad5c885a": {
+  "visual": "A single-storey red brick building with a decorative cornice, framed by bare trees. Classical columns flank the recessed entrance; tall sash windows line the facade."
+ },
  "54066e174a14": {
   "visual": "Cream brick building, two storeys tall, with two large arched windows on the upper façade beneath a peaked roof. White-trimmed entrance at street level, parked cars in front."
  },
  "540f076b9d44": {
   "visual": "Classical stone building with pitched roof and pediment. Central double doors beneath a blue arched window sit atop wide stone steps flanked by tall columns. Mature trees frame the pale, symmetrical facade."
+ },
+ "54302652e976": {
+  "visual": "A brick building with a prominent arched entrance flanked by tall columns and topped with a curved dome. Stone steps lead to the doorway, with tall windows along the sides."
  },
  "5441272deae4": {
   "visual": "A pale stone building with two large arched windows and a red-tiled tower roof, partially covered by ivy. A stone plinth runs along the base; lawn and young trees occupy the foreground."
@@ -484,6 +508,12 @@
  },
  "553f22976fcd": {
   "visual": "Brick building with a distinctive overhanging roof tiled in a checkerboard pattern and classical facade details. Multi-pane windows are partially screened by temporary fencing and renovation equipment."
+ },
+ "557341591400": {
+  "visual": "A red-brick building with a pale stone upper section and classical pediment roof, with tall windows flanking a columned central entrance. Bare trees stand on the lawn before metal railings, a bench to the right."
+ },
+ "56b901bbec11": {
+  "visual": "A domed stone building with tall columns at its entrance and rounded arched windows along the sides, set in an open plaza with grass, pathways and young trees; buildings beyond."
  },
  "5716ed3647e9": {
   "visual": "A brick building with a red tile roof and two tall palm trees standing in front. Ground-floor shopfronts with red signage, and a two-storey structure visible behind under clear blue sky."
@@ -502,6 +532,9 @@
  },
  "599d9b99345b": {
   "visual": "A single-storey red brick building with a distinctive curved roof and classical portico with white columns framing the entrance. Dark burgundy foliage covers much of the right side, and mature trees surround the building."
+ },
+ "5a8912ed45ab": {
+  "visual": "Single-storey cream-coloured brick structure with a brown domed cupola. Tall windows flank a central entrance with steps, smaller windows at basement level, bare trees to either side."
  },
  "5afa478698d5": {
   "visual": "Two-storey pale brick building with a hipped roof, tall windows on the right facade, and a white-columned entrance beneath a pergola structure."
@@ -623,6 +656,9 @@
  "70e4294abe4a": {
   "visual": "Multi-storey pale stone building with classical architecture: tall symmetrical windows, a central wooden entrance topped with flags, and metal railings framing the approach. A decorative street lamp with spherical heads stands to the left."
  },
+ "717b1df9b7a1": {
+  "visual": "Two-storey building with classical portico: a row of columns frames the recessed central entrance beneath a triangular pediment. Tall sash windows light both storeys; a tree leans across the roof."
+ },
  "7183097072eb": {
   "visual": "Two-storey red brick building with a row of tall arched windows and ornamental stone detailing. Symmetrical staircases lead to a central entrance, with parked cars and neighbouring buildings visible on the street."
  },
@@ -713,6 +749,9 @@
  "7faf633f5004": {
   "visual": "Cream brick building with a steeply pitched roof and gabled ends. Multiple tall windows overlook a raised entrance protected by black metal railings."
  },
+ "7ff1eab196f5": {
+  "visual": "A three-storey red-brick building with evenly spaced sash windows, projecting stone detailing around the central entrance, and ivy or climbing plants covering the right facade."
+ },
  "803a36a292f9": {
   "visual": "Single-storey red brick building with a domed copper roof and central finial, columns flanking the entrance, and multiple tall windows. Metal railings enclose the front lawn, with mature trees and a palm tree visible against the clear sky."
  },
@@ -764,8 +803,14 @@
  "8a3ab6cffe6d": {
   "visual": "Two-storey stone building with rusticated walls and regularly spaced rectangular windows. A prominent domed cupola rises from the roof above substantial stone cornicing."
  },
+ "8a44ee531b4a": {
+  "visual": "A brick building with a gabled roof, tall windows arranged in rows, and a central entrance with columns framing the doorway and steps. Paired lamps flank the entrance; climbing plants and manicured lawns surround the façade."
+ },
  "8ad38d3ec8c2": {
   "visual": "Cream-walled single-storey building beneath a deep overhanging roof, largely clothed in climbing ivy. A terracotta-toned wooden door sits beneath ornamental metalwork, set amongst mature trees with lawn and paved areas beyond."
+ },
+ "8adb727d2bf1": {
+  "visual": "A single-storey building with a domed, tiled roof and curved stone facade, featuring seven tall arched windows separated by horizontal rustication. Tall chimneys rise from either end of the roof; steps lead to a central entrance door."
  },
  "8bbe8c984f49": {
   "visual": "Red brick building with stone bands, two storeys, grey slate roof and cupola. Central arched entrance with steps; tall trees frame the front beneath overcast sky."
@@ -830,6 +875,9 @@
  "953588fb9c89": {
   "visual": "Red-brick building with a prominent gable and stone detailing, large multi-pane windows and a stone base beneath overcast sky. A red sculptural form stands in the foreground landscaping."
  },
+ "957dce8da37f": {
+  "visual": "A single-storey red-brick building with a decorative pediment inscribed \"Carnegie Public Library\". The lower walls are faced in lighter stone, with tall sash windows and a central entrance flanked by columns. Mature trees surround the building under an overcast sky."
+ },
  "95b4436ff69d": {
   "visual": "A two-storey stone building with gabled roofs and classical columns at the entrance. Climbing vegetation obscures part of the left side; large trees frame the structure beneath overcast skies."
  },
@@ -841,6 +889,9 @@
  },
  "9651bac642a3": {
   "visual": "A substantial stone building with white columns and tall arched windows beneath a steeply pitched roof with dormers. An American flag flies from a pole at the front; the building sits on a paved plaza bordered by landscaping."
+ },
+ "9696b6679019": {
+  "visual": "Two-storey red brick building with white gable roof, tall arched windows with burgundy trim, beside a modern glass-fronted extension. Green foliage visible to the left; clear blue sky above."
  },
  "97e5bdd2958a": {
   "visual": "Symmetrical stone library facade with a classical design: three tall arched windows above, framed by fluted pilasters; central arched entrance with columns below, topped by a decorative pediment and cupola."
@@ -1040,6 +1091,9 @@
  "b5a9d8ae3e95": {
   "visual": "Single-storey red-brick building with a wide overhanging roof and windows with patterned glazing. Concrete steps lead to a canopied entrance, with balloons and bunting adorning the forecourt."
  },
+ "b5dedf35ac38": {
+  "visual": "Stone-fronted library with a large rounded arch entrance, flanked by stone pillars and topped with a triangular pediment. Gold lettering reads 'Public Library' above the arch; bare climbing ivy traces the left edge."
+ },
  "b65e279b4014": {
   "visual": "Single-storey red brick building with tiled roof and central chimney. Three large arched recesses form the front façade, with a stone plinth and central entrance; lawns and mature trees surround it."
  },
@@ -1081,6 +1135,9 @@
  },
  "bc3194fc13a2": {
   "visual": "A single-storey building with rendered walls, a distinctively-tiled curved roof, and central arched entrance with flanking lanterns. Tall palms rise beyond; two vintage motor cars stand at the kerb."
+ },
+ "bc3f86e3ab7f": {
+  "visual": "Two-storey stone building with a triangular pediment and symmetrical classical facade of tall windows; a columned entrance with steps leads to the raised ground floor; a bare tree stands to the left."
  },
  "bc5a0c879a8d": {
   "visual": "A two-storey ashlar stone building with a row of tall arched windows and smaller rectangular windows below, separated by decorative horizontal banding. Lawned forecourt with trees and clear sky."
@@ -1126,6 +1183,9 @@
  },
  "c326912b094d": {
   "visual": "A building with white stucco walls and a dark-tiled pitched roof, featuring a large arched doorway with dark wooden doors. A tall evergreen tree and shrubs partially conceal the facade. Parked vehicles stand at the street frontage."
+ },
+ "c33a39f81c14": {
+  "visual": "A two-storey red brick building with cream-coloured trim and large symmetrical windows. White steps lead to a central entrance set between tall window bays; lawns surround it under a blue sky."
  },
  "c35cefe03e11": {
   "visual": "Red brick building with a steeply pitched roof and yellow-lit windows. Bare trees and patches of snow frame the white concrete entrance steps; a metal bench with an orange seat sits facing the building."
