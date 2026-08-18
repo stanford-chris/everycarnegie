@@ -44,6 +44,41 @@ root and parent refs threaded through, roughly fifteen lines.
 what the account does and let the pinned post own the numbers, or accept the
 repetition on day one.
 
+### ⚠️ Post 2 of the thread is too vague, and here is the fix
+
+As drafted it reads: *"Carnegie paid for the building. The town had to supply
+the land and fund the running of it, every year, for good."* That states a deal
+without stating its terms, so a reader cannot see why it matters.
+
+The actual terms, verified from Wikipedia's Carnegie library article — the
+"Carnegie formula" — are specific and much stronger:
+
+- demonstrate the need for a public library
+- provide the building site
+- pay the staff and maintain it
+- draw on **public funds**, not private donations
+- **"annually provide ten percent of the cost of the library's construction to
+  support its operation"**
+- provide free service to all
+
+So a town taking a $10,000 library was voting to spend $1,000 a year of its own
+tax revenue, indefinitely. Some refused: in Canada in 1901 Carnegie offered
+$2.5m for 125 libraries and *"most cities at first turned him down, then
+eventually took the money."*
+
+Rewritten with the terms named:
+
+```
+Carnegie paid for the building. To get one, a town had to provide the land and
+commit ten percent of the build cost every year, out of public taxes, to run it.
+
+2,508 towns took that deal. Some refused it.
+```
+
+That is the subtext made explicit: these are not gifts, they are contracts, and
+every surviving Carnegie library is a town that voted to tax itself and kept
+paying.
+
 ### The opening line, and the closing line
 
 `"2,508 followed by 1929."` was ambiguous — it read as a sequence, 2,508 then
