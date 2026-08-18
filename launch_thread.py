@@ -51,7 +51,7 @@ By the 1990s, about 900 of the buildings in the U.S. were still libraries. The o
 
  ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now.
 
-Photos: Wikimedia Commons contributors, credited on every post.""", False),
+Photos: Wikimedia Commons contributors, credited on every post. Image descriptions are A.I.-written.""", False),
 ]
 
 IMAGE_TITLE = "File:The world's first Carnegie Library, in Dunfermline.JPG"

@@ -313,7 +313,8 @@ def build_credits():
             'List_of_Carnegie_libraries_in_the_United_States')
     tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n\n')
     tb.text(f'Included: the {postable:,} of 2,509 libraries with a free photo. '
-            "Britain and Ireland's are not.")
+            "Britain and Ireland's are not.\n\n")
+    tb.text('Image descriptions are A.I.-written.')
     return tb
 
 

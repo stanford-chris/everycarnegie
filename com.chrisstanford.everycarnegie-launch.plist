@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.chrisstanford.everycarnegie-launch</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/christopherstanford/Scripts/everycarnegie/everycarnegie_launch.sh</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key><string>/Users/christopherstanford</string>
+  </dict>
+  <!-- 20:45 Asia/Seoul on 29 August 2026 = 07:45 US Eastern, 12:45 in Britain.
+       Fifteen minutes ahead of the daily job's 21:00 slot, so the thread is up
+       before the first library follows it. The script deletes this file and
+       boots the job out once the thread has posted. -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Month</key><integer>8</integer>
+    <key>Day</key><integer>29</integer>
+    <key>Hour</key><integer>20</integer>
+    <key>Minute</key><integer>45</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/christopherstanford/Library/Logs/everycarnegie-launch.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/christopherstanford/Library/Logs/everycarnegie-launch.log</string>
+</dict>
+</plist>
