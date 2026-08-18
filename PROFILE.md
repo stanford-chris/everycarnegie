@@ -6,6 +6,9 @@ the account does not exist yet, and the pinned post is written by
 
 ## Handle and name
 
+**Account created 18 August 2026.** DID `did:plc:jfs5gkg7kloqukyp35zxeemi`.
+Display name, description and avatar are all set; the pinned post is not.
+
 | | |
 |---|---|
 | Handle | `everycarnegie.bsky.social` |
@@ -43,6 +46,25 @@ Three things about it are deliberate:
 
 No "not affiliated with" line, unlike Every U.K. Library and KBO in English.
 There is no Carnegie library service to be mistaken for.
+
+## Posting
+
+The app password lives in the keychain, never in the repo. This is the one
+step that has to be done by hand:
+
+```bash
+security add-generic-password -a "everycarnegie.bsky.social" \
+    -s "everycarnegie-bluesky" -w
+```
+
+Use a Bluesky **app password**, not the account password. Then:
+
+```bash
+python3 everycarnegie_post.py --dry-run     # check, post nothing
+python3 everycarnegie_post.py --pin --dry-run
+python3 everycarnegie_post.py --pin         # post the credits and pin them
+python3 everycarnegie_post.py               # post one library
+```
 
 ## Pinned post
 
