@@ -211,7 +211,10 @@ def parse_page(html, title):
 
             img = tr.select_one("img")
             if img and img.get("src"):
-                m = re.search(r"/([^/]+?)(?:/\d+px-[^/]+)?$", img["src"])
+                # Strip the query string first: some thumbnails carry campaign
+                # tracking parameters that otherwise end up inside the filename.
+                src = img["src"].split("?", 1)[0]
+                m = re.search(r"/([^/]+?)(?:/\d+px-[^/]+)?$", src)
                 if m:
                     row["image_file"] = urllib.parse.unquote(m.group(1))
 

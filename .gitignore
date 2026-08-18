@@ -6,3 +6,9 @@ data/pages/
 avatar/avatar_40px*.png
 avatar/avatar_proof.png
 __pycache__/
+
+# Resolved Commons metadata and the describer's scratch space. Regenerable.
+data/image_state.json
+data/image_state.json.tmp
+data/_tmp/
+data/describe.log
