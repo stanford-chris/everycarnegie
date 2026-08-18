@@ -29,29 +29,31 @@ CREDIT = "\n\n📷 Stephencdickson · CC BY-SA 3.0"
 
 # (text, carries_the_photograph)
 POSTS = [
- ("""Andrew Carnegie was born in Dunfermline in 1835. He later became the richest man in the world, and gave away about 90% of his wealth.
+ ("""Dunfermline, Scotland 📚
+
+Andrew Carnegie was born here in 1835. He later became the richest man in the world, and gave away about 90% of his wealth.
 
 Between 1883 and 1929 he paid for 2,509 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""His mother laid its foundation stone, and when it opened the town declared a public holiday.
+ ("""His mother laid its foundation stone. He had left Scotland 35 years earlier, at 12, when his father's weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
 
-He had left at twelve, when his father's weaving failed and the family sailed for Pennsylvania. In Pittsburgh he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
+ ("""Carnegie credited that library with his start, and when the steel money came he spent it building more of them.""", False),
 
- ("""The libraries he paid for were not gifts.
+ ("""They were not gifts, though.
 
-To get one, a town had to provide the land, pay the staff, keep it free to everyone, and commit ten percent of the building's cost every year, out of public taxes, to run it.""", False),
+To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building's cost every year, out of public taxes, to run it. Each one is a town that voted to tax itself, and kept paying.""", False),
 
- ("""So each one is a town that voted to tax itself, and kept paying.
+ ("""In the segregated South, Carnegie funded separate libraries for Black residents rather than requiring the existing ones to admit them. The one in Savannah, Ga., opened in 1914, for those whom the library had turned away.""", False),
 
-2,509 were built: 1,689 in the United States, 660 in Britain and Ireland, 125 in Canada, and 25 more from Fiji to Serbia.""", False),
+ ("""Most of the libraries (nearly 1,700) were in the U.S., with 660 in Britain and Ireland and 125 in Canada.
 
- ("""Not for everyone. In the segregated South he funded separate libraries for Black residents rather than requiring the existing ones admit them. Savannah's opened in 1914, for people the white library turned away.""", False),
+By 1992, 911 of the buildings in the U.S. were still libraries. The others had been converted to museums, town halls, offices, houses; some were gone.""", False),
 
- ("""By 1992, 911 of the 1,681 American buildings were still libraries. The others are museums, town halls, offices, houses; some are gone.
+ ("""This account posts them one at a time: the building, the grant, what that money is worth now and what became of it.
 
-This account posts them one at a time. 1,850 of them; Britain and Ireland's are not included yet.
+1,850 of them. Britain and Ireland's 660 are not included yet.
 
-Photos: Wikimedia Commons, credited on each post.""", False),
+Photos: Wikimedia Commons contributors, credited on every post.""", False),
 ]
 
 IMAGE_TITLE = "File:The world's first Carnegie Library, in Dunfermline.JPG"
@@ -87,7 +89,7 @@ img{width:100%;border-radius:10px;display:block;border:1px solid var(--line)}
 .alt{color:var(--muted);font-size:13px;margin:9px 0 0;padding-left:10px;border-left:2px solid var(--line)}
 .meta{color:var(--muted);font-size:12px;margin-top:9px}
 """
-    out = [f"<style>{css}</style>", "<div class=wrap>",
+    out = [f"<title>Carnegie — opening thread</title>", f"<style>{css}</style>", "<div class=wrap>",
            "<h1>Every Carnegie Library — opening thread</h1>",
            f"<p class=sub>29 August 2026. {len(POSTS)} posts, longest "
            f"{max(len(t) for t, _ in POSTS)} of 300.</p>", "<div class=thread>"]
