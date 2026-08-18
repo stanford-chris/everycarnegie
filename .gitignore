@@ -1,0 +1,3 @@
+# Cached Wikipedia HTML, 5.7 MB across 57 pages. Regenerable with --refetch,
+# and it would swamp every diff in this directory.
+data/pages/
