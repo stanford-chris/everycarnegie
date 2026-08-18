@@ -15,3 +15,4 @@ data/describe.log
 
 # Rendered preview, regenerable with carnegie_sample_page.py.
 data/sample_posts.html
+data/launch_options.html

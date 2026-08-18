@@ -17,7 +17,48 @@ Five approaches were considered. Only the last three were shown before.
 | 4 | **Start with a normal roster library**, no special post. | Discarded silently. Honest, but it throws away Dunfermline. |
 | 5 | **Dunfermline as the first post.** ⭐ built | Shown, in three wordings below. |
 
-### If Dunfermline: three wordings
+### If Dunfermline: one post or a thread?
+
+Rendered with the photograph at `data/launch_options.html`:
+
+```bash
+python3 launch_options_page.py && open data/launch_options.html
+```
+
+| | Structure | Lengths | |
+|---|---|---|---|
+| i | One post | 292 | Built. The bargain, the thing that makes these buildings interesting, does not appear at all. |
+| ii | Two posts | 282 + 248 | Hook, then the bargain and one line on what the account does. |
+| iii ⭐ | Three posts | 282 + 204 + 249 | Each post does one job: anniversary, bargain, what the account posts. |
+| iv | Thread ending in the credits note, pinned | — | Would save duplicating the scope line. ⚠️ **Unverified whether Bluesky can pin a reply.** Check before the 29th. |
+
+Threading was dismissed early as "reading like launch marketing". That was
+wrong: this is a bot explaining a subject most people do not know, launch day
+is the only day anyone reads a profile properly, and every post after it is a
+single, so the thread sets no pattern it will not keep.
+
+⚠️ Threading needs a code change. `post_launch` sends one post; replies need
+root and parent refs threaded through, roughly fifteen lines.
+
+⚠️ In option iii, post 3 overlaps the pinned post on scope. Either trim it to
+what the account does and let the pinned post own the numbers, or accept the
+repetition on day one.
+
+### The opening line, and the closing line
+
+`"2,508 followed by 1929."` was ambiguous — it read as a sequence, 2,508 then
+1929, rather than "2,508 more were built, finishing in 1929". Replaced with
+`"By 1929 there were 2,509 of them."`, which also closes the loop the post
+opens and matches the total used in the bio and the pinned post.
+
+Openings costed against the 300 limit: "The first." (287) · **"The world's
+first Carnegie library." (293, or 282 with a shorter closing line)** ⭐ · "The
+first Carnegie library anywhere." (283) · "The first of the 2,509." (289,
+duplicates the arithmetic) · "Where it all started." (282, different register
+from every other post) · "The first library Andrew Carnegie ever paid for."
+(295).
+
+### The three wordings, as first drafted
 
 **A — the holiday detail** (287 chars) ⭐ recommended, and built
 
