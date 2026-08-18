@@ -1,3 +1,8 @@
 # Cached Wikipedia HTML, 5.7 MB across 57 pages. Regenerable with --refetch,
 # and it would swamp every diff in this directory.
 data/pages/
+
+# Derived avatar proofs, regenerable with make_avatar.py --preview.
+avatar/avatar_40px*.png
+avatar/avatar_proof.png
+__pycache__/
