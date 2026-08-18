@@ -140,6 +140,29 @@ def clean_note(s):
     return s
 
 
+def typographic(s):
+    """Curly quotes and apostrophes, which is the house style.
+
+    ⚠️ Whatever this does to the post text must also be done to the strings the
+    poster searches for when attaching links. It finds the photographer's name
+    and the library's name inside the finished text to place the facets, and
+    nine photographers and one library in this corpus carry an apostrophe —
+    Bobak Ha'Eri, Saint Gabriel's Park. Curling the haystack and not the needle
+    drops the credit link on those posts, silently, and a missing credit on a
+    CC BY-SA photograph is a licence breach rather than a typo.
+    """
+    out, prev = [], " "
+    for ch in s:
+        if ch == '"':
+            out.append("\u201c" if prev in " ([{\n" else "\u201d")
+        elif ch == "'":
+            out.append("\u2019")
+        else:
+            out.append(ch)
+        prev = ch
+    return "".join(out)
+
+
 def region_of(row):
     """A place name fit to print, not the article title it came from."""
     region = re.sub(r"\s*\([^)]*\)", "", row["region"].strip()).strip()
@@ -240,7 +263,7 @@ def compose(row, note, with_address=True):
     tag = re.sub(r"[^A-Za-z]", "", region_of(row))
     lines.append("")
     lines.append(f"#CarnegieLibraries #{tag}" if tag else "#CarnegieLibraries")
-    return "\n".join(lines)
+    return typographic("\n".join(lines))
 
 
 def build(row, note):

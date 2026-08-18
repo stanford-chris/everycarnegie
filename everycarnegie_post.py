@@ -193,14 +193,14 @@ def build_post(row, note):
     # Link the building's own name only. cp.place() appends the region, and an
     # article about a library should not be reached by clicking "Alabama".
     place = cp.place(row)
-    subject = place.split(',')[0].strip()
+    subject = cp.typographic(place.split(',')[0].strip())
     article = (row.get('wikipedia_url') or '').strip()
     rest = text
     if article and text.startswith(subject):
         tb.link(subject, article)
         rest = text[len(subject):]
 
-    who = cp.credit_name(row['photographer'])
+    who = cp.typographic(cp.credit_name(row['photographer']))
     marker = f'📷 {who}'
     head, sep, tail = rest.partition(marker)
     if not sep or not row.get('credit_page'):
@@ -308,12 +308,12 @@ def build_credits():
     tb.text('Photos: ')
     tb.link('Wikimedia Commons', 'https://commons.wikimedia.org')
     tb.text('\n\nGrants and dates: ')
-    tb.link("Wikipedia's lists of Carnegie libraries",
+    tb.link("Wikipedia’s lists of Carnegie libraries",
             'https://en.wikipedia.org/wiki/'
             'List_of_Carnegie_libraries_in_the_United_States')
     tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n\n')
     tb.text(f'Included: the {postable:,} of 2,509 libraries with a free photo. '
-            "Britain and Ireland's are not.\n\n")
+            "Britain and Ireland’s are not.\n\n")
     tb.text('Image descriptions are A.I.-written.')
     return tb
 

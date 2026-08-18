@@ -35,13 +35,13 @@ Andrew Carnegie was born here in 1835. He later became the richest man in the wo
 
 Between 1883 and 1929 he paid for 2,509 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""His mother laid its foundation stone. Carnegie left Scotland 35 years earlier, at 12, when his father's weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
+ ("""His mother laid its foundation stone. Carnegie left Scotland 35 years earlier, at 12, when his father’s weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
 
  ("""Carnegie credited that library with his start, and when the steel money came he spent it building more of them.""", False),
 
  ("""They were not gifts, though.
 
-To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building's cost every year, out of public taxes, to run it.""", False),
+To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building’s cost every year, out of public taxes, to run it.""", False),
 
  ("""In the segregated South, Carnegie funded separate libraries for Black residents rather than requiring the existing ones to admit them. The one in Savannah, Ga., opened in 1914, for those whom the library had turned away.""", False),
 
