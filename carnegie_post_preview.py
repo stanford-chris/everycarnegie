@@ -254,8 +254,18 @@ def compose(row, note, with_address=True):
         middle.append(f"{grant} from Andrew Carnegie")
     elif granted:
         middle.append(f"Granted {granted}")
+    # ⚠️ Britain has neither a grant nor a date granted. Its lists give the year
+    # the building opened, and until 19 August 2026 nothing read it, so a
+    # British post carried no date at all: "Teddington, England 📚 / brick and
+    # stone construction". Used only as a fallback, so no American post changes:
+    # those already carry the grant line, and their opening year is usually in
+    # the note as well.
+    elif row.get("date_opened", "").strip():
+        middle.append(f"Opened {row['date_opened'].strip()}")
     if note:
-        middle.append(note)
+        # These notes are the tail of a Wikipedia bullet, so they begin
+        # mid-sentence in lower case: "brick and stone construction".
+        middle.append(note[0].upper() + note[1:] if note[:1].islower() else note)
     # 19 rows have neither a grant nor a note. Without this the post carries an
     # empty middle and goes out with a double blank line in it.
     if middle:

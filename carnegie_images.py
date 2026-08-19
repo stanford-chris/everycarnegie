@@ -74,7 +74,12 @@ DELAY = 0.15
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": USER_AGENT})
 
+# ⚠️ date_opened is carried because Britain has no grant and no date granted:
+# its bullet lists give the year the building opened and nothing else. Without
+# it in the manifest the composer sees no date at all and a British post is a
+# name and a sentence fragment. Added 19 August 2026.
 FIELDS = ["name", "kind", "city", "region", "country", "date_granted", "grant",
+          "date_opened",
           "address", "lat", "lon", "wikipedia_url", "image_source", "image_title",
           "image_url", "photographer", "licence", "licence_url", "credit_page",
           "postable"]
@@ -301,6 +306,7 @@ def main():
             "name": r["name"], "kind": r["kind"], "city": r["city"],
             "region": r["region"], "country": r["country"],
             "date_granted": r["date_granted"], "grant": r["grant"],
+            "date_opened": r.get("date_opened", ""),
             "address": r["address"], "lat": r["lat"], "lon": r["lon"],
             "wikipedia_url": r.get("wikipedia_url", ""),
             "image_source": source or "",
