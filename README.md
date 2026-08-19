@@ -109,12 +109,27 @@ copyright text, which reads as unlicensed; the project's site is explicit, and
 requires the credit `© [creator] Cardiff University AHRC "Shelf Life" project
 [AH/P002587/1]`. Checking the endpoint is not checking the licence.
 
-**CC BY-SA and CC BY-NC-SA are one-way incompatible**, so these rows cannot be
-merged into `carnegie_roster.csv`, which is Wikipedia-derived and CC BY-SA:
-doing so would drag 1,910 rows into a non-commercial licence they are not free
-to take. The ask is therefore for the gazetteer data alone, under CC BY-SA or
-CC BY. Letter drafted in `shelf_life_email.py`; the fallback is a separate file,
-separately licensed and separately credited.
+**CC BY-SA and CC BY-NC-SA cannot both be satisfied by one file.** ShareAlike
+runs in both directions: BY-SA forbids adding the non-commercial restriction, and
+BY-NC-SA forbids dropping it. `carnegie_roster.csv` is Wikipedia-derived and
+CC BY-SA, so merging their rows in would require the merged file to be both at
+once.
+
+⚠️ **The distinction that matters is Adapted Material versus a Collection.**
+ShareAlike binds an adaptation, not a collection of separate works. Two files
+kept apart, each under its own licence, read side by side at run time, is a
+collection and stays inside both licences. One CSV with the rows interleaved is
+an adaptation and does not. So the fallback works and it is the merge
+specifically that does not.
+
+⚠️ **And copyright is not the only right in play.** The individual facts are not
+copyrightable, but the UK has a separate database right protecting substantial
+investment in compiling and verifying a database, which is exactly what this is.
+Extracting a substantial part can infringe that even where no single fact is
+protected. It is the strongest reason to ask rather than to assume.
+
+The ask is therefore for the gazetteer data alone, under CC BY-SA or CC BY.
+Letter drafted in `shelf_life_email.py`.
 
 Its photographs are all "© Oriel Prizeman" and reserved. That costs nothing: the
 bot's pictures come from Commons and have to be freely licensed to post at all.

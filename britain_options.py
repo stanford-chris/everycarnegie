@@ -28,9 +28,11 @@ is CC BY-NC-SA 4.0, credited as © [creator] Cardiff University AHRC "Shelf Life
 project [AH/P002587/1]. Checking the endpoint is not checking the licence.
 
 That makes the problem narrower and sharper than "ask permission". **CC BY-SA
-and CC BY-NC-SA are one-way incompatible**, so these rows cannot go into a
-roster built from Wikipedia without dragging 1,910 CC BY-SA rows into a
-non-commercial licence they are not free to take. See `shelf_life_email.py`.
+and CC BY-NC-SA are incompatible in both directions**: BY-SA forbids adding the
+non-commercial restriction, BY-NC-SA forbids dropping it, and a merged file
+would have to be both. Keeping two files side by side is a Collection rather
+than Adapted Material and stays within both licences; interleaving the rows into
+one CSV does not. See `shelf_life_email.py`.
 
 Nothing here harvests anything. It counts what each source would yield and
 writes the page.
@@ -83,9 +85,10 @@ OPTIONS = [
      "research lists supplied by the Carnegie UK Trust combined with the statutory lists. "
      "It is the authoritative British roster and it is better than the American data the "
      "bot already posts: 100% dates, 100% status, 492 of 493 built entries with "
-     "coordinates, architects on 65%. ⚠️ **It is CC BY-NC-SA 4.0**, which is one-way "
-     "incompatible with the CC BY-SA the roster already carries: merging the two would "
-     "drag 1,910 Wikipedia-derived rows into a non-commercial licence they cannot take. "
+     "coordinates, architects on 65%. ⚠️ **It is CC BY-NC-SA 4.0**, which cannot be combined "
+     "with the CC BY-SA the roster already carries: BY-SA forbids adding the "
+     "non-commercial term and BY-NC-SA forbids dropping it, so one merged file would "
+     "have to satisfy both. "
      "So the ask is not for permission but for the gazetteer data alone, without the "
      "photographs, under CC BY-SA or CC BY. Letter drafted in shelf_life_email.py."),
 

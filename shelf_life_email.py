@@ -20,11 +20,19 @@ and more awkward than that:
      non-commercial in substance. It posts to Bluesky, which is a commercial
      platform, and NC has always been vague about that. Worth naming rather
      than assuming.
-  **SA** ⚠️ the real obstacle. The roster is built from Wikipedia, which is
-     CC BY-SA 4.0. **CC BY-SA and CC BY-NC-SA are one-way incompatible**: a
-     work combining them cannot be released under either. Merging their rows
-     into `carnegie_roster.csv` would drag 1,910 CC BY-SA rows into a
-     non-commercial licence they cannot legally take.
+  **SA** ⚠️ the real obstacle, and stronger than "one-way incompatible", which
+     is how this file first put it. The roster is built from Wikipedia, which
+     is CC BY-SA 4.0. **The two are incompatible in both directions.** BY-SA
+     forbids adding restrictions, so a BY-SA work cannot be relicensed
+     NC; BY-NC-SA requires adaptations to carry the NC term forward, so it
+     cannot be relicensed BY-SA. A merged file would have to be both at once,
+     and no licence satisfies both.
+
+     ⚠️ The escape hatch is real but narrow. ShareAlike binds **Adapted
+     Material**, not a mere **Collection**: two files kept separate, each under
+     its own licence, and read side by side at runtime is a collection. One CSV
+     with the rows interleaved is an adaptation. So the fallback works, and it
+     is the merge specifically that does not.
 
 Hence the actual request: would they consider releasing the gazetteer *data*
 (not the photographs, which are © Oriel Prizeman and not wanted) under CC BY-SA
@@ -51,13 +59,13 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I run a small non-commercial project that posts one Carnegie library a day to Bluesky, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 1,910 of the 2,509 buildings, built by parsing Wikipedia's lists.
+I run a small non-commercial project that posts one Carnegie library a day to Bluesky, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia's lists.
 
-Britain is the hole in it. Wikipedia's coverage of the 660 British and Irish libraries runs to about 225 usable entries, and they are thin. Your project's interactive map is plainly the authoritative record, and I can see the layer behind it holds 621 records with dates, architects, status and coordinates.
+Britain is the thin part of it. I have just finished parsing Wikipedia's British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 39 of them. Your project's map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
 
 I would like to use that gazetteer, and I am writing rather than simply taking it because of one licensing problem I cannot solve at my end.
 
-Your site provides its material under CC BY-NC-SA 4.0. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and the two are one-way incompatible: I cannot merge your rows into that file without dragging 1,910 rows into a non-commercial licence they are not free to take.
+Your site provides its material under CC BY-NC-SA 4.0. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and the two share-alike terms cannot both be satisfied by one file: BY-SA does not allow the non-commercial restriction to be added, and BY-NC-SA does not allow it to be dropped. So I cannot merge your rows into mine, however much I would like to.
 
 So my question is whether you would consider releasing the gazetteer data on its own — the names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
 
@@ -76,7 +84,9 @@ chris-stanford.com
 NOTES = [
     ("Why write at all, when the material is already licensed",
      "Because CC BY-NC-SA cannot be combined with the CC BY-SA the rest of the roster "
-     "carries. This is not a courtesy letter: without an answer the British rows have to "
+     "carries. ⚠️ Since the Wikipedia parser shipped on 19 August the letter is no longer "
+     "urgent: 245 British rows are already in. This is now about quality — dates, "
+     "coordinates and the 396 buildings Wikipedia does not list at all. Without an answer the extra rows have to "
      "live in a separate file under a separate licence, and every downstream script has to "
      "know which is which."),
 
