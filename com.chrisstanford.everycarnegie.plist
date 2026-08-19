@@ -2,44 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key>
-  <string>com.chrisstanford.everycarnegie</string>
-
-  <!-- ⚠️ The LIVE copy is ~/Library/LaunchAgents/com.chrisstanford.everycarnegie.plist.
-       This one is the version-controlled mirror. launchd only auto-loads
-       ~/Library/LaunchAgents at login: a job bootstrapped from anywhere else
-       survives until the machine restarts and then vanishes silently, which is
-       exactly what happened to both everylibrary jobs during the macOS update
-       on 18 August 2026. Edit this, copy it there, and reload. -->
-
-  <key>ProgramArguments</key>
-  <array>
-    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
-    <string>/Users/christopherstanford/Scripts/everycarnegie/everycarnegie_post.py</string>
-  </array>
-
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>HOME</key>
-    <string>/Users/christopherstanford</string>
-    <key>PATH</key>
-    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
-  </dict>
-
-  <!-- 21:00 and 09:00 Asia/Seoul = 8 a.m. and 8 p.m. US Eastern while the US is
-       on daylight time. launchd schedules in LOCAL time, so when the US falls
-       back in November these become 7 a.m. and 7 p.m. Eastern until March.
-       Accepted rather than corrected: an hour's drift twice a year is not worth
-       a wrapper that computes US clock changes on a Mac in Korea. -->
-  <key>StartCalendarInterval</key>
-  <array>
-    <dict><key>Hour</key><integer>21</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>0</integer></dict>
-  </array>
-
-  <key>StandardOutPath</key>
-  <string>/Users/christopherstanford/Library/Logs/everycarnegie.log</string>
-  <key>StandardErrorPath</key>
-  <string>/Users/christopherstanford/Library/Logs/everycarnegie.log</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>HOME</key>
+		<string>/Users/christopherstanford</string>
+		<key>PATH</key>
+		<string>/Library/Frameworks/Python.framework/Versions/3.13/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+	</dict>
+	<key>Label</key>
+	<string>com.chrisstanford.everycarnegie</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+		<string>/Users/christopherstanford/Scripts/everycarnegie/everycarnegie_post.py</string>
+	</array>
+	<key>StandardErrorPath</key>
+	<string>/Users/christopherstanford/Library/Logs/everycarnegie.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/christopherstanford/Library/Logs/everycarnegie.log</string>
+	<key>StartCalendarInterval</key>
+	<array>
+		<dict>
+			<key>Hour</key>
+			<integer>23</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+	</array>
 </dict>
 </plist>

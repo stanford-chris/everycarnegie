@@ -198,32 +198,55 @@ Image descriptions are A.I.-written. Not yet complete: see the reply.
 | b | `Carnegie_library` | Covers the whole programme; is not the source of the data. |
 | c | Both, as two links | Truthful, but three links in one short post. |
 
-## 4. Cadence ⬜ OPEN — recommendation changed on 19 August 2026
+## 4. Cadence and times ✅ DECIDED 19 August 2026 — two a day, 23:00 and 09:00 Seoul
 
-**1,298 postable** as of today, up from 1,223 before Britain.
+**1,298 postable**, so two a day runs for **1 year 9 months**.
+
+⚠️ **The job was already posting twice a day and item 4 said "nothing is
+scheduled yet".** The plist has carried two `StartCalendarInterval` slots since
+it was written, and `--count` defaults to 1, so two slots is two posts. What
+actually needed deciding was the times, not the rate.
 
 | Rate | Runs for | |
 |---|---|---|
-| 1/day | 3 yr 7 mo | The "Daily Carnegie" idea you set aside. Longest life, slowest reach. |
-| 2/day ⭐ | 1 yr 9 mo | **Now recommended.** |
-| 3/day | 1 yr 2 mo | Was recommended, on the grounds that it matches everylibrary's rhythm. |
+| 1/day | 3 yr 7 mo | The "Daily Carnegie" idea you set aside. |
+| 2/day ⭐ | 1 yr 9 mo | **Chosen**, and already in force. |
+| 3/day | 1 yr 2 mo | Previously recommended, for the wrong reason. |
 
-⚠️ **"Matches everylibrary" was the wrong reason, and it is why the
-recommendation has moved.** everylibrary has **2,238 postable** rows against
-this account's 1,298: a corpus 72% larger. At three a day everylibrary runs for
-**two years** and everycarnegie for **fourteen months**. Copying the number
-copies the wrong thing — the sibling's pacing is two years of feed, and matching
-*that* means roughly two a day here, not three.
+⚠️ **"Matches everylibrary" was the wrong reason.** everylibrary has **2,238**
+postable rows against this account's 1,298. At three a day the sibling runs two
+years and this one fourteen months. Matching its *pacing* means about two a day
+here, not three. Two also leaves headroom for the 153 British candidates under
+review, Ireland's 18, and anything the Cardiff gazetteer adds.
 
-Two a day also leaves headroom the account is likely to need: 153 British
-candidates await review, Ireland holds 18, and the Cardiff gazetteer would add
-several hundred more. Every one of those extends the runway rather than
-compressing it.
+### The times
 
-⚠️ Also open: what times. everylibrary posts 17:00, 21:00 and 01:00 Seoul,
-chosen to land at 09:00, 13:00 and 17:00 UK. **This corpus is 91% American**
-(1,183 of 1,298 postable), so those times serve the wrong audience. US Eastern
-morning and evening would be the equivalent choice.
+Changed from 21:00 to 23:00 Seoul on 19 August 2026; the 09:00 slot is unchanged.
+**This corpus is 91% American** — 1,183 of 1,298 postable — so the times are
+chosen for US clock time and everything else follows from it.
+
+| Seoul | US Eastern | US Pacific | UK |
+|---|---|---|---|
+| 23:00 | 10 a.m. | 7 a.m. | 3 p.m. |
+| 09:00 | 8 p.m. (previous day) | 5 p.m. | 1 a.m. |
+
+Ten hours apart in US terms: mid-morning and mid-evening, the two slots a US
+audience is actually awake for. The old 21:00 landed at 8 a.m. Eastern, which is
+before most people are at a desk and 5 a.m. on the west coast.
+
+⚠️ **The UK slot is the cost, and it is deliberate.** 09:00 Seoul is 1 a.m. in
+Britain, so British posts will mostly appear overnight there. With 4% of the
+corpus British and 91% American, serving the Americans is the right trade — but
+it is a trade, not a free win, and it would need revisiting if the Cardiff
+gazetteer ever quadrupled the British share.
+
+⚠️ **Korea has no daylight saving and the United States does**, so both slots
+drift an hour earlier in US terms each winter: 10 a.m. becomes 9 a.m. and 8 p.m.
+becomes 7 p.m. Both remain sensible, so nothing needs doing twice a year. Do not
+"fix" it by moving the Seoul times, or the summer schedule breaks instead.
+
+Live plist verified with `launchctl print` after reloading, and the mirror at
+`everycarnegie/com.chrisstanford.everycarnegie.plist` refreshed from it.
 
 ## 5. The thin posts ⬜ OPEN — measured 19 August 2026, and Britain changed it
 
