@@ -269,40 +269,40 @@ Two things were added back, because the draft dropped both and neither is taste:
   attribution is a licence condition. Post 2's "credited on every post" is also
   a promise post 1 has to keep. 284 of 300 with it.
 
-## 11. What the short thread is exposed to ⬜ OPEN — one sentence
+## 11. What the short thread is exposed to ✅ DECIDED 19 August 2026
 
 `python3 launch_thread_stress.py` writes the opposite thread from the same two
-Wikipedia articles the real one cites, and maps what it lands on. It was
-rewritten when the thread was cut down.
+Wikipedia articles the real one cites, and maps what it lands on. It has raised
+two findings and **both are now closed**.
 
-**The previous finding is resolved, and by accident.** It was "when the steel
-money came" in the old post 3: the one clause the bot wrote in its own voice
-about where the money came from, and the only line that could not be defended as
-an editorial choice. Simplifying for neutrality deleted the post it lived in.
+1. **"when the steel money came"**, the old post 3: the one clause the bot wrote
+   in its own voice about where the money came from, and the only line that
+   could not be defended as an editorial choice. Cutting seven posts to two
+   deleted the post it lived in.
+2. **"and gave away about 90 percent of his wealth"**, post 1. Cut. In seven
+   posts the terms of the deal and the segregation pulled against it; in two it
+   stood alone, and the thread read: richest man in the world, gave away 90%,
+   paid for 2,500 libraries. His own case for himself, made by an account nobody
+   asked. ⚠️ **It was cut for being flattering, not for being wrong** — it is
+   true and it is in the source. Post 1 is now 238 of 300 and says what he was
+   and what he paid for, with no view on either.
 
-**What is left is one sentence, and the edit made it more exposed, not less:**
+⚠️ **Do not restore that line without restoring something to balance it.** It is
+the obvious thing to reach for if the thread ever looks thin, and putting it back
+alone puts the finding straight back.
 
-> He later became the richest man in the world, and gave away about 90 percent
-> of his wealth.
+What remains is omission, which a two-post launch claiming no completeness can
+defend. Three things are still live, none of them for launch day:
 
-In seven posts it had the terms of the deal and the segregation pulling against
-it. In two posts it stands alone, and the thread reads: richest man in the
-world, gave away 90%, paid for more than 2,500 libraries. Read coldly that is
-his own case for himself, made unprompted. Everything else on the page is an
-omission a two-post launch can defend; this is a positive claim it chose to
-include.
-
-| | Option | |
+| | | |
 |---|---|---|
-| 1 | Post as drafted | Coherent, and it already resolves the old finding. |
-| 2 ⭐ | **Cut "and gave away about 90 percent of his wealth."** | Four words. The only evaluative claim left, and post 1 does not need it. ⚠️ It cuts in the flattering direction, which is not what "simplify" usually costs. 238 chars. |
-| 3 | Replace it with where the money came from | "He made his fortune in steel and became the richest man in the world, then gave most of it away." 289. Still the generous half of the story. |
-| 4 | Restore the terms as a third post | The ten percent in perpetuity: a contract, not a charge, and the thing most readers do not know. Reopens the length question. |
-| 5 | Say the roster gap in post 2 | Independent of the rest and near-free: 71 characters spare. 269 with it. |
-| 6 | Put the harder material in the pinned post | Rejected. Doing quietly what the thread declined to do out loud is worse than either doing it or not. |
-| 7 | Go back to seven posts | Rejected, and recorded so the ground is not re-covered. Neutrality was the instruction; five of those posts existed to characterise the man. |
+| The roster gap | ⬜ open, nearly free | The account is called "every" and the roster holds 1,910 of 2,509. Post 2 has 71 characters spare: *"This account posts them one at a time, though Britain's 660 are not in it yet:"* (269). Against: it is the one line that would make the launch sound apologetic, and the pinned post already says it. |
+| Segregation | ⚠️ tripwire | Defensible to omit from a launch claiming no completeness. **It stops being defensible the moment the account posts one of the segregated libraries without saying so.** A job for the daily posts and the roster. |
+| "A feed of handsome buildings" | no action | The cynic's closing line, and the one charge a neutral launch cannot answer on launch day, because the answer is what the daily posts turn out to contain. |
 
-⚠️ **The segregation cut is a decision, not a finding, but it has a tripwire.**
-It is defensible in a launch that makes no claim to completeness. It stops being
-defensible the moment the account posts one of the segregated libraries without
-saying so. That is a job for the daily posts and the roster, not for launch day.
+Rejected and recorded so the ground is not re-covered: going back to seven posts
+(neutrality was the instruction, and five of those posts existed to characterise
+the man); putting the harder material in the pinned post instead (doing quietly
+what the thread declined to do out loud is worse than either doing it or not);
+restoring the terms of the deal as a third post (a contract rather than a
+charge, and the best of the cut five, but it reopens the length question).

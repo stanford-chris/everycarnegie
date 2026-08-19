@@ -12,18 +12,23 @@ launch thread is sourced from — Carnegie library and Andrew Carnegie, checked
 19 August 2026 — because an attack built from the bot's own sources is the only
 kind worth defending against.
 
-⚠️ **Rewritten 19 August 2026, when the thread went from seven posts to two.**
-The previous finding was that the exposure was not an omission but a euphemism:
-"when the steel money came", in the old post 3, the one clause the bot wrote in
-its own voice about where the money came from. **The short version deletes that
-post, so the finding is resolved rather than outstanding** — which is worth
-saying plainly, because simplifying for neutrality happened to remove the single
-line that was not neutral.
+⚠️ **This page has now raised two findings and both are closed.**
 
-What replaces it is a different shape of risk. Everything is now omission, which
-is a defensible editorial position for a two-post launch that makes no claim to
-be a biography. But the thread is four sentences long, so what remains carries
-more weight per sentence, and one sentence now stands unbalanced: see the table.
+The first was that the exposure was not an omission but a euphemism: "when the
+steel money came", in the old post 3, the one clause the bot wrote in its own
+voice about where the money came from. Cutting the thread from seven posts to
+two deleted the post it lived in.
+
+The second was that the cut left "and gave away about 90 percent of his wealth"
+standing with nothing on the other side of it, so four sentences read as his own
+case for himself. That line was cut on 19 August 2026. Both times the fix went
+in the direction of saying less about the man, and the second cut removed a
+flattering claim, not an unflattering one.
+
+What is left is omission, which a two-post launch claiming no completeness can
+defend. The remaining items in the table are jobs for the roster and the daily
+posts rather than for launch day, with one exception that is nearly free: the
+account is called "every" and the roster holds 1,910 of 2,509.
 
 Usage:
     python3 launch_thread_stress.py     # writes data/launch_thread_stress.html
@@ -78,109 +83,99 @@ He bought 2,509 buildings’ worth of it, and now an account that will post a ha
 # ---------------------------------------------- where the real thread stands
 
 EXPOSURE = [
-    ("“He later became the richest man in the world, and gave away about 90 percent of his wealth.”",
-     "Post 1. The only sentence in the thread that says anything about the man.",
-     "high",
-     "⚠️ The whole of the remaining risk is here, and it grew rather than shrank in the "
-     "edit. In seven posts this sat between the origin story and the terms of the deal, "
-     "and posts 4 and 5 pulled the other way. In two posts it stands alone: richest man in "
-     "the world, gave away 90%, paid for 2,500 libraries. Read coldly, that is his own "
-     "case for himself in three clauses, and the account is making it unprompted. "
-     "Everything else on this page is an omission the thread can defend; this is a "
-     "positive claim it chose to include."),
+    ("“and gave away about 90 percent of his wealth”",
+     "✅ Cut 19 August 2026.",
+     "resolved",
+     "The finding of the previous run, and the second one in a row that the edits have "
+     "closed. It was true and it was sourced; what made it a liability was that at two "
+     "posts nothing stood on the other side of it, so the thread read as his own case for "
+     "himself. It is the rare cut that goes in the flattering direction."),
 
     ("“when the steel money came”",
-     "✅ Gone. It was the old post 3, which the short version deletes.",
+     "✅ Gone with the seven-post version.",
      "resolved",
-     "The previous run of this page found this to be the only real exposure, on the "
-     "grounds that omission is editing but a euphemism is a voice. Simplifying for "
-     "neutrality removed it. Nothing further to do."),
-
-    ("Homestead, 1892: ten dead, and the Homestead library owned by Carnegie Steel",
-     "Not mentioned, and now nothing adjacent is either.",
-     "medium",
-     "Still the fact a hostile reply will reach for, and still one search away. It is a "
-     "weaker charge against two posts than against seven: a thread that plainly does not "
-     "attempt a biography is not concealing one. The awkwardness is only that post 1 does "
-     "make a claim about the man, so the thread cannot quite say it stayed out of it."),
-
-    ("Carnegie’s own “better cut of meat” answer to workers who wanted wages",
-     "Not mentioned.",
-     "low",
-     "The most quotable thing in the story, and squarely out of scope for a two-post "
-     "launch. No longer worth spending a post on."),
-
-    ("Buildings only: no books, no salaries. The ten percent, in perpetuity",
-     "Not mentioned. The old post 4 carried it.",
-     "low",
-     "The most interesting thing about these buildings and the least accusatory: it is a "
-     "contract, not a charge. Cut with the rest. It is the one candidate worth restoring "
-     "if the thread ever goes back to three posts."),
-
-    ("Segregation, and grants sized on the white population",
-     "Not mentioned. The old post 5 carried it squarely.",
-     "medium",
-     "⚠️ The deliberate cut, so it is a decision rather than a finding. Worth being clear "
-     "about what changes: it is defensible in a two-post launch that makes no claim to "
-     "completeness, and it becomes indefensible the moment the account posts one of the "
-     "segregated libraries without saying so. That is a job for the daily posts and the "
-     "roster, not for launch day."),
+     "The original finding: omission is editing, but a euphemism is a voice. Simplifying "
+     "for neutrality deleted the post it lived in."),
 
     ("The account itself: “every”, when the roster is 1,910 of 2,509",
      "Not said in the thread. The pinned post says it.",
      "medium",
-     "Unchanged by the edit, and cheaper to fix now: post 2 has 71 characters spare."),
+     "⚠️ **Now the highest thing left, and the only one that is cheap.** Post 1 has 62 "
+     "characters spare and post 2 has 71. “Every” is in the account’s name, so a reader "
+     "who finds the gap themselves finds it as a discrepancy rather than a disclosure. "
+     "See the rewrite below."),
 
     ("The account itself: a feed of handsome buildings",
      "Post 2 states what it posts, neutrally.",
      "medium",
      "The closing line of the cynic’s thread, and the one charge a neutral launch cannot "
-     "answer on launch day. It can only be answered by what the daily posts turn out to "
-     "contain."),
+     "answer on launch day, because the answer is what the daily posts turn out to "
+     "contain. Nothing to do here; it is a standing obligation on the roster."),
+
+    ("Homestead, 1892: ten dead, and the Homestead library owned by Carnegie Steel",
+     "Not mentioned.",
+     "low",
+     "Downgraded by the cut above. While post 1 characterised the man, its silence on "
+     "Homestead was selective; now the thread says only what he was and what he paid for, "
+     "and a launch that plainly does not attempt a biography is not concealing one."),
+
+    ("Carnegie’s own “better cut of meat” answer to workers who wanted wages",
+     "Not mentioned.",
+     "low",
+     "The most quotable thing in the story, and out of scope for two posts."),
+
+    ("Buildings only: no books, no salaries. The ten percent, in perpetuity",
+     "Not mentioned. The old post 4 carried it.",
+     "low",
+     "The most interesting thing about these buildings and the least accusatory: a "
+     "contract, not a charge. The one candidate worth restoring if the thread ever goes "
+     "to three posts."),
+
+    ("Segregation, and grants sized on the white population",
+     "Not mentioned. The old post 5 carried it squarely.",
+     "medium",
+     "⚠️ A decision, not a finding, and the one item on this page that does not shrink "
+     "with the thread. Defensible in a launch claiming no completeness. It stops being "
+     "defensible the moment the account posts one of the segregated libraries without "
+     "saying so, which is a job for the daily posts and the roster."),
 ]
 
 # ------------------------------------------------------------- what to do
 
 OPTIONS = [
-    ("1", "Post it as drafted.", "live",
-     "Coherent, and it resolves the finding the previous version of this page raised. "
-     "The account is about buildings, the thread now says so and little else, and no "
-     "sentence in it is in the bot’s own editorial voice except the one below."),
+    ("1", "Post it as it now stands.", "recommended",
+     "Two posts, four sentences, no verdict on anybody. Both findings this page has "
+     "raised are closed, and what is left is omission, which a launch that claims no "
+     "completeness can defend. The remaining items are jobs for the roster and the daily "
+     "posts, not for 29 August."),
 
-    ("2", "Cut “and gave away about 90 percent of his wealth.”", "recommended",
-     "The most neutral version available, and a four-word deletion. It is the only "
-     "evaluative claim left in the thread, it is the one thing a critic can say the "
-     "account volunteered on his behalf, and post 1 does not need it: born here, became "
-     "the richest man in the world, paid for more than 2,500 libraries. Three facts, no "
-     "verdict. ⚠️ Note it cuts in the flattering direction, which is the opposite of what "
-     "“simplify” usually costs."),
+    ("2", "Say the roster gap in post 2.", "live",
+     "The only cheap thing left. “Every” is in the account’s name and the roster is 1,910 "
+     "of 2,509, so a reader who works it out gets a discrepancy where they could have had "
+     "a disclosure. Post 2 has 71 characters spare and the pinned post already carries "
+     "the admission. ⚠️ Against: it is the one line that would make the launch sound "
+     "apologetic, and the pinned post is one tap away."),
 
-    ("3", "Replace it with where the money came from.", "live",
-     "“He made his fortune in steel in Pittsburgh, and later gave most of it away.” Names "
-     "the source without characterising it, and answers the cynic’s first post at the "
-     "cost of one clause. Slightly less neutral than 2, because “gave most of it away” "
-     "is still the generous half of the story."),
+    ("3", "Restore the terms as a third post.", "live",
+     "The ten percent, in perpetuity, out of public taxes. A contract rather than a "
+     "charge, and the thing most readers do not know. ⚠️ It reopens the length question "
+     "that the cut settled."),
 
-    ("4", "Keep two posts, restore the terms as a third.", "live",
-     "The ten percent, in perpetuity, out of public taxes. The least accusatory of the "
-     "five posts that were cut: a contract, not a charge, and the thing most readers do "
-     "not know. ⚠️ It also reopens the question of length, which was the point of the "
-     "edit."),
-
-    ("5", "Say the roster gap in post 2.", "live",
-     "Independent of the others and near-free: post 2 has 71 characters spare, and “every” "
-     "is in the account’s name. See the rewrite below."),
-
-    ("6", "Put the harder material in the pinned post instead.", "rejected",
+    ("4", "Put the harder material in the pinned post instead.", "rejected",
      "The pinned post already carries the roster gap and the sources. Rejected for the "
-     "rest, for the same reason as before: doing quietly what the thread declined to do "
-     "out loud is worse than either doing it or not."),
+     "rest: doing quietly what the thread declined to do out loud is worse than either "
+     "doing it or not."),
 
-    ("7", "Go back to seven posts.", "rejected",
+    ("5", "Go back to seven posts.", "rejected",
      "Recorded so the ground is not re-covered. It was a good thread and it is in "
-     "`git log`. Rejected because neutrality was the instruction, not an accident, and "
-     "the seven-post version could not be neutral: five of its posts existed to "
+     "`git log`. Neutrality was the instruction, and five of those posts existed to "
      "characterise the man."),
+
+    ("6", "Restore the 90 percent line.", "rejected",
+     "⚠️ Recorded because it is the obvious thing to reach for if the thread ever looks "
+     "thin. It is true and sourced. It went because at two posts nothing balances it, so "
+     "restoring it without restoring something to pull the other way puts the finding "
+     "straight back."),
 ]
 
 # --------------------------------------------------------------- rewrites
@@ -189,20 +184,18 @@ _P1 = REAL[0][0]
 _P2 = REAL[1][0]
 
 REWRITES = [
-    ("Post 1, as it stands", _P1,
-     "The exposed sentence is the first one."),
+    ("Post 1, as it now stands", _P1,
+     "62 characters spare. The sentence about the man states what he was and nothing "
+     "about what to make of it."),
 
-    ("Post 1, option 2 — the verdict removed",
-     _P1.replace(", and gave away about 90 percent of his wealth", ""),
-     "Four words out. Nothing else moves."),
+    ("Post 1, as it was until 19 August", _P1.replace(
+        "He later became the richest man in the world.",
+        "He later became the richest man in the world, and gave away about 90 percent of his wealth."),
+     "284 chars. Kept here so the cut is visible rather than remembered."),
 
-    ("Post 1, option 3 — the source named",
-     _P1.replace("He later became the richest man in the world, and gave away about 90 percent of his wealth.",
-                 "He made his fortune in steel and became the richest man in the world, then gave most of it away."),
-     "⚠️ First draft named Pittsburgh and ran to 303. “in Pittsburgh” was the four words "
-     "that had to go, not the ones carrying the point."),
+    ("Post 2, as it stands", _P2, "71 characters spare."),
 
-    ("Post 2, option 5 — the roster gap said out loud",
+    ("Post 2, option 2 — the roster gap said out loud",
      _P2.replace("This account posts them one at a time:",
                  "This account posts them one at a time, though Britain’s 660 are not in it yet:"),
      "Takes the pinned post’s admission and says it where the readers are."),
@@ -276,12 +269,13 @@ def main():
            "articles the launch thread is sourced from, checked 19 August 2026. An attack "
            "built from the bot’s own sources is the only kind worth defending against.</p>",
 
-           "<p class=lede>Nothing here is for posting. <b>Rewritten for the two-post "
-           "thread.</b> The previous finding — “when the steel money came”, the one clause "
-           "the bot wrote in its own voice — is <b>resolved</b>: simplifying for neutrality "
-           "deleted the post it lived in. What is left is a different shape. Everything is "
-           "now omission, which two posts can defend, except for one sentence the thread "
-           "chose to include and which now stands with nothing on the other side of it.</p>",
+           "<p class=lede>Nothing here is for posting. <b>Two findings raised, both now "
+           "closed.</b> “When the steel money came” went with the seven-post version; “and "
+           "gave away about 90 percent of his wealth” was cut on 19 August. Both fixes went "
+           "the same way, towards saying less about the man, and the second removed a "
+           "flattering claim rather than an unflattering one. What is left is omission, "
+           "which a launch claiming no completeness can defend — with one exception that is "
+           "nearly free, in the table below.</p>",
 
            "<p class=src><b>The two sources, and nothing else:</b><br>"
            "<a href='https://en.wikipedia.org/wiki/Carnegie_library'>"
@@ -295,9 +289,9 @@ def main():
            "leaving for Scotland before it broke, and Richard White on leisure.</p>",
 
            "<h2>1 · The real thread, as it now stands</h2>",
-           "<p class=sub>Two posts. The marked sentence is where the remaining risk "
-           "is concentrated.</p>",
-           thread_html(real, hot=(1,)),
+           "<p class=sub>Two posts, 238 and 229 of 300. Nothing is marked: no sentence "
+           "in it is now in the account’s own editorial voice.</p>",
+           thread_html(real),
 
            "<h2>2 · The cynic’s thread</h2>",
            "<p class=sub>Seven posts, same anniversary, hostile author. Left at seven "

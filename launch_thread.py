@@ -30,10 +30,20 @@ Dunfermline image is CC BY-SA 3.0, so "Photos: Wikimedia Commons contributors,
 credited on every post" in post 2 is a promise post 1 has to keep by naming
 Stephencdickson. Post 1 is 284 of 300 with it.
 
+⚠️ **"and gave away about 90 percent of his wealth" was cut on 19 August 2026,
+and it was cut for being flattering rather than for being wrong.** It is true
+and it is in the source. The reason it went is that at two posts it no longer
+had anything on the other side of it: born here, richest man in the world, gave
+away 90%, paid for 2,500 libraries reads as his own case for himself, made by
+an account nobody asked. Everything else the short thread leaves out is an
+omission it can defend; that was a positive claim it chose to include. What
+remains states what he was and what he paid for, and holds no view on either.
+Do not restore it without restoring something to balance it.
+
 Every remaining claim is from the Andrew Carnegie and Carnegie library articles
 on Wikipedia, checked 18 August 2026: born Dunfermline 1835; richest man in the
-world; about 90% of the fortune given away; 2,509 buildings 1883-1929, which
-the post rounds to "more than 2,500"; Dunfermline first, opened 29 August 1883.
+world; 2,509 buildings 1883-1929, which the post rounds to "more than 2,500";
+Dunfermline first, opened 29 August 1883.
 
 Usage:
     python3 launch_thread.py          # print the thread, render the page
@@ -46,7 +56,7 @@ CREDIT = "\n\n📷 Stephencdickson · CC BY-SA 3.0"
 POSTS = [
  ("""Dunfermline, Scotland 📚
 
-Andrew Carnegie was born here in 1835. He later became the richest man in the world, and gave away about 90 percent of his wealth.
+Andrew Carnegie was born here in 1835. He later became the richest man in the world.
 
 He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
