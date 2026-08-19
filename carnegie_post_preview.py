@@ -181,14 +181,18 @@ def place(row):
     if region and region.lower() != head.lower():
         parts.append(region)
 
-    # Name the country everywhere except the United States. "Ontario" alone is
-    # ambiguous with Ontario, California, and this corpus spans 16 countries.
-    # The US is exempted because its states are widely known and "Tecumseh,
-    # Michigan, United States" reads like a postal address. region_of() already
-    # falls back to the country on the continental pages, so the guard stops
-    # "Barberton, South Africa, South Africa".
+    # Name the country everywhere except the United States and the United
+    # Kingdom. "Ontario" alone is ambiguous with Ontario, California, and this
+    # corpus spans 17 countries. The two exemptions are for the same reason:
+    # their subdivisions are widely known and unambiguous, and "Tecumseh,
+    # Michigan, United States" reads like a postal address. England, Scotland,
+    # Wales and Northern Ireland are countries in their own right and collide
+    # with nothing, so "Airdrie Public Library, Scotland" is both shorter and
+    # more natural than appending the state. region_of() already falls back to
+    # the country on the continental pages, so the guard stops "Barberton,
+    # South Africa, South Africa".
     country = row["country"].strip()
-    if country and country != "United States":
+    if country and country not in ("United States", "United Kingdom"):
         parts.append(country)
 
     # "Blackrock, Dublin" in a region called Dublin gives "Blackrock, Dublin,
