@@ -251,19 +251,58 @@ Beaux-Arts to Scottish Baronial. The colonnade is what we picture, not what he
 specified. That is a fair thing for an avatar to do and a bad thing for a post
 to do, so it is written down here rather than left to be rediscovered.
 
-## 10. The thread against a hostile reading ⬜ OPEN
+## 10. The opening thread ✅ DECIDED 19 August 2026 — two posts, neutral
+
+Seven posts became two. What went: the foundation stone and the boy borrowing
+books in Pittsburgh; his crediting that library with his start; the terms of the
+deal; the segregated South and Savannah in 1914; and the counts, with about 900
+of the US buildings still libraries by the 1990s. All in `git log`.
+
+Two things were added back, because the draft dropped both and neither is taste:
+
+- **The place header.** Post 1 opens "born here in 1835". Without
+  "Dunfermline, Scotland" above it, "here" points at nothing but the photograph.
+  It was absent from the seven-post version for arithmetic: naming the town in
+  the prose and again in a header ran the post to 315. At two posts there is
+  room, so the 📚 place format now starts on post 1 rather than with the dailies.
+- **The photograph's credit.** The Dunfermline image is CC BY-SA 3.0, so
+  attribution is a licence condition. Post 2's "credited on every post" is also
+  a promise post 1 has to keep. 284 of 300 with it.
+
+## 11. What the short thread is exposed to ⬜ OPEN — one sentence
 
 `python3 launch_thread_stress.py` writes the opposite thread from the same two
-Wikipedia articles the real one cites, and maps what it lands on.
+Wikipedia articles the real one cites, and maps what it lands on. It was
+rewritten when the thread was cut down.
 
-**The exposure is not an omission.** Homestead, Carnegie's "better cut of meat"
-answer and the buildings-but-no-books gap are all absent, but leaving things out
-of seven posts is editing, and posts 4 and 5 already carry the terms and the
-segregation. The exposure is six words the bot wrote in its own voice: **"when
-the steel money came"** in post 3. Money that came, from nowhere, to be spent
-well. It is the only line in the thread that cannot be defended as an editorial
-choice, and the only place the account sounds like a fan.
+**The previous finding is resolved, and by accident.** It was "when the steel
+money came" in the old post 3: the one clause the bot wrote in its own voice
+about where the money came from, and the only line that could not be defended as
+an editorial choice. Simplifying for neutrality deleted the post it lived in.
 
-Seven responses are set out on the page, with the rewrites and their character
-counts. Recommended: replace post 3 with Homestead and the quote, keeping the
-thread at seven posts, which spends its softest post on its hardest fact.
+**What is left is one sentence, and the edit made it more exposed, not less:**
+
+> He later became the richest man in the world, and gave away about 90 percent
+> of his wealth.
+
+In seven posts it had the terms of the deal and the segregation pulling against
+it. In two posts it stands alone, and the thread reads: richest man in the
+world, gave away 90%, paid for more than 2,500 libraries. Read coldly that is
+his own case for himself, made unprompted. Everything else on the page is an
+omission a two-post launch can defend; this is a positive claim it chose to
+include.
+
+| | Option | |
+|---|---|---|
+| 1 | Post as drafted | Coherent, and it already resolves the old finding. |
+| 2 ⭐ | **Cut "and gave away about 90 percent of his wealth."** | Four words. The only evaluative claim left, and post 1 does not need it. ⚠️ It cuts in the flattering direction, which is not what "simplify" usually costs. 238 chars. |
+| 3 | Replace it with where the money came from | "He made his fortune in steel and became the richest man in the world, then gave most of it away." 289. Still the generous half of the story. |
+| 4 | Restore the terms as a third post | The ten percent in perpetuity: a contract, not a charge, and the thing most readers do not know. Reopens the length question. |
+| 5 | Say the roster gap in post 2 | Independent of the rest and near-free: 71 characters spare. 269 with it. |
+| 6 | Put the harder material in the pinned post | Rejected. Doing quietly what the thread declined to do out loud is worse than either doing it or not. |
+| 7 | Go back to seven posts | Rejected, and recorded so the ground is not re-covered. Neutrality was the instruction; five of those posts existed to characterise the man. |
+
+⚠️ **The segregation cut is a decision, not a finding, but it has a tripwire.**
+It is defensible in a launch that makes no claim to completeness. It stops being
+defensible the moment the account posts one of the segregated libraries without
+saying so. That is a job for the daily posts and the roster, not for launch day.

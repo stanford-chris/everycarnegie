@@ -2,23 +2,38 @@
 """
 launch_thread.py — the opening thread for 29 August, and a page to read it on.
 
-Six posts, one idea each: who Carnegie was, what happened in Dunfermline, what
-the deal actually was, how many were built, who was shut out, and what became of
-them. The last post carries the sources, so the thread can serve as the pinned
-note.
+Two posts: what the building is, and what the account does. Neutral by
+decision, 19 August 2026.
 
-⚠️ Post 1 has no "Dunfermline, Fife 📚" header, and that is arithmetic rather
-than taste. Naming the town in the prose and again in a header runs the post to
-315 characters. The 📚 place-header format therefore begins with the daily
-posts, and the opening reads as an introduction instead of a catalogue entry.
+⚠️ It was seven posts until then, and the five that went are worth knowing
+about, because losing them was the point rather than an accident. They were:
+Carnegie's mother laying the foundation stone and the boy borrowing books in
+Pittsburgh; his crediting that library with his start; the terms of the deal,
+land plus ten percent of the build cost every year out of public taxes; the
+segregated South and the separate libraries at places like Savannah in 1914;
+and the counts, with about 900 of the US buildings still libraries by the
+1990s. `git log` has them in full, as does DECISIONS.md item 10.
 
-⚠️ Post 5 is not optional. A bot posting a thousand handsome civic buildings
-owes its readers the fact that in the segregated South the terms were different.
+The last two lines of the short version are the load-bearing ones, and both
+were absent from the draft this was cut down from:
 
-Every claim is from the Andrew Carnegie and Carnegie library articles on
-Wikipedia, checked 18 August 2026: 2,509 buildings 1883–1929; the ten percent
-annual commitment from public funds; about 90% of the fortune given away;
-Savannah 1914; 911 of 1,681 US buildings still libraries in 1992.
+⚠️ **The place header is not decoration here.** Post 1 opens "born here in
+1835", and without "Dunfermline, Scotland" above it, "here" points at nothing
+but the photograph. In the seven-post version the header was dropped for
+arithmetic, because naming the town in the prose and again in a header ran the
+post to 315 characters. The short version has the room, so the header comes
+back and the 📚 place format now starts on post 1 rather than with the daily
+posts.
+
+⚠️ **The photograph's own credit is a licence condition, not a courtesy.** The
+Dunfermline image is CC BY-SA 3.0, so "Photos: Wikimedia Commons contributors,
+credited on every post" in post 2 is a promise post 1 has to keep by naming
+Stephencdickson. Post 1 is 284 of 300 with it.
+
+Every remaining claim is from the Andrew Carnegie and Carnegie library articles
+on Wikipedia, checked 18 August 2026: born Dunfermline 1835; richest man in the
+world; about 90% of the fortune given away; 2,509 buildings 1883-1929, which
+the post rounds to "more than 2,500"; Dunfermline first, opened 29 August 1883.
 
 Usage:
     python3 launch_thread.py          # print the thread, render the page
@@ -31,23 +46,9 @@ CREDIT = "\n\n📷 Stephencdickson · CC BY-SA 3.0"
 POSTS = [
  ("""Dunfermline, Scotland 📚
 
-Andrew Carnegie was born here in 1835. He later became the richest man in the world, and gave away about 90% of his wealth.
+Andrew Carnegie was born here in 1835. He later became the richest man in the world, and gave away about 90 percent of his wealth.
 
-Between 1883 and 1929 he paid for 2,509 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
-
- ("""His mother laid its foundation stone. Carnegie left Scotland 35 years earlier, at 12, when his father’s weaving business failed and the family sailed for Pennsylvania. In Pittsburgh, he borrowed books from a man who opened his library to working boys on Saturdays.""", False),
-
- ("""Carnegie credited that library with his start, and when the steel money came he spent it building more of them.""", False),
-
- ("""They were not gifts, though.
-
-To get one, a town had to provide the land, pay the staff, keep it free to everyone and commit 10% of the building’s cost every year, out of public taxes, to run it.""", False),
-
- ("""In the segregated South, Carnegie funded separate libraries for Black residents rather than requiring the existing ones to admit them. The one in Savannah, Ga., opened in 1914, for those whom the library had turned away.""", False),
-
- ("""Nearly 1,700 libraries were in the U.S., with 660 in Britain and Ireland and 125 in Canada.
-
-By the 1990s, about 900 of the buildings in the U.S. were still libraries. The others had been converted to museums, town halls, offices or houses. Some were gone.""", False),
+He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
  ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now.
 
