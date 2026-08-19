@@ -1,7 +1,10 @@
 {
- "_note": "Photographs judged by hand from the contact sheet in uk_image_review.py. England, 19 August 2026: 107 candidates looked at one by one \u2014 62 approved, 27 rejected as the wrong building, 18 as impossible to tell. Scotland, Wales and Northern Ireland are not yet reviewed. A key here, approved or rejected, takes the row off the review sheet; anything absent is still awaiting a look.",
+ "_note": "Photographs judged by hand from the contact sheet in uk_image_review.py. All 153 British candidates were looked at one by one on 19 August 2026. England: 62 approved of 107. Scotland 18 of 22, Wales 13 of 19, Northern Ireland 0 of 5. A key here, approved or rejected, takes the row off the review sheet.",
  "reviewed": {
-  "England": "2026-08-19"
+  "England": "2026-08-19",
+  "Scotland": "2026-08-19",
+  "Wales": "2026-08-19",
+  "Northern Ireland": "2026-08-19"
  },
  "approved": {
   "Annfield Plain||England": "Annfield Plain Library - geograph.org.uk - 4801192.jpg",
@@ -65,7 +68,38 @@
   "Walthamstow|London|England": "Walthamstow Library - geograph.org.uk - 6266013.jpg",
   "Wednesbury||England": "Wednesbury Library - geograph.org.uk - 3540083.jpg",
   "West Bromwich||England": "West Bromwich Library .jpg",
-  "West Greenwich|London|England": "Greenwich , West Greenwich Library - geograph.org.uk - 7084335.jpg"
+  "West Greenwich|London|England": "Greenwich , West Greenwich Library - geograph.org.uk - 7084335.jpg",
+  "Aberdeen Central Library||Scotland": "Aberdeen Central Library.jpg",
+  "Airdrie Public Library||Scotland": "Airdrie Library - geograph.org.uk - 4490984.jpg",
+  "Blackness Library, Dundee||Scotland": "Blackness Community Library - geograph.org.uk - 5078786.jpg",
+  "Broughty Ferry Library, Dundee||Scotland": "Broughty Ferry library - geograph.org.uk - 4821815.jpg",
+  "Castle Douglas|Library|Scotland": "Library, Castle Douglas, 3.jpg",
+  "Coatbridge library||Scotland": "Coatbridge Library.jpg",
+  "Coldside Library|Dundee|Scotland": "Dundee City - Coldside Community Library - 20230902121325.jpg",
+  "Dennistoun Library||Scotland": "Glasgow City - Dennistoun Library, 2A Craigpark, Glasgow - 20231026121805.jpg",
+  "Ewart Library, Dumfries||Scotland": "Ewart Library, Catherine Street, Dumfries - geograph.org.uk - 930720.jpg",
+  "Fraserburgh||Scotland": "Library, King Edward Street, Fraserburgh, Aberdeenshire - geograph.org.uk - 6991299.jpg",
+  "Hamilton townhouse library||Scotland": "Hamilton Library 2002.jpg",
+  "Hawick Library||Scotland": "Hawick Public Library - geograph.org.uk - 934939.jpg",
+  "Maryhill Public Library||Scotland": "Maryhill Library - geograph.org.uk - 4890163.jpg",
+  "Montrose, Angus||Scotland": "Montrose Library, High Street, Montrose, Angus - geograph.org.uk - 7568838.jpg",
+  "Motherwell||Scotland": "Motherwell Library - geograph.org.uk - 3045089.jpg",
+  "Tain||Scotland": "Tain Library - geograph.org.uk - 3869155.jpg",
+  "Thurso, Highland||Scotland": "Thurso Library.jpg",
+  "West Calder||Scotland": "Library, West Calder - geograph.org.uk - 2646579.jpg",
+  "Abergavenny||Wales": "Abergavenny Library - geograph.org.uk - 2130363.jpg",
+  "Aberystwyth||Wales": "Aberystwyth Library - geograph.org.uk - 6188070.jpg",
+  "Barry||Wales": "Barry Council Office and Library.JPG",
+  "Bridgend||Wales": "Bridgend Public Library - geograph.org.uk - 1008395.jpg",
+  "Buckley||Wales": "Buckley Library and Swimming Baths - geograph.org.uk - 2431279.jpg",
+  "Canton, Cardiff||Wales": "Canton Library, Cardiff - geograph.org.uk - 2223478.jpg",
+  "Coedpoeth||Wales": "Coedpoeth Library.jpg",
+  "Colwyn Bay||Wales": "Colwyn Bay Library (geograph 5008172).jpg",
+  "Dolgellau||Wales": "Darllenfa Rydd Dolgellau (Dolgellau Free Library) - geograph.org.uk - 4448343.jpg",
+  "Dowlais|Merthyr Tydfil|Wales": "Dowlais Library - geograph.org.uk - 2788957.jpg",
+  "Llandudno||Wales": "Llandudno Library.jpg",
+  "Penarth||Wales": "Penarth - Penarth Library - 20220729142510.jpg",
+  "Whitchurch|Cardiff|Wales": "Cardiff Whitchurch Library.jpg"
  },
  "rejected": {
   "Accrington Library|Lancashire|England": "a souvenir programme, not a building",
@@ -112,6 +146,21 @@
   "Taunton|Opened|England": "filename says '(pub)'; the building itself looks right",
   "Thornton Heath|London|England": "an arch detail only",
   "Walsall||England": "dominated by the modern glass extension",
-  "Workington||England": "reads 1930s"
+  "Workington||England": "reads 1930s",
+  "Bo'ness||Scotland": "a modern concrete entrance",
+  "Govanhill & Crosshill District Library||Scotland": "a statue detail, no building in frame",
+  "Kirkwall||Scotland": "a street under construction; the library is not identifiable",
+  "Woodside Library||Scotland": "a statue, no building in frame",
+  "Cathays|Cardiff|Wales": "the modern glass library",
+  "Criccieth||Wales": "a bus shelter and grass",
+  "Flint||Wales": "modern, with tower blocks behind",
+  "Llandrindod Wells||Wales": "reads as a hotel",
+  "Merthyr Tydfil||Wales": "a 1930s building, dated 1935 \u2014 after Carnegie's programme ended",
+  "Pontypool||Wales": "a *temporary* library in another building",
+  "Bangor, County Down||Northern Ireland": "modern",
+  "Belfast||Northern Ireland": "Belfast Central Library, 1888, which predates the grant programme",
+  "Belfast, Donegall Road||Northern Ireland": "a cupola detail only",
+  "Derry||Northern Ireland": "a modern shopping street",
+  "Downpatrick||Northern Ireland": "modern"
  }
 }
