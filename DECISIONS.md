@@ -273,7 +273,7 @@ Two things were added back, because the draft dropped both and neither is taste:
 
 `python3 launch_thread_stress.py` writes the opposite thread from the same two
 Wikipedia articles the real one cites, and maps what it lands on. It has raised
-two findings and **both are now closed**.
+three findings and **all three are now closed**.
 
 1. **"when the steel money came"**, the old post 3: the one clause the bot wrote
    in its own voice about where the money came from, and the only line that
@@ -284,19 +284,24 @@ two findings and **both are now closed**.
    stood alone, and the thread read: richest man in the world, gave away 90%,
    paid for 2,500 libraries. His own case for himself, made by an account nobody
    asked. ⚠️ **It was cut for being flattering, not for being wrong** — it is
-   true and it is in the source. Post 1 is now 238 of 300 and says what he was
+   true and it is in the source. Post 1 is now 239 of 300 and says what he was
    and what he paid for, with no view on either.
+3. **The account's own name.** It is called "every" and the roster holds 1,910
+   of 2,509. Post 2 now says so: *"This account posts them one at a time, though
+   Britain's 660 are not in it yet: …"* (269). A reader who worked the
+   arithmetic out before reaching the pinned post found a discrepancy where they
+   can now find a disclosure. ⚠️ **Raise the figure in post 2 if Britain is ever
+   added**, or the disclosure becomes the inaccuracy.
 
 ⚠️ **Do not restore that line without restoring something to balance it.** It is
 the obvious thing to reach for if the thread ever looks thin, and putting it back
 alone puts the finding straight back.
 
 What remains is omission, which a two-post launch claiming no completeness can
-defend. Three things are still live, none of them for launch day:
+defend. Two things are still live, neither of them for launch day:
 
 | | | |
 |---|---|---|
-| The roster gap | ⬜ open, nearly free | The account is called "every" and the roster holds 1,910 of 2,509. Post 2 has 71 characters spare: *"This account posts them one at a time, though Britain's 660 are not in it yet:"* (269). Against: it is the one line that would make the launch sound apologetic, and the pinned post already says it. |
 | Segregation | ⚠️ tripwire | Defensible to omit from a launch claiming no completeness. **It stops being defensible the moment the account posts one of the segregated libraries without saying so.** A job for the daily posts and the roster. |
 | "A feed of handsome buildings" | no action | The cynic's closing line, and the one charge a neutral launch cannot answer on launch day, because the answer is what the daily posts turn out to contain. |
 

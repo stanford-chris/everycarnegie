@@ -12,7 +12,7 @@ launch thread is sourced from — Carnegie library and Andrew Carnegie, checked
 19 August 2026 — because an attack built from the bot's own sources is the only
 kind worth defending against.
 
-⚠️ **This page has now raised two findings and both are closed.**
+⚠️ **This page has now raised three findings and all three are closed.**
 
 The first was that the exposure was not an omission but a euphemism: "when the
 steel money came", in the old post 3, the one clause the bot wrote in its own
@@ -25,10 +25,14 @@ case for himself. That line was cut on 19 August 2026. Both times the fix went
 in the direction of saying less about the man, and the second cut removed a
 flattering claim, not an unflattering one.
 
+The third was the account's own name. It is called "every" and the roster holds
+1,910 of 2,509, so a reader who worked the arithmetic out before reaching the
+pinned post found a discrepancy where they could have had a disclosure. Post 2
+now says it: "though Britain's 660 are not in it yet".
+
 What is left is omission, which a two-post launch claiming no completeness can
-defend. The remaining items in the table are jobs for the roster and the daily
-posts rather than for launch day, with one exception that is nearly free: the
-account is called "every" and the roster holds 1,910 of 2,509.
+defend. The two remaining items in the table are jobs for the roster and the
+daily posts rather than for launch day.
 
 Usage:
     python3 launch_thread_stress.py     # writes data/launch_thread_stress.html
@@ -98,12 +102,11 @@ EXPOSURE = [
      "for neutrality deleted the post it lived in."),
 
     ("The account itself: “every”, when the roster is 1,910 of 2,509",
-     "Not said in the thread. The pinned post says it.",
-     "medium",
-     "⚠️ **Now the highest thing left, and the only one that is cheap.** Post 1 has 62 "
-     "characters spare and post 2 has 71. “Every” is in the account’s name, so a reader "
-     "who finds the gap themselves finds it as a discrepancy rather than a disclosure. "
-     "See the rewrite below."),
+     "✅ Said in post 2 from 19 August 2026.",
+     "resolved",
+     "Third finding, third close. “Every” is in the account’s name, so a reader who works "
+     "the arithmetic out before reaching the pinned post would have found a discrepancy "
+     "where they can now find a disclosure. 269 of 300."),
 
     ("The account itself: a feed of handsome buildings",
      "Post 2 states what it posts, neutrally.",
@@ -144,34 +147,28 @@ EXPOSURE = [
 
 OPTIONS = [
     ("1", "Post it as it now stands.", "recommended",
-     "Two posts, four sentences, no verdict on anybody. Both findings this page has "
-     "raised are closed, and what is left is omission, which a launch that claims no "
-     "completeness can defend. The remaining items are jobs for the roster and the daily "
-     "posts, not for 29 August."),
+     "Two posts. All three findings this page has raised are closed, and the thread now "
+     "states what he was, what he paid for, what the account will post and what it does "
+     "not yet cover, with no verdict on anybody. What is left is omission, which a launch "
+     "claiming no completeness can defend, and the two remaining items are jobs for the "
+     "roster and the daily posts rather than for 29 August."),
 
-    ("2", "Say the roster gap in post 2.", "live",
-     "The only cheap thing left. “Every” is in the account’s name and the roster is 1,910 "
-     "of 2,509, so a reader who works it out gets a discrepancy where they could have had "
-     "a disclosure. Post 2 has 71 characters spare and the pinned post already carries "
-     "the admission. ⚠️ Against: it is the one line that would make the launch sound "
-     "apologetic, and the pinned post is one tap away."),
-
-    ("3", "Restore the terms as a third post.", "live",
+    ("2", "Restore the terms as a third post.", "live",
      "The ten percent, in perpetuity, out of public taxes. A contract rather than a "
      "charge, and the thing most readers do not know. ⚠️ It reopens the length question "
      "that the cut settled."),
 
-    ("4", "Put the harder material in the pinned post instead.", "rejected",
+    ("3", "Put the harder material in the pinned post instead.", "rejected",
      "The pinned post already carries the roster gap and the sources. Rejected for the "
      "rest: doing quietly what the thread declined to do out loud is worse than either "
      "doing it or not."),
 
-    ("5", "Go back to seven posts.", "rejected",
+    ("4", "Go back to seven posts.", "rejected",
      "Recorded so the ground is not re-covered. It was a good thread and it is in "
      "`git log`. Neutrality was the instruction, and five of those posts existed to "
      "characterise the man."),
 
-    ("6", "Restore the 90 percent line.", "rejected",
+    ("5", "Restore the 90 percent line.", "rejected",
      "⚠️ Recorded because it is the obvious thing to reach for if the thread ever looks "
      "thin. It is true and sourced. It went because at two posts nothing balances it, so "
      "restoring it without restoring something to pull the other way puts the finding "
@@ -185,20 +182,21 @@ _P2 = REAL[1][0]
 
 REWRITES = [
     ("Post 1, as it now stands", _P1,
-     "62 characters spare. The sentence about the man states what he was and nothing "
-     "about what to make of it."),
+     "61 characters spare. States what he was, and nothing about what to make of it."),
 
     ("Post 1, as it was until 19 August", _P1.replace(
-        "He later became the richest man in the world.",
-        "He later became the richest man in the world, and gave away about 90 percent of his wealth."),
+        "Andrew Carnegie was born here in 1835, and later became the richest man in the world.",
+        "Andrew Carnegie was born here in 1835. He later became the richest man in the world, "
+        "and gave away about 90 percent of his wealth."),
      "284 chars. Kept here so the cut is visible rather than remembered."),
 
-    ("Post 2, as it stands", _P2, "71 characters spare."),
+    ("Post 2, as it now stands", _P2,
+     "31 characters spare, with the roster gap in it."),
 
-    ("Post 2, option 2 — the roster gap said out loud",
-     _P2.replace("This account posts them one at a time:",
-                 "This account posts them one at a time, though Britain’s 660 are not in it yet:"),
-     "Takes the pinned post’s admission and says it where the readers are."),
+    ("Post 2, before the roster gap went in", _P2.replace(
+        "This account posts them one at a time, though Britain’s 660 are not in it yet:",
+        "This account posts them one at a time:"),
+     "229 chars. The pinned post carried the admission alone until 19 August."),
 ]
 
 
@@ -269,13 +267,13 @@ def main():
            "articles the launch thread is sourced from, checked 19 August 2026. An attack "
            "built from the bot’s own sources is the only kind worth defending against.</p>",
 
-           "<p class=lede>Nothing here is for posting. <b>Two findings raised, both now "
-           "closed.</b> “When the steel money came” went with the seven-post version; “and "
-           "gave away about 90 percent of his wealth” was cut on 19 August. Both fixes went "
-           "the same way, towards saying less about the man, and the second removed a "
-           "flattering claim rather than an unflattering one. What is left is omission, "
-           "which a launch claiming no completeness can defend — with one exception that is "
-           "nearly free, in the table below.</p>",
+           "<p class=lede>Nothing here is for posting. <b>Three findings raised, all "
+           "three closed.</b> “When the steel money came” went with the seven-post version; "
+           "“and gave away about 90 percent of his wealth” was cut on 19 August; and post 2 "
+           "now says the roster gap out loud rather than leaving it to the pinned post. The "
+           "first two fixes went the same way, towards saying less about the man, and the "
+           "second removed a flattering claim rather than an unflattering one. What is left "
+           "is omission, which a launch claiming no completeness can defend.</p>",
 
            "<p class=src><b>The two sources, and nothing else:</b><br>"
            "<a href='https://en.wikipedia.org/wiki/Carnegie_library'>"
@@ -289,7 +287,7 @@ def main():
            "leaving for Scotland before it broke, and Richard White on leisure.</p>",
 
            "<h2>1 · The real thread, as it now stands</h2>",
-           "<p class=sub>Two posts, 238 and 229 of 300. Nothing is marked: no sentence "
+           "<p class=sub>Two posts, 239 and 269 of 300. Nothing is marked: no sentence "
            "in it is now in the account’s own editorial voice.</p>",
            thread_html(real),
 

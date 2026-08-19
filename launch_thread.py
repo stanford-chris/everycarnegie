@@ -28,7 +28,15 @@ posts.
 ⚠️ **The photograph's own credit is a licence condition, not a courtesy.** The
 Dunfermline image is CC BY-SA 3.0, so "Photos: Wikimedia Commons contributors,
 credited on every post" in post 2 is a promise post 1 has to keep by naming
-Stephencdickson. Post 1 is 284 of 300 with it.
+Stephencdickson.
+
+⚠️ **Post 2 says the roster gap out loud, and that is deliberate**, added 19
+August 2026. The account is called "every" and the roster holds 1,910 of the
+2,509, almost all of the shortfall being the 660 in Britain and Ireland that
+Wikipedia's lists carry as prose bullets rather than tables. The pinned post
+already admits it, but a reader who works the arithmetic out before reaching
+the pinned post finds a discrepancy where they could have had a disclosure.
+Raise the figure here if Britain is ever added: see README.md.
 
 ⚠️ **"and gave away about 90 percent of his wealth" was cut on 19 August 2026,
 and it was cut for being flattering rather than for being wrong.** It is true
@@ -56,11 +64,11 @@ CREDIT = "\n\n📷 Stephencdickson · CC BY-SA 3.0"
 POSTS = [
  ("""Dunfermline, Scotland 📚
 
-Andrew Carnegie was born here in 1835. He later became the richest man in the world.
+Andrew Carnegie was born here in 1835, and later became the richest man in the world.
 
 He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now.
+ ("""This account posts them one at a time, though Britain’s 660 are not in it yet: the building and what became of it, what Carnegie paid and what that money is worth now.
 
 Photos: Wikimedia Commons contributors, credited on every post. Image descriptions are A.I.-written.""", False),
 ]
