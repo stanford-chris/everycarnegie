@@ -48,6 +48,7 @@ HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
 sys.path.insert(0, str(HERE.parent / "everylibrary"))
 import everylibrary_describe as ed          # noqa: E402
+import carnegie_post_preview as cp         # noqa: E402  (typographic)
 
 ed.TMP_DIR = DATA / "_tmp"                  # see the warning above
 ed.TMP_DIR.mkdir(parents=True, exist_ok=True)
@@ -107,7 +108,10 @@ def main():
         with _lock:
             done[0] += 1
             if text:
-                alt[library_id(row)] = {"visual": text}
+                # Curled on the way in, so the store matches house style at
+                # rest; the poster curls again on the way out, which is a
+                # no-op on text that is already curly.
+                alt[library_id(row)] = {"visual": cp.typographic(text)}
                 ok[0] += 1
             if done[0] % 25 == 0 or done[0] == len(todo):
                 save_alt(alt)
