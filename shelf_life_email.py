@@ -59,17 +59,17 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I run a small non-commercial project that posts one Carnegie library a day to Bluesky, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia's lists.
+I am creating a Bluesky bot that posts info about Carnegie libraries, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia’s lists.
 
-Britain is the thin part of it. I have just finished parsing Wikipedia's British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 39 of them. Your project's map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
+Britain is the thin part of it. I have just finished parsing Wikipedia’s British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 39 of them. Your project’s map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
 
 I would like to use that gazetteer, and I am writing rather than simply taking it because of one licensing problem I cannot solve at my end.
 
-Your site provides its material under CC BY-NC-SA 4.0. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and the two share-alike terms cannot both be satisfied by one file: BY-SA does not allow the non-commercial restriction to be added, and BY-NC-SA does not allow it to be dropped. So I cannot merge your rows into mine, however much I would like to.
+Your site provides its material under CC BY-NC-SA 4.0. The account is unfunded, carries no advertising and earns nothing, so I do not think the non-commercial term is the difficulty. The share-alike one is. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and the two terms cannot both be satisfied by one file: BY-SA does not allow the non-commercial restriction to be added, and BY-NC-SA does not allow it to be dropped. So I cannot merge your rows into mine, however much I would like to.
 
 So my question is whether you would consider releasing the gazetteer data on its own — the names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
 
-If you were willing, I would credit the project as your terms require, as © Cardiff University AHRC "Shelf Life" project [{grant}], both in the account's pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. If dual licensing is not something you want to do, I would be glad to know whether you are content with the data being used under CC BY-NC-SA in a separate file, kept apart from the Wikipedia-derived rows and credited the same way.
+If you were willing, I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], both in the account’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. If dual licensing is not something you want to do, I would be glad to know whether you are content with the data being used under CC BY-NC-SA in a separate file, kept apart from the Wikipedia-derived rows and credited the same way.
 
 One thing I can offer back. To post a building I have to find a freely licensed photograph of it and match it to the record, so if it is of any use I would happily send you the Commons photographs I identify for your 493 built entries, with their coordinates, as a plain CSV. Several hundred of them are likely to be images your project has not catalogued.
 
@@ -109,12 +109,13 @@ NOTES = [
      "of silence is an answer, and the fallback is the separate-file arrangement, which "
      "their existing licence already permits for a non-commercial account."),
 
-    ("⚠️ One thing to check before sending",
+    ("Why the non-commercial term is met head-on",
      "The account posts to Bluesky, a commercial platform, while carrying no advertising "
-     "and earning nothing itself. That is non-commercial in substance and NC has always "
-     "been vague about the distinction. The letter does not raise it, on the grounds that "
-     "the dual-licensing request makes it moot if granted. If you would rather be "
-     "scrupulous, add a sentence saying the account is unfunded and carries no advertising."),
+     "and earning nothing itself. That is non-commercial in substance, but NC has always "
+     "been vague about the distinction, so the letter says so plainly and then moves past "
+     "it. ⚠️ The move matters as much as the sentence: raising NC and dismissing it in one "
+     "breath stops the reader answering the easy question instead of the real one, which "
+     "is share-alike."),
 ]
 
 CSS = """
