@@ -98,14 +98,25 @@ built, leaving 493 buildings, 451 still standing, 492 of them with coordinates,
 architects on 65%. That is better data than the American rows the bot already
 posts, which carry coordinates on 31%.
 
-**It states no licence, so it is a thing to ask for, not to take.** Its
-photographs are all "© Oriel Prizeman" and unusable regardless; the bot's
-pictures come from Commons either way. What is wanted is the gazetteer.
+⚠️ **It is CC BY-NC-SA 4.0.** The feature layer's own metadata carries no
+copyright text, which reads as unlicensed; the project's site is explicit, and
+requires the credit `© [creator] Cardiff University AHRC "Shelf Life" project
+[AH/P002587/1]`. Checking the endpoint is not checking the licence.
+
+**CC BY-SA and CC BY-NC-SA are one-way incompatible**, so these rows cannot be
+merged into `carnegie_roster.csv`, which is Wikipedia-derived and CC BY-SA:
+doing so would drag 1,910 rows into a non-commercial licence they are not free
+to take. The ask is therefore for the gazetteer data alone, under CC BY-SA or
+CC BY. Letter drafted in `shelf_life_email.py`; the fallback is a separate file,
+separately licensed and separately credited.
+
+Its photographs are all "© Oriel Prizeman" and reserved. That costs nothing: the
+bot's pictures come from Commons and have to be freely licensed to post at all.
 
 | Source | Yield | Verdict |
 |---|---|---|
 | Wikipedia's Europe list, parsed as lists | ~225 | ⭐ do this: same CC BY-SA licence as the rest, asks nobody |
-| Carnegie Libraries of Britain gazetteer | 621 records, 493 built | ⭐ ask: authoritative, but unlicensed |
+| Carnegie Libraries of Britain gazetteer | 621 records, 493 built | ⭐ ask: authoritative, but CC BY-NC-SA, which the roster cannot absorb |
 | Historic England / HES / Cadw statutory lists | listed buildings only | Open Government Licence. Verification, not a roster |
 | Columbia's digitised Carnegie Corporation records | primary source | settles a disputed date; not for bulk |
 | Miller, *Carnegie Grants for Library Buildings 1890–1917* (1943) | authoritative | print only |

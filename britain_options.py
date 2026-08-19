@@ -19,8 +19,18 @@ the likely origin of the claim.
 ⚠️ **A source nobody had found does exist**, and it is better than anything in
 the roster today: the AHRC-funded Carnegie Libraries of Britain project at
 Cardiff serves its whole gazetteer from a public ArcGIS FeatureServer. 621
-records with coordinates, dates, architects and current status. **It carries no
-licence statement at all**, so it is a thing to ask for, not a thing to take.
+records with coordinates, dates, architects and current status.
+
+⚠️ **It is licensed CC BY-NC-SA 4.0, and this file said otherwise for a few
+hours.** The feature layer's own metadata carries no copyrightText and no terms,
+which read as unlicensed; the project's site is explicit that everything on it
+is CC BY-NC-SA 4.0, credited as © [creator] Cardiff University AHRC "Shelf Life"
+project [AH/P002587/1]. Checking the endpoint is not checking the licence.
+
+That makes the problem narrower and sharper than "ask permission". **CC BY-SA
+and CC BY-NC-SA are one-way incompatible**, so these rows cannot go into a
+roster built from Wikipedia without dragging 1,910 CC BY-SA rows into a
+non-commercial licence they are not free to take. See `shelf_life_email.py`.
 
 Nothing here harvests anything. It counts what each source would yield and
 writes the page.
@@ -40,6 +50,8 @@ WIKIPEDIA = {
     "Northern Ireland": dict(top=9, top_dated=5, nested=0),
 }
 WIKI_TOTAL = sum(v["top_dated"] + v["nested"] for v in WIKIPEDIA.values())   # 225
+
+GRANT = "AH/P002587/1"
 
 CLB_LAYER = ("https://services6.arcgis.com/RZ8g7e9Htqe5KBoA/arcgis/rest/services/"
              "CLofBritain_v26012021/FeatureServer/0")
@@ -66,14 +78,16 @@ OPTIONS = [
      "gets a third of the way and it can ship this week."),
 
     ("2", "Ask Carnegie Libraries of Britain for their gazetteer", "621 records, 493 built",
-     "⚠️ none stated anywhere", "recommended, in parallel",
+     "CC BY-NC-SA 4.0", "recommended, in parallel",
      "The AHRC 'Shelf-Life' project at Cardiff, led by Oriel Prizeman, built its map from "
      "research lists supplied by the Carnegie UK Trust combined with the statutory lists. "
      "It is the authoritative British roster and it is better than the American data the "
      "bot already posts: 100% dates, 100% status, 492 of 493 built entries with "
-     "coordinates, architects on 65%. ⚠️ **The layer states no licence and no copyright**, "
-     "and a public endpoint is not a grant of permission. The project has a contact page. "
-     "Ask, cite them by name if they agree, and take the refusal gracefully if not."),
+     "coordinates, architects on 65%. ⚠️ **It is CC BY-NC-SA 4.0**, which is one-way "
+     "incompatible with the CC BY-SA the roster already carries: merging the two would "
+     "drag 1,910 Wikipedia-derived rows into a non-commercial licence they cannot take. "
+     "So the ask is not for permission but for the gazetteer data alone, without the "
+     "photographs, under CC BY-SA or CC BY. Letter drafted in shelf_life_email.py."),
 
     ("3", "Wikipedia as the spine, their data as enrichment", "225 rows, better filled",
      "mixed; needs 2's permission", "fallback if 2 is refused in part",
@@ -230,15 +244,25 @@ def main():
             "<p>⚠️ It is better than the data the bot already posts. The American rows have "
             "coordinates on 31%; these have them on 99%.</p></div>",
 
-            "<div class='box warn'><h3>⚠️ It states no licence, and that decides how to "
-            "use it</h3>"
-            "<p>The layer carries no copyright text and no terms. A public endpoint is not "
-            "a grant of permission, and an unlicensed academic dataset is the one kind you "
-            "ask for rather than take. The project has a contact page and a named lead.</p>"
-            "<p>Separately, <b>every photograph in it is “© Oriel Prizeman”</b>, so the "
-            "images are unusable regardless. That costs nothing: the bot takes its pictures "
-            "from Wikimedia Commons and would carry on doing so. What is wanted here is the "
-            "gazetteer — names, dates, architects, status, coordinates.</p></div>",
+            "<div class='box warn'><h3>⚠️ It is CC BY-NC-SA 4.0, and that decides "
+            "how it can be used</h3>"
+            "<p>The feature layer’s own metadata carries no copyright text and no terms, "
+            "which reads as an unlicensed dataset. It is not. The project’s site is "
+            "explicit: everything on it is <b>CC BY-NC-SA 4.0</b>, to be credited as "
+            f"<code>© [creator] Cardiff University AHRC “Shelf Life” project [{GRANT}]</code>. "
+            "⚠️ Checking the endpoint is not checking the licence, and this page said "
+            "“no licence stated” for a few hours on the strength of the endpoint alone.</p>"
+            "<p><b>CC BY-SA and CC BY-NC-SA are one-way incompatible.</b> The roster is "
+            "derived from Wikipedia and is CC BY-SA 4.0, so merging these rows into it "
+            "would drag 1,910 rows into a non-commercial licence they are not free to "
+            "take. The ask is therefore not “may we use this” — the licence already "
+            "answers that for a non-commercial account — but whether the gazetteer data "
+            "alone could be released under CC BY-SA or CC BY. Drafted in "
+            "<code>shelf_life_email.py</code>.</p>"
+            "<p>Separately, <b>every photograph is “© Oriel Prizeman”</b> and reserved. "
+            "That costs nothing: the bot’s pictures come from Wikimedia Commons and have "
+            "to be freely licensed to be posted at all. What is wanted is the gazetteer — "
+            "names, dates, architects, status, coordinates.</p></div>",
 
             "<h2>3 · What their status field records</h2>",
             "<p class=sub>Of the 493 that were built. It is a richer vocabulary than the "
