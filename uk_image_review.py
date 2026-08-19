@@ -101,6 +101,16 @@ def main():
     state = json.loads((DATA / "image_state.json").read_text())
     names = state.get("name", {})
 
+    # ⚠️ A card that has already been judged must not come back. Without this
+    # the sheet still offered England's 107 after all 107 had been looked at,
+    # which is worse than useless: it reads as work outstanding.
+    judged = {}
+    ap = DATA / "approved_images.json"
+    if ap.exists():
+        d = json.loads(ap.read_text())
+        judged = {**{k: "approved" for k in d.get("approved", {})},
+                  **{k: "rejected" for k in d.get("rejected", {})}}
+
     with open(DATA / "carnegie_roster.csv") as f:
         rows = [r for r in csv.DictReader(f) if r["kind"] == "public"]
     for i, r in enumerate(rows):
@@ -109,8 +119,11 @@ def main():
     uk = [r for r in rows if r["country"] == "United Kingdom"]
     order = {"England": 0, "Scotland": 1, "Wales": 2, "Northern Ireland": 3}
     uk.sort(key=lambda r: (order.get(r["region"], 9), r["name"]))
-    review, confident, nothing = [], 0, 0
+    review, confident, nothing, done = [], 0, 0, 0
     for r in uk:
+        if f"{r['name']}|{r['city']}|{r['region']}" in judged:
+            done += 1
+            continue
         got = names.get(r["_key"])
         if got and got.get("title"):
             confident += 1
@@ -123,7 +136,7 @@ def main():
            "<title>Carnegie — British photographs to check</title>",
            f"<style>{CSS}</style>", "<div class=wrap>",
            "<h1>British photographs the bot is not confident about</h1>",
-           f"<p class=sub>{len(review)} British candidates, plus a second cohort further "
+           f"<p class=sub>{len(review)} British candidates still to judge, plus a second cohort further "
            f"down that was shipping until today. {confident} British rows matched a file "
            f"whose own title says Carnegie and are already postable; {nothing} found "
            f"nothing at all.</p>",
@@ -221,7 +234,8 @@ tally();
     out = DATA / "uk_image_review.html"
     out.write_text("\n".join(doc), encoding="utf-8")
     print(f"wrote {out}")
-    print(f"  {len(review)} to check · {confident} already confident · {nothing} with nothing")
+    print(f"  {len(review)} to check · {confident} already confident · "
+          f"{nothing} with nothing · {done} already judged")
 
 
 if __name__ == "__main__":
