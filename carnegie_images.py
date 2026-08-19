@@ -174,9 +174,82 @@ def geosearch(rows, state):
         time.sleep(DELAY)
 
 
+# ⚠️ Stage 3 exists because stages 1 and 2 are blind to Britain, proved by the
+# run of 19 August 2026: 245 rows, 0 images. There is no filename to follow and
+# no coordinate to search around, so the only handle left is the library's name.
+#
+# Searching by name finds something for 84% of them and **that is the danger,
+# not the achievement**. Commons will happily return "The new Deptford Library",
+# a 1960s branch in the right town, or a brass band standing outside. A wrong
+# building under a library's name is worse than no post at all.
+#
+# So the bar is the word Carnegie in the file's own title, which takes 21% and
+# leaves the rest alone. Everything that merely mentions a library in the right
+# place is written to a review file for a person to look at, and is never
+# promoted automatically. That follows the rule the rest of this script already
+# keeps: unsure means unpostable, not shipped.
+
+# Parts of a building, not the building. A title naming one of these is a
+# detail shot even when it is the right library.
+NAME_DETAIL = re.compile(
+    r"\b(memorial|plaque|ceiling|interior|inside|relief|balcony|stained|window|"
+    r"door(?:way)?|mosaic|bust|statue|sign|shelves|bookcase|staircase|mural|"
+    r"clock|foundation stone|chart|map|portrait|painting)\b", re.I)
+NAME_LIBRARYISH = re.compile(r"\b(?:librar\w*|carnegie|reading\s+room|institute)\b", re.I)
+# ⚠️ The trailing \b in an earlier version of the pattern above made "librar"
+# never match "Library", so only Carnegie-titled files scored and the measured
+# hit rate read 30% when it was 84%.
+NAME_NEWER = re.compile(r"\b(new|modern|replacement|community hub)\b", re.I)
+NAME_SKIP_EXT = (".pdf", ".tif", ".tiff", ".djvu", ".svg")
+NAME_STOPWORDS = {"library", "public", "district", "central", "the"}
+REVIEW = os.path.join(DATA, "uk_image_review.json")
+
+
+def _name_candidates(title, name):
+    """(confident, plausible) for one search hit."""
+    t = title[5:] if title.startswith("File:") else title
+    if t.lower().endswith(NAME_SKIP_EXT):
+        return False, False
+    if NAME_DETAIL.search(t) or not NAME_LIBRARYISH.search(t) or NAME_NEWER.search(t):
+        return False, False
+    # It must name the place itself, or "Carnegie Library" alone would match
+    # any Carnegie library anywhere.
+    words = [w for w in re.findall(r"[A-Za-z']{3,}", name)
+             if w.lower() not in NAME_STOPWORDS]
+    if words and not any(re.search(rf"\b{re.escape(w)}", t, re.I) for w in words):
+        return False, False
+    return bool(re.search(r"\bcarnegie\b", t, re.I)), True
+
+
+def namesearch(rows, state):
+    """Commons title search, for rows with neither a filename nor coordinates."""
+    state.setdefault("name", {})
+    pending = [r for r in rows
+               if not r["image_file"].strip() and not r["lat"].strip()
+               and r["_key"] not in state["name"]]
+    log(f"stage 3  namesearch: {len(pending)} libraries with neither picture nor coordinates")
+    for n, r in enumerate(pending, 1):
+        d = get({"action": "query", "format": "json", "list": "search",
+                 "srsearch": f'{r["name"]} library {r["region"]}',
+                 "srnamespace": 6, "srlimit": 10})
+        confident = plausible = None
+        for h in (d or {}).get("query", {}).get("search", []) or []:
+            sure, maybe = _name_candidates(h["title"], r["name"])
+            if sure and confident is None:
+                confident = h["title"]
+            elif maybe and plausible is None:
+                plausible = h["title"]
+        state["name"][r["_key"]] = {"title": confident, "review": plausible}
+        if n % 50 == 0 or n == len(pending):
+            save_state(state)
+            got = sum(1 for v in state["name"].values() if v and v.get("title"))
+            log(f"         {n:>5}/{len(pending)}  confident {got}")
+        time.sleep(DELAY)
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", choices=["1", "2"])
+    ap.add_argument("--stage", choices=["1", "2", "3"])
     ap.add_argument("--reset", action="store_true")
     args = ap.parse_args()
 
@@ -200,6 +273,12 @@ def main():
         extra = sorted({v["title"] for v in state["geo"].values() if v})
         if extra:
             resolve(extra, state)
+    if args.stage in (None, "3"):
+        namesearch(rows, state)
+        extra = sorted({v["title"] for v in state.get("name", {}).values()
+                        if v and v.get("title")})
+        if extra:
+            resolve(extra, state)
 
     out = []
     for r in rows:
@@ -212,6 +291,10 @@ def main():
             g = state["geo"].get(r["_key"])
             if g and state["imageinfo"].get(g["title"]):
                 source, title = "commons-geosearch", g["title"]
+        if source is None:
+            nm = state.get("name", {}).get(r["_key"])
+            if nm and nm.get("title") and state["imageinfo"].get(nm["title"]):
+                source, title = "commons-namesearch", nm["title"]
         meta = state["imageinfo"].get(title) if title else None
         who = (meta or {}).get("artist", "")
         out.append({
@@ -241,7 +324,9 @@ def main():
     log("")
     log(f"  libraries            {len(out):>5}")
     log(f"  with an image        {len(have):>5}  ({len(have)/len(out)*100:.1f}%)")
-    for s in ("wikipedia-list", "commons-geosearch"):
+    # ⚠️ Listed explicitly, and stage 3 was missing from this tuple on its first
+    # run: the totals were right and the breakdown silently under-reported by 76.
+    for s in ("wikipedia-list", "commons-geosearch", "commons-namesearch"):
         log(f"      {s:<20} {sum(1 for r in have if r['image_source'] == s):>5}")
     log(f"  safe to post         {len(post):>5}  ({len(post)/len(out)*100:.1f}%)")
     log(f"  image but no credit  {len(have) - len(post):>5}")
