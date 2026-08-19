@@ -173,6 +173,201 @@ def region_from_title(title):
     return title.replace("List of Carnegie libraries in ", "").strip()
 
 
+# ---------------------------------------------------------------- UK bullets
+#
+# Britain is not in table form. The United Kingdom section of the Europe page is
+# bullet lists, so the table parser above walks straight past it and the roster
+# has been short by Britain since it was built.
+#
+# ⚠️ README.md recorded these as unparseable prose — "several libraries crammed
+# into each" — and that claim kept anyone from looking again for months. It is
+# wrong. Scotland, Wales and Northern Ireland are one library per bullet;
+# England is a two-level list with branches nested under their city. It reads as
+# run-together prose only if the markup is stripped before parsing, which is
+# probably how the claim arose.
+
+UK_SECTIONS = ("England", "Scotland", "Wales", "Northern Ireland")
+
+# Two entries in these lists are not public library buildings, and both say so
+# in their own text. "King's College, London" is the Carnegie Collection of
+# British Music, on loan to the Maughan Library. "Solon" is "Solon Carnegie
+# Library, no building provided. This academic library comprised books on
+# ceramics." They are marked academic rather than dropped, which is what the
+# roster already does with the four American college libraries filed in public
+# tables: the bot filters on `kind`, so marking them keeps them out of the feed
+# without quietly shrinking the roster.
+UK_ACADEMIC = {"king's college, london", "solon"}
+
+# ⚠️ Bounded, not any four digits. These bullets are prose and carry other
+# years: "Bromley 1908, designed by Evelyn Hellicar (1862-1929)" and, worse,
+# "Ewart Library, Dumfries, named after William Ewart, MP for Dumfries Burghs
+# 1841-1868". An unbounded pattern dated that library to 1841. Carnegie's
+# grants run 1883 to 1929 and the buildings finish by 1940, which is also the
+# span of the Cardiff gazetteer, so anything outside that is somebody's dates
+# and not the building's.
+YEAR_RE = re.compile(r"\b(18[89]\d|19[0-3]\d|1940)\b")
+
+MONTHS = {"january", "february", "march", "april", "may", "june", "july",
+          "august", "september", "october", "november", "december"}
+
+# Where a bullet stops naming the building and starts reporting on it. Only
+# needed for the undated bullets, which have no year to cut at: "Belfast,
+# Oldpark Road no longer in use" is a library called Belfast, Oldpark Road.
+# Matched on word boundaries, so "Newbuilt" and "Openshaw" are safe.
+STATUS_LEAD = re.compile(
+    r"\b(?:no longer|still in use|now|closed|demolished|converted|run by|opened|"
+    r"built|rebuilt|replaced|destroyed|burnt|bombed|extended|refurbished)\b",
+    re.I)
+
+
+def _bullet_text(li):
+    """The bullet's own text: no nested list, no footnote markers."""
+    c = copy.copy(li)
+    for junk in c.find_all(["ul", "ol", "sup"]):
+        junk.decompose()
+    return clean(c.get_text(" "))
+
+
+def _section_lists(soup, heading_id, level=3):
+    """Every <ul> between one heading and the next of the same or higher rank.
+
+    MediaWiki wraps headings in <div class="mw-heading mw-heading3">, so the
+    walk is over the wrapper's siblings, not the <h3>'s. Reading the level off
+    that class is what stops England's list from swallowing Scotland's.
+    """
+    h = soup.find(id=heading_id)
+    if not h:
+        return []
+    node = h.parent if h.parent and h.parent.name == "div" else h
+    out = []
+    while True:
+        node = node.find_next_sibling()
+        if node is None:
+            break
+        classes = node.get("class") or []
+        if "mw-heading" in classes:
+            ranks = [c for c in classes if c.startswith("mw-heading") and c[-1].isdigit()]
+            if ranks and int(ranks[-1][-1]) <= level:
+                break
+        if node.name == "ul":
+            out.extend(node.find_all("li", recursive=False))
+    return out
+
+
+def _trim_name(head):
+    """Cut a name out of the text before the year.
+
+    Taking all of it is wrong twice over: "Inverurie Public Library, August
+    1911" yields a library called "Inverurie Public Library, August", and the
+    Ewart bullet yields ninety-nine characters of biography. Taking only up to
+    the first comma is wrong the other way, losing the town in "Arthurstone
+    Library, Dundee".
+
+    So: keep comma-separated pieces while they still look like part of a name,
+    and stop at the first one that begins with a lower-case word, which is where
+    the sentence starts, or with a month, which is where the date starts.
+    """
+    parts = head.split(",")
+    kept = [parts[0]]
+    for chunk in parts[1:]:
+        first = (chunk.strip().split(" ") or [""])[0].strip(".")
+        if not first or first[:1].islower() or first.lower() in MONTHS:
+            break
+        kept.append(chunk)
+    return ",".join(kept)
+
+
+def _split_entry(li):
+    """(name, year, notes, town) for one bullet.
+
+    The name comes from the leading wikilink where there is one, which is 86% of
+    them. That is not a stylistic preference: splitting on the first year
+    instead turns "[[Hartlepool]] was built in 1903" into a library called
+    "Hartlepool was built in", and "[[Harrogate]] Opened in Victoria Avenue in
+    1906" into one called "Harrogate Opened in Victoria Avenue in". The link is
+    the subject; the rest of the bullet is a sentence about it.
+    """
+    text = _bullet_text(li)
+    lead = next((e for e in li.contents
+                 if getattr(e, "name", None) or clean(str(e))), None)
+    name = ""
+    if getattr(lead, "name", None) == "a" and not lead.get("href", "").startswith("/wiki/File:"):
+        name = clean(lead.get_text(" "))
+
+    m = YEAR_RE.search(text)
+    year = m.group(1) if m else ""
+
+    # Where the link names the library and the town follows it, the town is
+    # worth keeping: "[[Drury Lane Library]], Wakefield 1905" would otherwise
+    # record a library in England and nothing more. Only a short capitalised
+    # run qualifies, so the prose in "[[Knutsford]], red brick and terracotta"
+    # is not mistaken for a place.
+    town = ""
+    if name and m:
+        between = clean(text[len(name):m.start()]).strip(" ,.;:-\u2013\u2014")
+        words = between.split()
+        if between and len(words) <= 3 and words[0][:1].isupper() \
+                and words[0].lower() not in MONTHS:
+            town = between
+
+    if not name:
+        # No leading link. Everything before the year, trimmed; and failing a
+        # year, the first clause — an undated bullet reads "Sydenham (run by
+        # London Borough of Lewisham)." and the parenthesis is not its name.
+        head = clean(text[:m.start()]) if m else text
+        # An undated bullet runs straight on into its own commentary, with no
+        # year to stop at: cut at the parenthesis, the full stop, the dash that
+        # introduces a status clause, and failing all three at the status
+        # wording itself.
+        if not m:
+            head = re.split(r"[.(]|\s[-\u2013\u2014]\s", head)[0]
+            cut = STATUS_LEAD.search(head)
+            if cut and cut.start() > 0:
+                head = head[:cut.start()]
+        name = _trim_name(clean(head))
+    name = clean(name).strip(" ,.;:-\u2013\u2014")
+
+    notes = clean(text[m.end():]) if m else clean(text[len(name):])
+    return name, year, notes.strip(" ,.;:-\u2013\u2014"), town
+
+
+def parse_uk_lists(soup, title):
+    """The United Kingdom bullet lists, as roster rows."""
+    rows = []
+    for section in UK_SECTIONS:
+        for li in _section_lists(soup, section.replace(" ", "_")):
+            nested = li.find("ul")
+            # A bullet with children is a city heading, never a library: none of
+            # the six carries a date, and their children all do.
+            group = [(clean(_bullet_text(li)).strip(" .,"), sub)
+                     for sub in nested.find_all("li", recursive=False)] if nested \
+                else [("", li)]
+
+            for city, item in group:
+                name, year, notes, town = _split_entry(item)
+                if not name:
+                    continue
+                row = {f: "" for f in FIELDS}
+                row.update(kind="academic" if name.lower() in UK_ACADEMIC else "public",
+                           name=name, city=city or town, region=section,
+                           country="United Kingdom", date_opened=year, notes=notes,
+                           section=section, source_page=title)
+
+                # ⚠️ Only from a link that names a library. Most of these point
+                # at the TOWN — "[[Aberystwyth]] 1906" is the town article, not
+                # its library — and a post whose title links to a town is
+                # quietly wrong. Same rule as the table parser's, and the same
+                # reason: the Curepipe row.
+                a = item.find("a", href=re.compile(r"^/wiki/"))
+                if a and "redlink=1" not in a.get("href", "") \
+                        and not a["href"].startswith("/wiki/File:") \
+                        and "librar" in (a.get("title") or a.get_text()).lower():
+                    row["wikipedia_url"] = "https://en.wikipedia.org" + a["href"]
+
+                rows.append(row)
+    return rows
+
+
 def parse_page(html, title):
     """Every wikitable on the page, as row dicts."""
     soup = BeautifulSoup(html, "lxml")
@@ -268,6 +463,12 @@ def parse_page(html, title):
                 continue
             if row["name"]:
                 out.append(row)
+
+    # Britain is bullets, not tables, so it needs its own pass over the same
+    # soup. Keyed on the section headings existing rather than on the page
+    # title, so it costs nothing on the 56 pages that have no such section.
+    if soup.find(id="United_Kingdom"):
+        out.extend(parse_uk_lists(soup, title))
     return out
 
 

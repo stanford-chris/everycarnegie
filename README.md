@@ -13,23 +13,29 @@ countries. Wikidata knows only 703 of them, so it cannot serve as the roster.
 
 | | |
 |---|---|
-| Public libraries | **1,910** |
-| Academic libraries, kept separate | 106 |
-| Countries | 16 |
+| Public libraries | **2,151** |
+| Academic libraries, kept separate | 112 |
+| Countries | 17 |
 | With grant amount | 92% |
 | With date granted | 89% |
 | With an address | 85% |
 | With an image on the page | 63% |
 | With coordinates | 31% |
 
-United States 1,685, Canada 125, Ireland 56, New Zealand 18, South Africa 12,
+United States 1,681, United Kingdom 245, Canada 125, Ireland 56, New Zealand 18,
+South Africa 12,
 Australia 4, then single figures across Trinidad and Tobago, Mauritius,
 Seychelles, Barbados, Dominica, Guyana, Puerto Rico, Saint Lucia and
 Saint Vincent.
 
-Two independent checks say the US harvest is right: 1,685 against the documented
+Two independent checks say the US harvest is right: 1,681 against the documented
 1,689, and Indiana at 164, the figure Indiana is known for. Canada matches its
 documented 125 exactly.
+
+⚠️ Britain arrived on 19 August 2026 and is **partial by nature**: 245 public
+rows against a documented 660 for Britain and Ireland. It comes from bullet
+lists rather than tables, so it carries no addresses, no coordinates and no
+images, and 39 of the 247 have no date. See the Britain section below.
 
 ```bash
 python3 carnegie_roster.py             # harvest and write the csv
