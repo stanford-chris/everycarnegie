@@ -198,25 +198,89 @@ Image descriptions are A.I.-written. Not yet complete: see the reply.
 | b | `Carnegie_library` | Covers the whole programme; is not the source of the data. |
 | c | Both, as two links | Truthful, but three links in one short post. |
 
-## 4. Cadence ⬜ OPEN — nothing is scheduled yet
+## 4. Cadence ⬜ OPEN — recommendation changed on 19 August 2026
 
-1,223 postable today.
+**1,298 postable** as of today, up from 1,223 before Britain.
 
-| Rate | Runs for | Note |
+| Rate | Runs for | |
 |---|---|---|
-| 1/day | 3 yr 4 mo | Matches "The Daily Carnegie" idea you set aside |
-| 2/day | 1 yr 8 mo | |
-| 3/day ⭐ | 1 yr 1 mo | Matches everylibrary's rhythm |
+| 1/day | 3 yr 7 mo | The "Daily Carnegie" idea you set aside. Longest life, slowest reach. |
+| 2/day ⭐ | 1 yr 9 mo | **Now recommended.** |
+| 3/day | 1 yr 2 mo | Was recommended, on the grounds that it matches everylibrary's rhythm. |
 
-Also open: what times. everylibrary posts at 17:00, 21:00 and 01:00 Seoul,
-chosen to land at 09:00, 13:00 and 17:00 UK. This corpus is 88% American, so
-US times may suit it better.
+⚠️ **"Matches everylibrary" was the wrong reason, and it is why the
+recommendation has moved.** everylibrary has **2,238 postable** rows against
+this account's 1,298: a corpus 72% larger. At three a day everylibrary runs for
+**two years** and everycarnegie for **fourteen months**. Copying the number
+copies the wrong thing — the sibling's pacing is two years of feed, and matching
+*that* means roughly two a day here, not three.
 
-## 5. The thin posts ⬜ OPEN — you have not ruled
+Two a day also leaves headroom the account is likely to need: 153 British
+candidates await review, Ireland holds 18, and the Cardiff gazetteer would add
+several hundred more. Every one of those extends the runway rather than
+compressing it.
 
-19 rows have no grant, no date and no note, so the post is a place, a
-photograph and a credit. Recommended: post them, the picture is the content.
-Alternatives: hold them back, or write a fallback line.
+⚠️ Also open: what times. everylibrary posts 17:00, 21:00 and 01:00 Seoul,
+chosen to land at 09:00, 13:00 and 17:00 UK. **This corpus is 91% American**
+(1,183 of 1,298 postable), so those times serve the wrong audience. US Eastern
+morning and evening would be the equivalent choice.
+
+## 5. The thin posts ⬜ OPEN — measured 19 August 2026, and Britain changed it
+
+A **thin post** is one where the middle — everything between the place header
+and the photo credit — is nearly empty, because the roster holds no grant
+amount, no date and no note. The post is then a place name, a picture and a
+credit line. This is the sparsest that ships today:
+
+```
+Farnworth, England 📚
+
+Opened 1911
+
+📷 Dave Bevis · CC BY-SA 2.0
+
+#CarnegieLibraries #England
+```
+
+91 characters against a median of 193, and against a full American post at 252:
+
+```
+Prescott, Arizona 📚
+125 E Gurley St.
+
+$4,000 from Andrew Carnegie, 4 July 1899 (about $155,000 today)
+Open from November 24, 1903, until 1975. The building is now home to several private businesses
+
+📷 Doncram · CC BY-SA 3.0
+
+#CarnegieLibraries #Arizona
+```
+
+Measured across all 1,298 postable rows:
+
+| | | |
+|---|---|---|
+| very thin, under 120 chars | 27 | 2%, of which **19 British** |
+| thin, 120–159 | 178 | 14%, of which 18 British |
+| normal, 160–249 | 864 | 66% |
+| full, 250+ | 229 | 17%, **none British** |
+
+⚠️ **Britain is structurally thin and always will be.** The bullet lists carry
+no grant amount, no date granted and no address, so a British post can never
+reach the American shape: no "$10,000 from Andrew Carnegie, 2 February 1903
+(about $358,000 today)" line is possible. What it has is the opening year and a
+sentence about what became of the building. That is not a defect to be fixed;
+it is what the source contains.
+
+⚠️ It was worse until today. `compose()` read only `date_granted`, so British
+posts carried **no date at all** while the roster held the opening year for 208
+of them. Fixed; `date_opened` now travels in the manifest and is used as a
+fallback.
+
+Recommended: post them. The picture is the content, and a photograph of a 1911
+library with its year is a perfectly good post. The alternatives are to hold
+them back, which would cost most of Britain, or to write a fallback line, which
+would be padding.
 
 ## 6. Ireland ✅ DECIDED — held back
 
