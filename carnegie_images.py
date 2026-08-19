@@ -13,9 +13,18 @@ Two stages, and deliberately not the three that everylibrary uses:
                     library or Carnegie. Only possible for rows that do have
                     coordinates, and only run where stage 1 found nothing.
 
-There is no Geograph stage. Geograph covers Britain and Ireland, and this roster
-is overwhelmingly American: it supplied a third of everylibrary's coverage and
-would supply almost none here.
+⚠️ **Neither stage can see the British rows, and the run on 19 August 2026
+proved it: 245 rows, 0 images, 0 postable.** Stage 1 needs a filename from the
+roster and stage 2 needs coordinates; Britain comes from bullet lists and has
+neither. Adding Britain to the roster therefore did not add it to the feed, and
+re-running this script will not change that however many times it is run.
+
+⚠️ **The paragraph that used to sit here is now stale, and it was load-bearing.**
+It read: "There is no Geograph stage. Geograph covers Britain and Ireland, and
+this roster is overwhelmingly American: it supplied a third of everylibrary's
+coverage and would supply almost none here." That was true when the roster held
+no British rows. It holds 245 now, and Geograph is the source that covers
+exactly them. The rejection needs re-deciding rather than inheriting.
 
 Every row that ends up postable carries photographer, licence and a credit URL,
 because these are CC BY-SA and attribution is a condition of use. A row with an
