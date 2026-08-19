@@ -68,30 +68,61 @@ lifts it to 91%, and those links go to the **town** — "Curepipe" the place,
 not its library. A post whose title links to a town article is quietly wrong,
 so the link is only ever taken from a genuine library-name column.
 
-## ⚠️ Britain is missing, and not by oversight
+## ⚠️ Britain is missing, and here is what it would take
 
-**The 660 British Carnegie libraries are not in this roster and cannot be got
-from these lists.** Wikipedia's Europe page carries Ireland as a proper table,
-which is captured, but England, Scotland, Wales and Northern Ireland are *prose
-bullet lists*: 103 England bullets with several libraries crammed into each
-("Birmingham. Aston Cross, 1903. Bartley Green 1905…"), no addresses and no
-coordinates.
+**The 660 British Carnegie libraries are not in this roster.** Wikipedia's Europe
+page carries Ireland as a proper table, which is captured; Britain is not in
+table form and the harvester reads tables.
 
-Four sources were tried and none comes close:
+⚠️ **This section used to say the British entries were unparseable prose and
+that four sources had been tried and all failed. Both halves were wrong, and the
+error was load-bearing: it read as an argument for not looking again.** Checked
+against the live wikitext on 19 August 2026:
 
-| Source | UK and Ireland found |
-|---|---|
-| Wikipedia prose bullets | ~187 bullets, England's compound |
-| Wikipedia categories | 57 articles |
-| Commons subcategories | ~79 buildings |
-| Wikidata | 78 UK items, 70 photographed |
-| `everylibrary`'s UK corpus, matched on the name | 5 |
+- **Scotland, Wales and Northern Ireland are one library per bullet**, with a
+  name, a year and usually a wikilink:
+  `* [[Airdrie Public Library]] 1894 and 1925`
+- **England is a two-level list**, branches nested under their city:
+  `* [[Coventry]]` then `** [[Earlsdon]] Library 1913.`
 
-Name-matching against the sibling project fails because British Carnegie
-libraries are almost always named after their town, not after Carnegie.
+Not crammed prose. It reads that way only if the markup is stripped before it is
+parsed, which is probably where the claim came from. A second parser for lists,
+alongside the existing one for tables, yields **about 225 entries**: England 92
+top-level plus 66 nested, Scotland 30, Wales 32, Northern Ireland 5.
 
-So the roster is 1,910 of 2,509, and the missing quarter is almost entirely
-British. Adding it is a research problem, not a parsing one.
+⚠️ **And a gazetteer nobody had found is on a public endpoint.** The AHRC
+"Shelf-Life" project at Cardiff, *Carnegie Libraries of Britain*, serves its
+whole map from an ArcGIS FeatureServer: **621 records**, built from research
+lists supplied by the Carnegie UK Trust plus the statutory lists. 128 were never
+built, leaving 493 buildings, 451 still standing, 492 of them with coordinates,
+architects on 65%. That is better data than the American rows the bot already
+posts, which carry coordinates on 31%.
+
+**It states no licence, so it is a thing to ask for, not to take.** Its
+photographs are all "© Oriel Prizeman" and unusable regardless; the bot's
+pictures come from Commons either way. What is wanted is the gazetteer.
+
+| Source | Yield | Verdict |
+|---|---|---|
+| Wikipedia's Europe list, parsed as lists | ~225 | ⭐ do this: same CC BY-SA licence as the rest, asks nobody |
+| Carnegie Libraries of Britain gazetteer | 621 records, 493 built | ⭐ ask: authoritative, but unlicensed |
+| Historic England / HES / Cadw statutory lists | listed buildings only | Open Government Licence. Verification, not a roster |
+| Columbia's digitised Carnegie Corporation records | primary source | settles a disputed date; not for bulk |
+| Miller, *Carnegie Grants for Library Buildings 1890–1917* (1943) | authoritative | print only |
+| Wikidata | 66 UK items, mostly hockey clubs | rejected, re-confirmed 19 Aug 2026 |
+| Commons subcategories | ~79 | rejected, unchanged |
+| everylibrary's UK corpus, matched on name | 5 | rejected, unchanged |
+
+⚠️ **Every name-based approach fails for one structural reason**, and it is why
+Wikidata and the name-match come back near zero: **British Carnegie libraries are
+named after their town, not after Carnegie.** Renfrew's is Renfrew Library.
+
+The full working, with counts and the licence question set out, is in
+`britain_options.py`:
+
+```bash
+python3 britain_options.py && open data/britain_options.html
+```
 
 ## Three parsing traps, all of the same species
 

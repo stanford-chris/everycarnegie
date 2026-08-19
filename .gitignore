@@ -28,3 +28,6 @@ data/restructured.html
 data/final_thread.py
 data/preview_all.html
 data/launch_thread_stress.html
+
+# Rendered preview, regenerable with britain_options.py.
+data/britain_options.html
