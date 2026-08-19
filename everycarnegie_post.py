@@ -234,8 +234,14 @@ def build_alt(row):
     if not visual:                                # description, e.g. the launch post
         visual = alt_store().get(library_id(row), {}).get('visual')
     if visual:
-        return f'{AI_PREFIX} {visual}'[:ALT_MAX]
-    return f'Photograph of the Carnegie library at {cp.place(row)}.'[:ALT_MAX]
+        # Curled the same way the post text is, and for the same reason. The
+        # post has gone through cp.typographic() since the start; the alt never
+        # did, so a listener got straight quotes where a reader got curly ones —
+        # 101 of the 1,345 stored descriptions contain one. Curled at post time
+        # rather than in the store, so the descriptions already written are
+        # covered without a migration.
+        return f'{AI_PREFIX} {cp.typographic(visual)}'[:ALT_MAX]
+    return cp.typographic(f'Photograph of the Carnegie library at {cp.place(row)}.')[:ALT_MAX]
 
 
 # --------------------------------------------------------------- the image
