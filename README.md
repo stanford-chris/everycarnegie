@@ -156,6 +156,41 @@ The full working, with counts and the licence question set out, is in
 python3 britain_options.py && open data/britain_options.html
 ```
 
+## Does the premise hold? `carnegie_verify.py`
+
+Every row is Wikipedia's claim that a building was Carnegie-funded, and nothing
+tested that until 19 August 2026.
+
+```bash
+python3 carnegie_verify.py            # report only
+python3 carnegie_verify.py --apply    # also blank unsupported links
+```
+
+Three checks. **Aggregate**: 1,681 US against a documented 1,689, Canada 125
+exactly, Indiana 164. **Shape**: no duplicate rows; one name that is not a
+library, the Kish Bank lighthouse, and Ireland is held back anyway.
+**Corroboration**: for the 23% of rows that link a Wikipedia article, fetch that
+article and look for the word Carnegie. It is written by different editors from
+the list that named the building, so agreement is real evidence.
+
+**9 of 499 articles never mention Carnegie**, and the script blanks those links
+rather than dropping the rows: a library whose article turns out to be about a
+park is still a Carnegie library, it is the link that is wrong. Two were plainly
+wrong — Seward Park pointed at the park and Charleston at a 1748 subscription
+library — and about four are probably the right building with an incomplete
+article. The check cannot tell those apart, so it blanks all nine and loses four
+useful links out of 1,262.
+
+⚠️ **The redirect trap inverted this result once.** Asking the API for an article
+by title returns the redirect page, not its target, and a redirect's entire
+content is one line. Without `redirects=1` the check reported **50** articles
+with no Carnegie mention; 46 were redirects and the true figure is 9. The wrong
+number was five times too high and looked completely plausible.
+
+⚠️ **77% of rows link no article at all**, and for them the only evidence is the
+list row itself. A clean run means the checkable quarter checks out, not that
+the roster is verified.
+
 ## ⚠️ Every generated page must declare its charset, first
 
 Safari reads a local `file://` page with no charset declaration as Latin-1, so
