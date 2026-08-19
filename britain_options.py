@@ -297,7 +297,63 @@ def main():
                    f"<p class=meta>Yield: <b>{yield_}</b> · Licence: {lic}</p>"
                    f"<p>{why}</p></div>")
 
-    doc += ["<h2>6 · What I would do</h2>",
+    doc += ["<h2>6 · Does the letter need sending at all?</h2>",
+            "<p class=sub>Asked 19 August 2026, after the letter was drafted. The answer "
+            "is no, and the reason matters.</p>",
+            "<div class='box warn'><p><b>No permission is required.</b> CC BY-NC-SA grants "
+            "non-commercial reproduction and adaptation with attribution. The account is "
+            "unfunded and carries no advertising. Their records in a separate file, "
+            "credited as their terms require, is compliant today and needs nobody\u2019s "
+            "agreement.</p>"
+            "<p>\u26a0\ufe0f <b>So asking manufactures a veto that does not currently exist.</b> "
+            "If they decline, the licence still permits the use \u2014 but you would not then "
+            "want to proceed. A clear legal right would have been traded for a social "
+            "refusal. That is the argument the drafted letter does not make against "
+            "itself.</p>"
+            "<p>Two facts about them: the layer is stamped <code>v26012021</code> and the "
+            "grant is AH/P002587/1, so the project has almost certainly ended. The site is "
+            "still maintained by the Welsh School of Architecture and Prizeman is still "
+            "there, so a reply is plausible but not quick.</p></div>",
+
+            "<div class=opt><h3>a. Send the letter as drafted "
+            "<span class='pill mid'>live</span></h3><p>Asks for CC BY-SA or CC BY so the "
+            "British rows can sit in one file. Honest, and the photograph offer gives them "
+            "a reason to answer. Costs the veto risk above, for a convenience.</p></div>",
+
+            "<div class=opt><h3>b. Send a notification, not a question "
+            "<span class='pill mid'>live</span></h3><p>\u201cI am using your data under your "
+            "licence, credited thus, and here is what I can send back.\u201d No question, so "
+            "nothing to refuse. Gets the courtesy and the impact evidence, loses the "
+            "chance of better terms.</p></div>",
+
+            "<div class=opt><h3>c. Do not send now. Use it, credit it, write later with "
+            "the photographs in hand <span class='pill rec'>recommended</span></h3>"
+            "<p>Ship Britain from Wikipedia, which is already done. Add their gazetteer in "
+            "its own file under their licence with the required credit, which needs no "
+            "permission. Then write when there is something finished to give: the Commons "
+            "photographs matched to their 493 built entries. A completed contribution is a "
+            "far better letter than a promised one, it removes the veto risk entirely, and "
+            "an ended project is likelier to answer an email that gives it something than "
+            "one that asks.</p></div>",
+
+            "<div class=opt><h3>d. Use it, credit it, never write "
+            "<span class='pill rej'>rejected</span></h3><p>Compliant, and the outcome "
+            "option c reaches anyway if the photographs never get matched. Rejected as a "
+            "plan rather than as an outcome: you are leaning heavily on one team\u2019s work "
+            "and they would want to know.</p></div>",
+
+            "<div class=opt><h3>e. Do not use their data at all "
+            "<span class='pill rej'>rejected</span></h3><p>Wikipedia only, 245 rows, no "
+            "coordinates and 39 undated. Rejected: the licence permits the use, and "
+            "declining it costs the roster 396 buildings for no gain.</p></div>",
+
+            "<div class=box><p>\u26a0\ufe0f <b>One caveat that argues mildly for writing "
+            "eventually.</b> The licence statement covers \u201call material on this site\u201d. "
+            "The gazetteer is served from a third-party ArcGIS host and embedded in their "
+            "page. Reading it as covered is reasonable \u2014 it is the map on their site \u2014 "
+            "but it is not airtight, and a note on the record removes the doubt.</p></div>",
+
+            "<h2>7 · What I would do</h2>",
             "<div class=box><p><b>Both, starting today, in this order.</b></p>"
             "<p><b>Write the list parser</b> (option 1). It is a day's work at most, every "
             "row arrives under the licence the roster already uses, it needs nobody's "
