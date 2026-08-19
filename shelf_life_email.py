@@ -59,17 +59,19 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I am creating a Bluesky bot that posts info about Carnegie libraries, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia’s lists.
+I am creating a Bluesky bot that posts about Carnegie libraries, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia’s lists.
 
 Britain is the thin part of it. I have just finished parsing Wikipedia’s British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 39 of them. Your project’s map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
 
-I would like to use that gazetteer, and I am writing rather than simply taking it because of one licensing problem I cannot solve at my end.
+I would like to use that gazetteer, and I am writing before rather than after.
 
-Your site provides its material under CC BY-NC-SA 4.0. The account is unfunded, carries no advertising and earns nothing, so I do not think the non-commercial term is the difficulty. The share-alike one is. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and the two terms cannot both be satisfied by one file: BY-SA does not allow the non-commercial restriction to be added, and BY-NC-SA does not allow it to be dropped. So I cannot merge your rows into mine, however much I would like to.
+Your site provides its material under CC BY-NC-SA 4.0. The account is unfunded, carries no advertising and earns nothing, so I do not think the non-commercial term is a difficulty. Share-alike is the awkward one. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and no single file can satisfy both, since BY-SA does not allow the non-commercial restriction to be added and BY-NC-SA does not allow it to be dropped.
 
-So my question is whether you would consider releasing the gazetteer data on its own — the names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
+That is workable as it stands. I would keep your records in their own file under your licence, credited as you require, rather than merging them into mine: a collection rather than an adaptation, which share-alike does not reach. It is what I will do if I do not hear back, and I would rather say so than write as though I were blocked.
 
-If you were willing, I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], both in the account’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. If dual licensing is not something you want to do, I would be glad to know whether you are content with the data being used under CC BY-NC-SA in a separate file, kept apart from the Wikipedia-derived rows and credited the same way.
+My question is whether you would rather it were simpler. Would you consider releasing the gazetteer data on its own — names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0? It would let the British records sit alongside the rest instead of in quarantine, and spare anyone else building on your work the same puzzle. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
+
+Either way I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], in the account’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com.
 
 One thing I can offer back. To post a building I have to find a freely licensed photograph of it and match it to the record, so if it is of any use I would happily send you the Commons photographs I identify for your 493 built entries, with their coordinates, as a plain CSV. Several hundred of them are likely to be images your project has not catalogued.
 
@@ -82,7 +84,18 @@ chris-stanford.com
 """.replace("{grant}", GRANT)
 
 NOTES = [
-    ("Why write at all, when the material is already licensed",
+    ("⚠️ Why write at all, when there is a legal workaround",
+     "An earlier draft called this “one licensing problem I cannot solve at my end”. That "
+     "was not true. Share-alike binds Adapted Material, not a Collection: two files, each "
+     "under its own licence and separately credited, read side by side at run time, is a "
+     "collection and needs nobody’s permission. The draft then named that very workaround "
+     "four paragraphs later, so it argued against itself — and an AHRC project with "
+     "licensing advice would have seen it. The letter now states the workaround itself and "
+     "asks whether they would rather it were simpler. ⚠️ It is a question, not a request to "
+     "be unblocked: overstating a difficulty to a specialist is the fastest way to lose "
+     "them, and it gives away the one thing worth having, which is their goodwill."),
+
+    ("Superseded: why the merge itself is impossible",
      "Because CC BY-NC-SA cannot be combined with the CC BY-SA the rest of the roster "
      "carries. ⚠️ Since the Wikipedia parser shipped on 19 August the letter is no longer "
      "urgent: 245 British rows are already in. This is now about quality — dates, "
