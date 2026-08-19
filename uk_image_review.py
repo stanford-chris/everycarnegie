@@ -123,9 +123,10 @@ def main():
            "<title>Carnegie — British photographs to check</title>",
            f"<style>{CSS}</style>", "<div class=wrap>",
            "<h1>British photographs the bot is not confident about</h1>",
-           f"<p class=sub>{len(review)} candidates. {confident} others matched a file whose "
-           f"own title says Carnegie and are already postable; {nothing} found nothing at "
-           f"all.</p>",
+           f"<p class=sub>{len(review)} British candidates, plus a second cohort further "
+           f"down that was shipping until today. {confident} British rows matched a file "
+           f"whose own title says Carnegie and are already postable; {nothing} found "
+           f"nothing at all.</p>",
 
            "<div class='box warn'><p><b>Nothing here is postable.</b> These are shown, not "
            "shipped, and no post will use one until it is approved.</p>"
@@ -166,6 +167,38 @@ def main():
             f"<label class=keep><input type=checkbox data-name=\"{html.escape(r['name'])}\" "
             f"data-region=\"{html.escape(r['region'])}\" data-file=\"{html.escape(f)}\"> "
             f"keep this one</label></div></div>")
+
+    # The second cohort: rows that DO carry an image in the manifest but are
+    # held because it was found by proximity and nothing about the file says
+    # Carnegie. Before 19 August 2026 these shipped, and among them were a
+    # photograph of a librarian, a hiking trail, and Kitchener's modern central
+    # library standing in for the Carnegie one it replaced.
+    with open(DATA / "carnegie_images.csv") as f:
+        manifest = list(csv.DictReader(f))
+    held = [r for r in manifest
+            if r["postable"] == "no" and r["image_title"] and r["photographer"]
+            and r["country"] not in ("Ireland",)]
+    held.sort(key=lambda r: (r["country"], r["region"], r["name"]))
+    if held:
+        doc.append(f"</div><h2>Held back: found by proximity, no Carnegie evidence · "
+                   f"{len(held)}</h2>"
+                   "<p class=sub>These were postable until 19 August 2026. Proximity says "
+                   "a file was taken near the library; it says nothing about what is in "
+                   "the frame.</p><div class=grid>")
+        for r in held:
+            t = r["image_title"]
+            f_ = t[5:] if t.startswith("File:") else t
+            doc.append(
+                f"<div class=card>"
+                f"<a href='{html.escape(file_page(t))}' target=_blank>"
+                f"<img loading=lazy src='{html.escape(commons_thumb(t))}' alt=''></a>"
+                f"<div class=meta><div class=nm>{html.escape(r['name'])}</div>"
+                f"<div class=rg>{html.escape(r['region'])} · {html.escape(r['country'])}</div>"
+                f"<div class=fn><a href='{html.escape(file_page(t))}' target=_blank>"
+                f"{html.escape(f_)}</a></div>"
+                f"<label class=keep><input type=checkbox data-name=\"{html.escape(r['name'])}\" "
+                f"data-region=\"{html.escape(r['region'])}\" data-file=\"{html.escape(f_)}\"> "
+                f"keep this one</label></div></div>")
 
     doc += ["</div>",
             "<div class=bar><span id=count>0 kept</span>"

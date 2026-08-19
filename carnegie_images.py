@@ -155,30 +155,6 @@ def resolve(titles, state):
         time.sleep(DELAY)
 
 
-def geosearch(rows, state):
-    pending = [r for r in rows
-               if r["lat"].strip() and not r["image_file"].strip()
-               and r["_key"] not in state["geo"]]
-    log(f"stage 2  geosearch: {len(pending)} libraries with coordinates and no picture")
-    for n, r in enumerate(pending, 1):
-        d = get({"action": "query", "format": "json", "list": "geosearch",
-                 "gsnamespace": 6, "gscoord": f"{r['lat']}|{r['lon']}",
-                 "gsradius": RADIUS_M, "gslimit": 50})
-        hits = (d or {}).get("query", {}).get("geosearch", []) or []
-        cand = [h for h in hits
-                if "librar" in h["title"].lower() or "carnegie" in h["title"].lower()]
-        if cand:
-            best = min(cand, key=lambda h: h.get("dist", RADIUS_M))
-            state["geo"][r["_key"]] = {"title": best["title"],
-                                       "dist": round(best.get("dist", 0))}
-        else:
-            state["geo"][r["_key"]] = None
-        if n % 50 == 0 or n == len(pending):
-            save_state(state)
-            log(f"         {n:>5}/{len(pending)}  matched {sum(1 for v in state['geo'].values() if v)}")
-        time.sleep(DELAY)
-
-
 # ⚠️ Stage 3 exists because stages 1 and 2 are blind to Britain, proved by the
 # run of 19 August 2026: 245 rows, 0 images. There is no filename to follow and
 # no coordinate to search around, so the only handle left is the library's name.
@@ -224,6 +200,41 @@ def _name_candidates(title, name):
     if words and not any(re.search(rf"\b{re.escape(w)}", t, re.I) for w in words):
         return False, False
     return bool(re.search(r"\bcarnegie\b", t, re.I)), True
+
+
+def geosearch(rows, state):
+    pending = [r for r in rows
+               if r["lat"].strip() and not r["image_file"].strip()
+               and r["_key"] not in state["geo"]]
+    log(f"stage 2  geosearch: {len(pending)} libraries with coordinates and no picture")
+    for n, r in enumerate(pending, 1):
+        d = get({"action": "query", "format": "json", "list": "geosearch",
+                 "gsnamespace": 6, "gscoord": f"{r['lat']}|{r['lon']}",
+                 "gsradius": RADIUS_M, "gslimit": 50})
+        hits = (d or {}).get("query", {}).get("geosearch", []) or []
+        # ⚠️ "librar in the title, within 250m" was the whole test until 19
+        # August 2026, and it shipped rubbish: Whitby matched "Librarian, Marie
+        # Bracey, 1952.jpg", St Catharines matched a photograph of a homeless
+        # man outside the building, Sault Ste. Marie matched a hiking trail, and
+        # Berlin, Ontario matched Kitchener's modern central library — a
+        # different building from the Carnegie one it replaced. Proximity says
+        # a file was taken near the library; it says nothing about what is in
+        # the frame. The same filters stage 3 uses now apply here.
+        cand = [h for h in hits
+                if NAME_LIBRARYISH.search(h["title"])
+                and not NAME_DETAIL.search(h["title"])
+                and not NAME_NEWER.search(h["title"])
+                and not h["title"].lower().endswith(NAME_SKIP_EXT)]
+        if cand:
+            best = min(cand, key=lambda h: h.get("dist", RADIUS_M))
+            state["geo"][r["_key"]] = {"title": best["title"],
+                                       "dist": round(best.get("dist", 0))}
+        else:
+            state["geo"][r["_key"]] = None
+        if n % 50 == 0 or n == len(pending):
+            save_state(state)
+            log(f"         {n:>5}/{len(pending)}  matched {sum(1 for v in state['geo'].values() if v)}")
+        time.sleep(DELAY)
 
 
 def namesearch(rows, state):
@@ -316,7 +327,18 @@ def main():
             "licence": (meta or {}).get("licence", ""),
             "licence_url": (meta or {}).get("licence_url", ""),
             "credit_page": (meta or {}).get("page", ""),
-            "postable": ("yes" if (source and who and r["country"] not in HELD_COUNTRIES)
+            # ⚠️ Two standards of evidence, and only one of them is trusted
+            # without the word Carnegie. A wikipedia-list image was placed in
+            # that row by an editor who was looking at the list; that is an
+            # editorial judgement about which building it is. An image this
+            # script found on Commons is a guess, however good the filter, so
+            # it ships only if the file itself says Carnegie. Otherwise the row
+            # is held for review — the same rule as everywhere else here:
+            # unsure means unpostable.
+            "postable": ("yes" if (source and who
+                                   and r["country"] not in HELD_COUNTRIES
+                                   and (source == "wikipedia-list"
+                                        or "carnegie" in (title or "").lower()))
                          else "no"),
         })
 
@@ -335,7 +357,13 @@ def main():
     for s in ("wikipedia-list", "commons-geosearch", "commons-namesearch"):
         log(f"      {s:<20} {sum(1 for r in have if r['image_source'] == s):>5}")
     log(f"  safe to post         {len(post):>5}  ({len(post)/len(out)*100:.1f}%)")
-    log(f"  image but no credit  {len(have) - len(post):>5}")
+    # ⚠️ This line said "image but no credit" until 19 August 2026, when the
+    # only reason to have an image and not ship was a missing photographer.
+    # Rows are now also held for want of Carnegie evidence, so the old label
+    # would report a credit problem that does not exist.
+    nocredit = [r for r in have if not r["photographer"]]
+    log(f"  held: no photographer{len(nocredit):>5}")
+    log(f"  held: for review     {len(have) - len(post) - len(nocredit):>5}")
     log(f"\nwritten to {OUT}")
 
 
