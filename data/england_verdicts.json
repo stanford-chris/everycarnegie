@@ -1,0 +1,695 @@
+{
+ "wrong": [
+  {
+   "n": 1,
+   "name": "Accrington Library",
+   "year": "1907",
+   "file": "Opening of Accrington Library - Souvenir Brochure, 18 January 1908.jpg",
+   "why": "a souvenir programme, not a building"
+  },
+  {
+   "n": 3,
+   "name": "Arnold, Nottinghamshire",
+   "year": "1906",
+   "file": "Bestwood Library, Arnold Road - geograph.org.uk - 5653043.jpg",
+   "why": "Bestwood Library \u2014 a different branch, and modern"
+  },
+  {
+   "n": 5,
+   "name": "Barrow in Furness",
+   "year": "1922",
+   "file": "Roose Library, Roose Road (A5087), Barrow-In-Furness - geograph.org.uk - 7512913.jpg",
+   "why": "Roose Library \u2014 a different branch, and modern"
+  },
+  {
+   "n": 8,
+   "name": "Birkenhead",
+   "year": "",
+   "file": "Benkid77 Brass Band, Birkenhead Library 180709.JPG",
+   "why": "a brass band in the street, no library in frame"
+  },
+  {
+   "n": 11,
+   "name": "Boston",
+   "year": "1904",
+   "file": "Boston Spa Library.jpg",
+   "why": "Boston Spa, Yorkshire \u2014 a different town entirely"
+  },
+  {
+   "n": 12,
+   "name": "Bournemouth",
+   "year": "1907",
+   "file": "Bournemouth Library - geograph.org.uk - 5286678.jpg",
+   "why": "the modern central library"
+  },
+  {
+   "n": 14,
+   "name": "Bromley",
+   "year": "1908",
+   "file": "Nottingham, a glimpse of the Bromley House Library - geograph.org.uk - 5510259.jpg",
+   "why": "a shopfront in Nottingham"
+  },
+  {
+   "n": 27,
+   "name": "Deptford",
+   "year": "1914",
+   "file": "Deptford Library in the sunshine - geograph.org.uk - 3739085.jpg",
+   "why": "Deptford Lounge, gold-clad, 2012"
+  },
+  {
+   "n": 28,
+   "name": "Derby",
+   "year": "",
+   "file": "Wall And Gatepiers To West Derby Library.jpg",
+   "why": "West Derby, Liverpool \u2014 a wall and gatepiers, no building"
+  },
+  {
+   "n": 31,
+   "name": "Eastbourne",
+   "year": "1904",
+   "file": "Eastbourne Library, Eastbourne, East Sussex - geograph.org.uk - 7810943.jpg",
+   "why": "a 1960s block"
+  },
+  {
+   "n": 32,
+   "name": "Eastleigh",
+   "year": "1935",
+   "file": "Eastleigh Community Library - geograph.org.uk - 3582723.jpg",
+   "why": "a phone box and a grass verge; dated 1935"
+  },
+  {
+   "n": 34,
+   "name": "Enfield",
+   "year": "1912",
+   "file": "Library Green, Enfield - geograph.org.uk - 2716619.jpg",
+   "why": "a fountain in a park"
+  },
+  {
+   "n": 42,
+   "name": "Gorleston-on-Sea",
+   "year": "1907",
+   "file": "Gorleston library - geograph.org.uk - 1695248.jpg",
+   "why": "a 1960s shopping parade"
+  },
+  {
+   "n": 43,
+   "name": "Grays",
+   "year": "1903",
+   "file": "Grays Inn Law Library - geograph.org.uk - 2188147.jpg",
+   "why": "Gray's Inn Law Library, London \u2014 a different institution"
+  },
+  {
+   "n": 44,
+   "name": "Great Yarmouth",
+   "year": "1905",
+   "file": "Path to the Great Yarmouth library - geograph.org.uk - 5943234.jpg",
+   "why": "modern"
+  },
+  {
+   "n": 48,
+   "name": "Homerton",
+   "year": "1913",
+   "file": "Homerton library, Homerton High Street - geograph.org.uk - 3033919.jpg",
+   "why": "modern"
+  },
+  {
+   "n": 51,
+   "name": "Ipswich",
+   "year": "1924",
+   "file": "Ipswich School Library Building.jpg",
+   "why": "Ipswich School's library"
+  },
+  {
+   "n": 61,
+   "name": "Luton",
+   "year": "1910",
+   "file": "Luton Central Library - geograph.org.uk - 2705953.jpg",
+   "why": "a modern precinct"
+  },
+  {
+   "n": 66,
+   "name": "Newbury",
+   "year": "1906",
+   "file": "Newbury Library - geograph.org.uk - 4749525.jpg",
+   "why": "a car park and a modern block"
+  },
+  {
+   "n": 67,
+   "name": "Newcastle upon Tyne",
+   "year": "1909",
+   "file": "High Heaton library and The Spinney, Newcastle upon Tyne - geograph.org.uk - 4828315.jpg",
+   "why": "High Heaton \u2014 a different branch, and modern"
+  },
+  {
+   "n": 72,
+   "name": "Pontefract",
+   "year": "1904",
+   "file": "Exterior of Pontefract Library (27th May 2023).jpg",
+   "why": "modern glass and timber"
+  },
+  {
+   "n": 73,
+   "name": "Portsmouth",
+   "year": "1906",
+   "file": "Portsmouth Central Library - geograph.org.uk - 4408696.jpg",
+   "why": "the brutalist central library"
+  },
+  {
+   "n": 78,
+   "name": "Scunthorpe",
+   "year": "1904",
+   "file": "Scunthorpe Library - geograph.org.uk - 2834210.jpg",
+   "why": "modern"
+  },
+  {
+   "n": 83,
+   "name": "Southend-on-Sea",
+   "year": "1905",
+   "file": "The Forum Library, Southend-on-Sea.jpg",
+   "why": "The Forum \u2014 modern"
+  },
+  {
+   "n": 91,
+   "name": "Stourbridge",
+   "year": "1904",
+   "file": "Stourbridge Library - geograph.org.uk - 2041794.jpg",
+   "why": "a modern shopfront"
+  },
+  {
+   "n": 93,
+   "name": "Sunderland",
+   "year": "1908",
+   "file": "Sunderland Architecture , The Library, University Of Sunderland - geograph.org.uk - 4300990.jpg",
+   "why": "modern"
+  },
+  {
+   "n": 107,
+   "name": "Worthing",
+   "year": "1908",
+   "file": "Worthing Library 2026-01-14.jpg",
+   "why": "modern"
+  }
+ ],
+ "doubtful": [
+  {
+   "n": 4,
+   "name": "Ashby",
+   "year": "1906",
+   "file": "Ashby-de-la-Zouch Library - geograph.org.uk - 6528848.jpg",
+   "why": "solar panels; may be rebuilt"
+  },
+  {
+   "n": 6,
+   "name": "Bartley Green",
+   "year": "1905",
+   "file": "Bartley Green Library and Reading Room - geograph.org.uk - 6376382.jpg",
+   "why": "reads mid-century"
+  },
+  {
+   "n": 7,
+   "name": "Bideford",
+   "year": "1905",
+   "file": "Bideford town hall and library - geograph.org.uk - 2170612.jpg",
+   "why": "a town-hall streetscape"
+  },
+  {
+   "n": 9,
+   "name": "Blackheath",
+   "year": "1909",
+   "file": "Former Blackheath library - geograph.org.uk - 2762040.jpg",
+   "why": "a 1960s parade of shops"
+  },
+  {
+   "n": 15,
+   "name": "Burnley",
+   "year": "1930",
+   "file": "Entrance, Burnley Central Library - geograph.org.uk - 4676362.jpg",
+   "why": "entrance only, and dated 1930"
+  },
+  {
+   "n": 17,
+   "name": "Castleton, Rochdale",
+   "year": "1905",
+   "file": "Former Castleton Branch Library, Rochdale Road - geograph.org.uk - 7145827.jpg",
+   "why": "a pediment detail, not the building"
+  },
+  {
+   "n": 19,
+   "name": "Chatham",
+   "year": "1903",
+   "file": "Chatham Library - geograph.org.uk - 1950384.jpg",
+   "why": "a plain white block"
+  },
+  {
+   "n": 24,
+   "name": "Cubitt Town",
+   "year": "1905",
+   "file": "Cubitt Town Library - geograph.org.uk - 3236860.jpg",
+   "why": "a streetscape, library not identifiable"
+  },
+  {
+   "n": 55,
+   "name": "Kingston upon Thames",
+   "year": "1903",
+   "file": "Kingston Library - geograph.org.uk - 8275789.jpg",
+   "why": "distant and obscured"
+  },
+  {
+   "n": 57,
+   "name": "Leicester",
+   "year": "1905",
+   "file": "Leicester Central Library, Bishop Street - geograph.org.uk - 5967007.jpg",
+   "why": "ambiguous angle"
+  },
+  {
+   "n": 59,
+   "name": "Littlehampton",
+   "year": "1906",
+   "file": "Littlehampton Library - geograph.org.uk - 7935817.jpg",
+   "why": "obscured behind a wall"
+  },
+  {
+   "n": 63,
+   "name": "Melton Mowbray",
+   "year": "1905",
+   "file": "Melton Mowbray Library - geograph.org.uk - 4136812.jpg",
+   "why": "a plain block"
+  },
+  {
+   "n": 81,
+   "name": "Skipton, North Yorkshire",
+   "year": "1910",
+   "file": "Skipton Library.jpg",
+   "why": "a street scene, no library visible"
+  },
+  {
+   "n": 92,
+   "name": "Stratford-upon-Avon",
+   "year": "",
+   "file": "Stratford Public Library - geograph.org.uk - 7455105.jpg",
+   "why": "a Tudor timber-framed building"
+  },
+  {
+   "n": 95,
+   "name": "Taunton",
+   "year": "1905",
+   "file": "The Library (pub), Corporation Street, Taunton 2025-07-28.jpg",
+   "why": "filename says '(pub)'; the building itself looks right"
+  },
+  {
+   "n": 96,
+   "name": "Thornton Heath",
+   "year": "",
+   "file": "Thornton Heath Library - geograph.org.uk - 1970529.jpg",
+   "why": "an arch detail only"
+  },
+  {
+   "n": 101,
+   "name": "Walsall",
+   "year": "1906",
+   "file": "Walsall Central Library.jpg",
+   "why": "dominated by the modern glass extension"
+  },
+  {
+   "n": 106,
+   "name": "Workington",
+   "year": "1904",
+   "file": "Workington Library - geograph.org.uk - 2095855.jpg",
+   "why": "reads 1930s"
+  }
+ ],
+ "ok": [
+  {
+   "n": 2,
+   "name": "Annfield Plain",
+   "year": "1908",
+   "file": "Annfield Plain Library - geograph.org.uk - 4801192.jpg"
+  },
+  {
+   "n": 10,
+   "name": "Blackpool",
+   "year": "1911",
+   "file": "Blackpool Central Library - geograph.org.uk - 4013099.jpg"
+  },
+  {
+   "n": 13,
+   "name": "Brentford Library",
+   "year": "1903",
+   "file": "Brentford Library - geograph.org.uk - 2612963.jpg"
+  },
+  {
+   "n": 16,
+   "name": "Calne",
+   "year": "1905",
+   "file": "The entrance to Calne Library - geograph.org.uk - 4926883.jpg"
+  },
+  {
+   "n": 18,
+   "name": "Chadderton",
+   "year": "1904",
+   "file": "Chadderton Library.jpg"
+  },
+  {
+   "n": 20,
+   "name": "Chorlton",
+   "year": "",
+   "file": "Chorlton Library - geograph.org.uk - 2456723.jpg"
+  },
+  {
+   "n": 21,
+   "name": "Cockermouth",
+   "year": "",
+   "file": "Library, Cockermouth - geograph.org.uk - 3451612.jpg"
+  },
+  {
+   "n": 22,
+   "name": "Cradley Heath",
+   "year": "1909",
+   "file": "Cradley Heath Library - geograph.org.uk - 3720820.jpg"
+  },
+  {
+   "n": 23,
+   "name": "Crofton Park",
+   "year": "1905",
+   "file": "Crofton Park Library - geograph.org.uk - 4239116.jpg"
+  },
+  {
+   "n": 25,
+   "name": "Dalton-in-Furness",
+   "year": "1905",
+   "file": "Dalton Library.jpg"
+  },
+  {
+   "n": 26,
+   "name": "Dartford",
+   "year": "1916",
+   "file": "Dartford Library and Museum - geograph.org.uk - 6522903.jpg"
+  },
+  {
+   "n": 29,
+   "name": "Didsbury",
+   "year": "1915",
+   "file": "Didsbury Library, Manchester (1).JPG"
+  },
+  {
+   "n": 30,
+   "name": "Drury Lane Library",
+   "year": "1905",
+   "file": "Drury Lane Library, Wakefield - geograph.org.uk - 2655965.jpg"
+  },
+  {
+   "n": 33,
+   "name": "Eccles",
+   "year": "1907",
+   "file": "Salford - Eccles Library - 20130809130001.jpg"
+  },
+  {
+   "n": 35,
+   "name": "Enfield Highway",
+   "year": "1910",
+   "file": "Enfield Highway Public Library - geograph.org.uk - 5076180.jpg"
+  },
+  {
+   "n": 36,
+   "name": "Erith",
+   "year": "1906",
+   "file": "Erith Library - geograph.org.uk - 3909470.jpg"
+  },
+  {
+   "n": 37,
+   "name": "Fenton",
+   "year": "1906",
+   "file": "Fenton - Library - Glebedale Road frontage - geograph.org.uk - 3194081.jpg"
+  },
+  {
+   "n": 38,
+   "name": "Foleshill",
+   "year": "1913",
+   "file": "Foleshill library (28158264165).jpg"
+  },
+  {
+   "n": 39,
+   "name": "Folkestone",
+   "year": "1910",
+   "file": "Folkestone Library - geograph.org.uk - 6441598.jpg"
+  },
+  {
+   "n": 40,
+   "name": "Gainsborough",
+   "year": "1905",
+   "file": "1424936 Library Gainsborough 20240519 0132.jpg"
+  },
+  {
+   "n": 41,
+   "name": "Garston",
+   "year": "",
+   "file": "Garston Library, Liverpool (1).png"
+  },
+  {
+   "n": 45,
+   "name": "Hanwell",
+   "year": "1905",
+   "file": "Hanwell Community Library - geograph.org.uk - 7233583.jpg"
+  },
+  {
+   "n": 46,
+   "name": "Hartlepool",
+   "year": "1903",
+   "file": "Public library, Northgate, Hartlepool - geograph.org.uk - 6027718.jpg"
+  },
+  {
+   "n": 47,
+   "name": "Haslingden",
+   "year": "",
+   "file": "Haslingden Public Library, Upper Deardengate - geograph.org.uk - 2264116.jpg"
+  },
+  {
+   "n": 49,
+   "name": "Hove",
+   "year": "1908",
+   "file": "Hove Library, Church Road, Hove (NHLE Code 1298670) (October 2014).jpg"
+  },
+  {
+   "n": 50,
+   "name": "Hull",
+   "year": "1905",
+   "file": "Hull Central Library - geograph.org.uk - 4545717.jpg"
+  },
+  {
+   "n": 52,
+   "name": "Islington",
+   "year": "",
+   "file": "South Library, Islington - geograph.org.uk - 1625698.jpg"
+  },
+  {
+   "n": 53,
+   "name": "Keighley",
+   "year": "1904",
+   "file": "Keighley Library - North Street - geograph.org.uk - 477923.jpg"
+  },
+  {
+   "n": 54,
+   "name": "King's Heath",
+   "year": "1905",
+   "file": "King's Heath Library - geograph.org.uk - 7260419.jpg"
+  },
+  {
+   "n": 56,
+   "name": "Knutsford",
+   "year": "1904",
+   "file": "Former library building, Knutsford (2).JPG"
+  },
+  {
+   "n": 58,
+   "name": "Levenshulme",
+   "year": "1904",
+   "file": "Levenshulme former library (26413850355).jpg"
+  },
+  {
+   "n": 60,
+   "name": "Lowestoft",
+   "year": "1905",
+   "file": "Former Lowestoft Library in Suffolk Road - geograph.org.uk - 7267916.jpg"
+  },
+  {
+   "n": 62,
+   "name": "Manor Park",
+   "year": "1905",
+   "file": "Manor Park Library, E12 - geograph.org.uk - 361696.jpg"
+  },
+  {
+   "n": 64,
+   "name": "Middlesbrough",
+   "year": "1912",
+   "file": "Middlesbrough public library (28557894766).jpg"
+  },
+  {
+   "n": 65,
+   "name": "Neston",
+   "year": "1907",
+   "file": "Neston Library (1).JPG"
+  },
+  {
+   "n": 68,
+   "name": "Newton-le-Willows",
+   "year": "1909",
+   "file": "Newton-le-Willows Community Library - geograph.org.uk - 5435312.jpg"
+  },
+  {
+   "n": 69,
+   "name": "Normanton, West Yorkshire",
+   "year": "1907",
+   "file": "Library, Normanton - geograph.org.uk - 2734970.jpg"
+  },
+  {
+   "n": 70,
+   "name": "Northampton",
+   "year": "1910",
+   "file": "Northampton - Northamptonshire Central Library - 20220409123941.jpg"
+  },
+  {
+   "n": 71,
+   "name": "Northfield Library",
+   "year": "1906",
+   "file": "Northfield Library - geograph.org.uk - 7616307.jpg"
+  },
+  {
+   "n": 74,
+   "name": "Rawmarsh",
+   "year": "1905",
+   "file": "Rawmarsh Community Library - geograph.org.uk - 3326664.jpg"
+  },
+  {
+   "n": 75,
+   "name": "Rednal",
+   "year": "1909",
+   "file": "Rednal Library - geograph.org.uk - 7424325.jpg"
+  },
+  {
+   "n": 76,
+   "name": "Royton",
+   "year": "1907",
+   "file": "Royton Library - geograph.org.uk - 500873.jpg"
+  },
+  {
+   "n": 77,
+   "name": "Sandown",
+   "year": "1905",
+   "file": "Sandown Library - geograph.org.uk - 2531134.jpg"
+  },
+  {
+   "n": 79,
+   "name": "Sefton Park",
+   "year": "1911",
+   "file": "Sefton Park Library 2020-2.jpg"
+  },
+  {
+   "n": 80,
+   "name": "Selly Oak Library",
+   "year": "1906",
+   "file": "Selly Oak Library - geograph.org.uk - 1967888.jpg"
+  },
+  {
+   "n": 82,
+   "name": "Southall",
+   "year": "1905",
+   "file": "Library near Southall, England.jpg"
+  },
+  {
+   "n": 84,
+   "name": "Sowerby Bridge",
+   "year": "1905",
+   "file": "Public library, Hollins Mill Lane, Sowerby Bridge - geograph.org.uk - 7897457.jpg"
+  },
+  {
+   "n": 85,
+   "name": "St Annes-on-the-Sea",
+   "year": "1906",
+   "file": "St Annes Library, Lancashire - DSC07133.JPG"
+  },
+  {
+   "n": 86,
+   "name": "Stafford Old Borough Library",
+   "year": "1914",
+   "file": "Old Borough Library, Stafford.jpg"
+  },
+  {
+   "n": 87,
+   "name": "Stamford, Lincolnshire",
+   "year": "1906",
+   "file": "Stamford Library, Stamford - geograph.org.uk - 3737013.jpg"
+  },
+  {
+   "n": 88,
+   "name": "Stirchley",
+   "year": "1907",
+   "file": "Stirchley Library - geograph.org.uk - 8256886.jpg"
+  },
+  {
+   "n": 89,
+   "name": "Stockport",
+   "year": "1913",
+   "file": "Stockport Central Library - geograph.org.uk - 1135573.jpg"
+  },
+  {
+   "n": 90,
+   "name": "Stoke Library",
+   "year": "1913",
+   "file": "Stoke-upon-Trent - Library - south building - geograph.org.uk - 2899418.jpg"
+  },
+  {
+   "n": 94,
+   "name": "Sydenham",
+   "year": "",
+   "file": "Sydenham Community Library - geograph.org.uk - 3918792.jpg"
+  },
+  {
+   "n": 97,
+   "name": "Twickenham",
+   "year": "1906",
+   "file": "Twickenham Library, Garfield Rd.jpg"
+  },
+  {
+   "n": 98,
+   "name": "Tyldesley",
+   "year": "1909",
+   "file": "Tyldesley Library - geograph.org.uk - 2575819.jpg"
+  },
+  {
+   "n": 99,
+   "name": "Walkley",
+   "year": "1905",
+   "file": "Library, Walkley Road, Sheffield - geograph.org.uk - 8044699.jpg"
+  },
+  {
+   "n": 100,
+   "name": "Wallasey",
+   "year": "",
+   "file": "Wallasey Central Library (2).JPG"
+  },
+  {
+   "n": 102,
+   "name": "Walthamstow",
+   "year": "1907",
+   "file": "Walthamstow Library - geograph.org.uk - 6266013.jpg"
+  },
+  {
+   "n": 103,
+   "name": "Wednesbury",
+   "year": "1908",
+   "file": "Wednesbury Library - geograph.org.uk - 3540083.jpg"
+  },
+  {
+   "n": 104,
+   "name": "West Bromwich",
+   "year": "1907",
+   "file": "West Bromwich Library .jpg"
+  },
+  {
+   "n": 105,
+   "name": "West Greenwich",
+   "year": "1907",
+   "file": "Greenwich , West Greenwich Library - geograph.org.uk - 7084335.jpg"
+  }
+ ]
+}

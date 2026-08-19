@@ -185,6 +185,27 @@ NAME_SKIP_EXT = (".pdf", ".tif", ".tiff", ".djvu", ".svg")
 NAME_STOPWORDS = {"library", "public", "district", "central", "the"}
 REVIEW = os.path.join(DATA, "uk_image_review.json")
 
+# ⚠️ The one way a photograph gets in without the word Carnegie on it: somebody
+# looked. `data/approved_images.json` is written by hand after going through
+# `uk_image_review.py`'s contact sheet, and it is the only evidence this script
+# treats as equal to Wikipedia's own placement.
+#
+# England was reviewed on 19 August 2026 and the numbers are the argument for
+# never promoting this tier automatically: of 107 candidates, **27 were the
+# wrong building and 18 could not be told either way**. Boston matched a library
+# in Boston Spa, Yorkshire; Grays matched Gray's Inn Law Library in London;
+# Bromley matched a shopfront in Nottingham; Birkenhead matched a brass band.
+# The commonest failure by far was the town's *modern* library, which no
+# filename test can catch because it is genuinely called "Bournemouth Library".
+APPROVED = os.path.join(DATA, "approved_images.json")
+
+
+def load_approved():
+    if not os.path.exists(APPROVED):
+        return {}
+    with open(APPROVED, encoding="utf-8") as f:
+        return json.load(f).get("approved", {})
+
 
 def _name_candidates(title, name):
     """(confident, plausible) for one search hit."""
@@ -280,6 +301,9 @@ def main():
     log(f"roster: {len(rows)} public libraries")
 
     state = load_state()
+    approved = load_approved()
+    if approved:
+        log(f"approvals: {len(approved)} photographs passed by hand")
 
     if args.stage in (None, "1"):
         titles = sorted({"File:" + r["image_file"] for r in rows if r["image_file"].strip()})
@@ -293,8 +317,12 @@ def main():
         namesearch(rows, state)
         extra = sorted({v["title"] for v in state.get("name", {}).values()
                         if v and v.get("title")})
+        # Hand-approved files are resolved too: they were never promoted into
+        # state["name"][k]["title"], which is the point — the machine did not
+        # choose them.
+        extra += ["File:" + f for f in approved.values()]
         if extra:
-            resolve(extra, state)
+            resolve(sorted(set(extra)), state)
 
     out = []
     for r in rows:
@@ -311,6 +339,10 @@ def main():
             nm = state.get("name", {}).get(r["_key"])
             if nm and nm.get("title") and state["imageinfo"].get(nm["title"]):
                 source, title = "commons-namesearch", nm["title"]
+        if source is None:
+            ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
+            if ok and state["imageinfo"].get("File:" + ok):
+                source, title = "hand-approved", "File:" + ok
         meta = state["imageinfo"].get(title) if title else None
         who = (meta or {}).get("artist", "")
         out.append({
@@ -337,7 +369,7 @@ def main():
             # unsure means unpostable.
             "postable": ("yes" if (source and who
                                    and r["country"] not in HELD_COUNTRIES
-                                   and (source == "wikipedia-list"
+                                   and (source in ("wikipedia-list", "hand-approved")
                                         or "carnegie" in (title or "").lower()))
                          else "no"),
         })
@@ -354,7 +386,8 @@ def main():
     log(f"  with an image        {len(have):>5}  ({len(have)/len(out)*100:.1f}%)")
     # ⚠️ Listed explicitly, and stage 3 was missing from this tuple on its first
     # run: the totals were right and the breakdown silently under-reported by 76.
-    for s in ("wikipedia-list", "commons-geosearch", "commons-namesearch"):
+    for s in ("wikipedia-list", "commons-geosearch", "commons-namesearch",
+              "hand-approved"):
         log(f"      {s:<20} {sum(1 for r in have if r['image_source'] == s):>5}")
     log(f"  safe to post         {len(post):>5}  ({len(post)/len(out)*100:.1f}%)")
     # ⚠️ This line said "image but no credit" until 19 August 2026, when the
