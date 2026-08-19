@@ -305,10 +305,34 @@ library with its year is a perfectly good post. The alternatives are to hold
 them back, which would cost most of Britain, or to write a fallback line, which
 would be padding.
 
-## 6. Ireland ✅ DECIDED — held back
+## 6. Ireland ✅ RE-CHECKED 19 August 2026 — stays held, and the case is stronger
 
-56 rows, 18 postable. Restore by clearing `HELD_COUNTRIES` in
-`carnegie_images.py`.
+56 rows. Every one was examined today and the hold is not a formality.
+
+- **No grant amount and no date on a single row.** Zero of 56.
+- **47 of 56 notes are bare footnote markers** — `[10]`, `[18] [19]` — which
+  `clean_note` strips to nothing. Only 9 carry real prose. So a typical Irish
+  post is a street name, a photograph and a credit.
+- **The names are streets, not libraries**: "Anglesea Street", "Charleville
+  Mall, North Strand", "Ashe Street. Youghal".
+- ⚠️ **A formatting fault the other countries never trigger.** Where the name
+  already contains the county, the post repeats it: *"Blackrock, Dublin, Dublin,
+  Ireland 📚 / Blackrock, Dublin"* — the name is printed again as the address,
+  and Dublin appears three times. `place()`'s dedupe only removes exactly equal
+  parts, so "Blackrock, Dublin" and "Dublin" both survive.
+- **Kish Bank lighthouse is in the table**, and its photograph is the best thing
+  in the whole set: a wooden cabinet stencilled "CARNEGIE LIBRARIES FOR
+  LIGHTHOUSE SERVICE". It is a genuine Carnegie library and it is a *box of
+  books for lighthouse keepers*, not a building.
+
+Of the 20 with a photograph, about 14 are right. Blackrock matched the **town
+hall**, Waterford matched a **historic photograph of men laying a foundation
+stone**, Sandyford matched a community centre, and Limerick matched the City
+Gallery of Art, which is the former Carnegie building under its current name.
+
+Restoring Ireland means fixing the duplication, dropping the lighthouse, and
+accepting posts with no grant and no date. Clear `HELD_COUNTRIES` in
+`carnegie_images.py` when that is done, not before.
 
 ## 7. Name and bio ✅ DECIDED
 
@@ -483,3 +507,24 @@ figure is 9, and the wrong one looked entirely plausible.
 
 ⚠️ **77% of rows link no article**, so a clean run means the checkable quarter
 checks out, not that the roster is verified.
+
+## 15. ⚠️ Alt text: the bio promises more than the bot delivers ⬜ OPEN
+
+`data/alt_text.json` holds 653 A.I.-written descriptions and covers **622 of the
+1,371 postable rows — 45%.** The other 749 post the fallback, *"Photograph of
+the Carnegie library at Wednesbury, England."*, which is bare identification and
+of little use to anyone relying on it.
+
+**All 145 British rows are among the missing**, because they entered the roster
+today and have never been described.
+
+`build_alt()` is honest per post: the fallback deliberately carries no A.I.
+prefix, "because nothing here was written by one". The account's **bio** is the
+part that overstates — "image descriptions are A.I.-generated" is now true of
+fewer than half of them.
+
+Two things to do, in this order: run the describer over the uncovered rows,
+which is the real fix; and only if that cannot be finished before 29 August,
+soften the bio. Found by running `everycarnegie_post.py --dry-run`, which is not
+the same code path as `carnegie_post_preview.py` and had not been exercised
+today until then.
