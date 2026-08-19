@@ -1,10 +1,11 @@
 {
- "_note": "Photographs judged by hand from the contact sheet in uk_image_review.py. All 153 British candidates were looked at one by one on 19 August 2026. England: 62 approved of 107. Scotland 18 of 22, Wales 13 of 19, Northern Ireland 0 of 5. A key here, approved or rejected, takes the row off the review sheet.",
+ "_note": "Photographs judged by hand from the contact sheets in uk_image_review.py. All 153 British candidates and all 31 held proximity matches were looked at one by one on 19 August 2026. England 62 of 107, Scotland 18 of 22, Wales 13 of 19, Northern Ireland 0 of 5, proximity matches 16 of 31. A key here, approved or rejected, takes the row off the review sheet.",
  "reviewed": {
   "England": "2026-08-19",
   "Scotland": "2026-08-19",
   "Wales": "2026-08-19",
-  "Northern Ireland": "2026-08-19"
+  "Northern Ireland": "2026-08-19",
+  "proximity matches (Canada, US)": "2026-08-19"
  },
  "approved": {
   "Annfield Plain||England": "Annfield Plain Library - geograph.org.uk - 4801192.jpg",
@@ -99,7 +100,23 @@
   "Dowlais|Merthyr Tydfil|Wales": "Dowlais Library - geograph.org.uk - 2788957.jpg",
   "Llandudno||Wales": "Llandudno Library.jpg",
   "Penarth||Wales": "Penarth - Penarth Library - 20220729142510.jpg",
-  "Whitchurch|Cardiff|Wales": "Cardiff Whitchurch Library.jpg"
+  "Whitchurch|Cardiff|Wales": "Cardiff Whitchurch Library.jpg",
+  "Dresden Public Library|Dresden|Ontario": "Chatham-Kent Library (Dresden Branch), Dresden, Ontario, 2025-09-13.jpg",
+  "Fergus Public Library|Fergus|Ontario": "Wellington County Library.jpg",
+  "Goderich Public Library|Goderich|Ontario": "Public Library.jpg",
+  "Listowel Public Library|Listowel|Ontario": "North Perth Public Library, Listowel Branch - Listowel, ON.jpg",
+  "Mitchell Public Library|Mitchell|Ontario": "West Perth Public Library - Mitchell, ON.jpg",
+  "Paris Public Library|Paris|Ontario": "County of Brant Public Library Paris Branch.jpg",
+  "Peterborough Public Library|Peterborough|Ontario": "301. A. Peterborough Public Library, Peterborough, 1911 (26524097505).jpg",
+  "Picton Public Library|Picton|Ontario": "Picton Branch Library - Picton, ON.jpg",
+  "Port Hope Public Library|Port Hope|Ontario": "Port Hope Public Library, April 1 2025.jpg",
+  "Renfrew Public Library|Renfrew|Ontario": "Renfrew Public Library.jpg",
+  "St. Marys Public Library|St. Marys|Ontario": "St. Marys Library and St. Marys Town Hall, St. Marys, Ontario (21839097665).jpg",
+  "Stratford Public Library|Stratford|Ontario": "Stratford Public Library.jpg",
+  "Toronto Public Library \u2014 Beaches Branch|Toronto|Ontario": "Toronto Public Library Beaches Branch.jpg",
+  "Toronto Public Library \u2014 High Park Branch|Toronto|Ontario": "High Park Library, Roncesvalles.jpg",
+  "Walkerton Public Library|Walkerton|Ontario": "Walkerton Public Library - Walkerton, ON.jpg",
+  "Weston Public Library|Weston, Toronto|Ontario": "Weston-toronto-public-library.jpg"
  },
  "rejected": {
   "Accrington Library|Lancashire|England": "a souvenir programme, not a building",
@@ -161,6 +178,21 @@
   "Belfast||Northern Ireland": "Belfast Central Library, 1888, which predates the grant programme",
   "Belfast, Donegall Road||Northern Ireland": "a cupola detail only",
   "Derry||Northern Ireland": "a modern shopping street",
-  "Downpatrick||Northern Ireland": "modern"
+  "Downpatrick||Northern Ireland": "modern",
+  "Aylmer Public Library|Aylmer|Ontario": "the Old Town Hall Theatre; reads as a town hall, not a library",
+  "Berlin Public Library|Berlin|Ontario": "Kitchener's modern central library \u2014 a different building from the Carnegie one it replaced",
+  "Elora Public Library|Elora|Ontario": "obscured, and what is visible reads modern",
+  "Hespeler Public Library|Hespeler|Ontario": "a modern all-glass building",
+  "Kingsville Public Library|Kingsville|Ontario": "modern",
+  "Midland Public Library|Midland|Ontario": "a street view; the library is not identifiable",
+  "Ottawa Public Library \u2014 Main Branch|Ottawa|Ontario": "a modern office block",
+  "Ottawa Public Library \u2014 Rosemount Branch|Ottawa|Ontario": "an interior, with a children's group",
+  "Perth Public Library|Perth|Ontario": "the old fire hall, not the library",
+  "St. Catharines Public Library|St. Catharines|Ontario": "a hammock in the trees outside",
+  "Toronto Public Library \u2014 Central Reference Branch|Toronto|Ontario": "the Fields Institute, a mathematics centre",
+  "Toronto Public Library \u2014 Yorkville Branch|Toronto|Ontario": "a window detail of the 1977 Reference Library",
+  "Whitby Public Library|Whitby|Ontario": "a portrait of a librarian, 1952",
+  "Berkeley|Berkeley|California": "a bronze plaque, dated 1931",
+  "Bridgeport North Branch|Bridgeport|Connecticut": "a vintage postcard illustration, and of the main library"
  }
 }

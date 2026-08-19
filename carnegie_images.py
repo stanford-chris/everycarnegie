@@ -326,8 +326,15 @@ def main():
 
     out = []
     for r in rows:
+        # ⚠️ Checked first, and that is deliberate. A person choosing a
+        # photograph beats every automatic route, and the proximity matches
+        # under review already have a source set — so an approval tested last
+        # would never fire for exactly the rows that most need it.
         source = title = None
-        if r["image_file"].strip():
+        ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
+        if ok and state["imageinfo"].get("File:" + ok):
+            source, title = "hand-approved", "File:" + ok
+        if source is None and r["image_file"].strip():
             t = "File:" + r["image_file"]
             if state["imageinfo"].get(t):
                 source, title = "wikipedia-list", t
@@ -339,10 +346,6 @@ def main():
             nm = state.get("name", {}).get(r["_key"])
             if nm and nm.get("title") and state["imageinfo"].get(nm["title"]):
                 source, title = "commons-namesearch", nm["title"]
-        if source is None:
-            ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
-            if ok and state["imageinfo"].get("File:" + ok):
-                source, title = "hand-approved", "File:" + ok
         meta = state["imageinfo"].get(title) if title else None
         who = (meta or {}).get("artist", "")
         out.append({
