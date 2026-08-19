@@ -410,27 +410,76 @@ what the thread declined to do out loud is worse than either doing it or not);
 restoring the terms of the deal as a third post (a contract rather than a
 charge, and the best of the cut five, but it reopens the length question).
 
-## 12. The image manifest has not been rebuilt since Britain arrived ⬜ OPEN
+## 12. Britain's photographs ✅ PART DONE, ⬜ 184 awaiting your eye
 
-⚠️ **`data/carnegie_images.csv` holds 1,906 rows and the roster now holds 2,263.**
-The 245 British rows added on 19 August are in `carnegie_roster.csv` but not in
-the manifest, so they are **not postable**: 1,223 postable, none of them British.
+Rebuilt 19 August 2026. **52 British rows are postable** — England 36, Scotland
+8, Wales 5, Northern Ireland 3 — and the roster's own bar decided which.
 
-Britain enters the feed only when `carnegie_images.py` is re-run to resolve
-Commons photographs for the new rows. That is a network job over Commons, and it
-is a content decision as much as a technical one, so it has not been run.
+⚠️ **Stages 1 and 2 were blind to Britain and always would have been.** Stage 1
+follows a filename from the roster, stage 2 searches around a coordinate;
+Britain's bullet lists supply neither, so the first re-run produced 245 rows and
+0 images. **Stage 3** searches Commons on the library's name instead.
 
-Two things to expect when it is:
+⚠️ **Searching by name finds something for 84% of British rows and that is the
+danger, not the achievement.** Commons returns "The new Deptford Library", a
+1960s branch in the right town, or a brass band standing outside. So the
+automatic bar is the word Carnegie in the file's own title: 52 pass, and 153
+that merely name a library in the right place go to a contact sheet instead.
 
-- **The British rows carry no image filename.** The Wikipedia bullets have none,
-  where the American tables supply one. Every British photograph therefore has
-  to be found by search rather than followed by name, so the hit rate will be
-  lower than the 64% the corpus manages overall. How much lower is unknown until
-  it runs.
-- **The rows are thin.** No addresses, no coordinates, no grant amounts, and no
-  date on 39 of the 245. A British post will usually be a name, a year, a
-  photograph and a credit. That is a live question for item 5, the thin posts,
-  which is still unruled.
+```bash
+python3 uk_image_review.py && open data/uk_image_review.html
+```
 
-Nothing is urgent: the daily job is inert until 29 August, verified by reading
-the guard at `everycarnegie_post.py:492`.
+**184 cards await judgement**: the 153 British candidates, and 31 rows found by
+proximity that were shipping until today (see item 13). Ticking a card and
+copying the list back is all that is needed to promote it.
+
+40 British rows found nothing at all and are not on the sheet: there is nothing
+to judge.
+
+## 13. One standard of evidence for photographs ✅ DECIDED 19 August 2026
+
+**An image this pipeline found on Commons ships only if the file itself says
+Carnegie.** Only a `wikipedia-list` image is trusted without that, because an
+editor placed that picture in that row while looking at the list, which is an
+editorial judgement about which building it is. Anything a query returned is a
+guess, however good the filter.
+
+⚠️ **This was found by auditing, not by a bug report, and 32 wrong buildings
+were already cleared to post.** The geosearch tier's whole test was "*librar* in
+the title, within 250 metres". Among what it had approved: Whitby matched
+`Librarian, Marie Bracey, 1952.jpg`, a photograph of a person; St Catharines a
+homeless man in a hammock outside the building; Sault Ste. Marie a hiking trail;
+Port Elgin and St Marys interiors; and Berlin, Ontario matched **Kitchener's
+modern central library**, a different building from the Carnegie one it
+replaced. Proximity says a file was taken near the library. It says nothing
+about what is in the frame.
+
+Rows shipping on proximity with no Carnegie evidence: **32 → 0**. Postable
+1,298 → 1,262.
+
+⚠️ Tightening the filter alone changed nothing: geosearch skips rows already in
+the state cache, so the new test never ran until the cache was cleared. The
+first pass looked applied and was inert.
+
+## 14. Does the premise hold? ✅ CHECKED 19 August 2026
+
+Every row is Wikipedia's claim that a building was Carnegie-funded, and nothing
+had tested it. `carnegie_verify.py` now does.
+
+- **Aggregate**: 1,681 US against a documented 1,689; Canada 125 and Indiana 164
+  exactly, both independent published figures.
+- **Shape**: no duplicate rows; one name that is not a library, the Kish Bank
+  lighthouse, in Ireland, which is held back anyway.
+- **Corroboration**: for the 23% of rows linking a Wikipedia article, fetch it
+  and look for the word Carnegie. Different editors wrote it, so agreement is
+  evidence. **9 of 499 fail.** Seward Park pointed at the park; Charleston at a
+  1748 subscription library. `--apply` blanks the link, never the row.
+
+⚠️ **The redirect trap inverted this once.** The API returns the redirect page
+and not its target, and a redirect's whole content is one line, so without
+`redirects=1` the check reported **50** failures. 46 were redirects. The real
+figure is 9, and the wrong one looked entirely plausible.
+
+⚠️ **77% of rows link no article**, so a clean run means the checkable quarter
+checks out, not that the roster is verified.
