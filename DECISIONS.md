@@ -226,3 +226,44 @@ by you. See `PROFILE.md`.
 
 Anniversary of Dunfermline opening, 1883. Alternatives were 25 November
 (Carnegie's birth), 11 August (his death), 27 July (foundation stone).
+
+## 9. Avatar ✅ DECIDED 19 August 2026 — keep A, the night facade with the lit lamp
+
+Eight approaches were drawn and judged at 40 px, the size that decides it.
+Regenerate the sheet with `python3 avatar/make_avatar_options.py`.
+
+| | Approach | Why it was or wasn't taken |
+|---|---|---|
+| **A** ⭐ | **Night facade, lit lamp post** | **Kept.** Reads at 40 px, and both of its motifs are documented. |
+| B | The lamp alone | Survives 40 px well, and the enlightenment lantern is the one motif Carnegie's office attached a meaning to. Says "light", not "library". |
+| C | The same facade by day, ink on limestone | The strongest alternative: inverting the ground is the biggest change available at thumbnail size. Rejected as a colourway, not a new idea. |
+| D | The carved lintel, "CARNEGIE LIBRARY" | ⚠️ Illegible at 40 px, **and wrong**: the article says it "was not necessary to put Andrew Carnegie's name on the building". |
+| E | A date stamp, built like everylibrary's | Ring text turns to mush at 40 px, exactly as it does on the sibling. Its backstory is a British library book's return slip, and this corpus is 88% American. |
+| F | The lit doorway, light falling down the steps | Runner-up, and the only candidate that says something new: the entrance staircase is also the standing criticism of these buildings. |
+| G | The steps alone | Reads as a stack of bars. Elevation by learning with the learning removed. |
+| H | The arched fanlight | Fills the circular crop better than anything else, but fanlights are not mentioned in the article at all. |
+
+⚠️ **The provenance split is the useful finding, and it applies to A as well.**
+The entry staircase ("symbolized a person's elevation by learning") and the
+entrance lamp post ("meant as a symbol of enlightenment") are Wikipedia's. The
+temple front is not: no style was recommended, and each town chose its own, from
+Beaux-Arts to Scottish Baronial. The colonnade is what we picture, not what he
+specified. That is a fair thing for an avatar to do and a bad thing for a post
+to do, so it is written down here rather than left to be rediscovered.
+
+## 10. The thread against a hostile reading ⬜ OPEN
+
+`python3 launch_thread_stress.py` writes the opposite thread from the same two
+Wikipedia articles the real one cites, and maps what it lands on.
+
+**The exposure is not an omission.** Homestead, Carnegie's "better cut of meat"
+answer and the buildings-but-no-books gap are all absent, but leaving things out
+of seven posts is editing, and posts 4 and 5 already carry the terms and the
+segregation. The exposure is six words the bot wrote in its own voice: **"when
+the steel money came"** in post 3. Money that came, from nowhere, to be spent
+well. It is the only line in the thread that cannot be defended as an editorial
+choice, and the only place the account sounds like a fan.
+
+Seven responses are set out on the page, with the rewrites and their character
+counts. Recommended: replace post 3 with Homestead and the quote, keeping the
+thread at seven posts, which spends its softest post on its hardest fact.
