@@ -31,7 +31,12 @@ credited on every post" in post 2 is a promise post 1 has to keep by naming
 Stephencdickson.
 
 ⚠️ **Post 2 says the roster gap out loud, and that is deliberate**, added 19
-August 2026. The account is called "every" and the roster holds 1,910 of the
+August 2026. It is a separate sentence at the end, and it has to stay one. The
+first attempt folded it into the main clause — "posts them one at a time, though
+Britain's 660 are not in it yet: the building and what became of it" — where
+"it" had no antecedent at all, and collided with the "it" four words later that
+means the building. The sentence's spine runs from "posts them" to the colon,
+so nothing can sit between them. The account is called "every" and the roster holds 1,910 of the
 2,509, almost all of the shortfall being the 660 in Britain and Ireland that
 Wikipedia's lists carry as prose bullets rather than tables. The pinned post
 already admits it, but a reader who works the arithmetic out before reaching
@@ -68,7 +73,7 @@ Andrew Carnegie was born here in 1835, and later became the richest man in the w
 
 He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""This account posts them one at a time, though Britain’s 660 are not in it yet: the building and what became of it, what Carnegie paid and what that money is worth now.
+ ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now. Britain’s 660 are not included yet.
 
 Photos: Wikimedia Commons contributors, credited on every post. Image descriptions are A.I.-written.""", False),
 ]

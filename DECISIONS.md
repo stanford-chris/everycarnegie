@@ -287,11 +287,16 @@ three findings and **all three are now closed**.
    true and it is in the source. Post 1 is now 239 of 300 and says what he was
    and what he paid for, with no view on either.
 3. **The account's own name.** It is called "every" and the roster holds 1,910
-   of 2,509. Post 2 now says so: *"This account posts them one at a time, though
-   Britain's 660 are not in it yet: …"* (269). A reader who worked the
-   arithmetic out before reaching the pinned post found a discrepancy where they
-   can now find a disclosure. ⚠️ **Raise the figure in post 2 if Britain is ever
-   added**, or the disclosure becomes the inaccuracy.
+   of 2,509. Post 2 now says so, as its own closing sentence: *"Britain's 660 are
+   not included yet."* (265). A reader who worked the arithmetic out before
+   reaching the pinned post found a discrepancy where they can now find a
+   disclosure. ⚠️ **Raise the figure in post 2 if Britain is ever added**, or the
+   disclosure becomes the inaccuracy.
+
+   ⚠️ It has to stay a separate sentence. Folded into the main clause it read
+   "posts them one at a time, though Britain's 660 are not in it yet: the
+   building and what became of it", where "it" had no antecedent and sat four
+   words from a second "it" meaning the building.
 
 ⚠️ **Do not restore that line without restoring something to balance it.** It is
 the obvious thing to reach for if the thread ever looks thin, and putting it back

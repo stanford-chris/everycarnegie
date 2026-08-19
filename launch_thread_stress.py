@@ -106,7 +106,7 @@ EXPOSURE = [
      "resolved",
      "Third finding, third close. “Every” is in the account’s name, so a reader who works "
      "the arithmetic out before reaching the pinned post would have found a discrepancy "
-     "where they can now find a disclosure. 269 of 300."),
+     "where they can now find a disclosure. 265 of 300."),
 
     ("The account itself: a feed of handsome buildings",
      "Post 2 states what it posts, neutrally.",
@@ -191,12 +191,18 @@ REWRITES = [
      "284 chars. Kept here so the cut is visible rather than remembered."),
 
     ("Post 2, as it now stands", _P2,
-     "31 characters spare, with the roster gap in it."),
+     "35 characters spare, with the roster gap as its own closing sentence."),
 
     ("Post 2, before the roster gap went in", _P2.replace(
-        "This account posts them one at a time, though Britain’s 660 are not in it yet:",
-        "This account posts them one at a time:"),
+        " Britain’s 660 are not included yet.", ""),
      "229 chars. The pinned post carried the admission alone until 19 August."),
+
+    ("Post 2, the broken first attempt at it", _P2.replace(
+        "This account posts them one at a time:", "This account posts them one at a time, "
+        "though Britain’s 660 are not in it yet:").replace(
+        " Britain’s 660 are not included yet.", ""),
+     "⚠️ “not in it yet” had no antecedent, and collided with the “it” four words later "
+     "that means the building. Kept as the reason the disclosure is a separate sentence."),
 ]
 
 
@@ -287,7 +293,7 @@ def main():
            "leaving for Scotland before it broke, and Richard White on leisure.</p>",
 
            "<h2>1 · The real thread, as it now stands</h2>",
-           "<p class=sub>Two posts, 239 and 269 of 300. Nothing is marked: no sentence "
+           "<p class=sub>Two posts, 239 and 265 of 300. Nothing is marked: no sentence "
            "in it is now in the account’s own editorial voice.</p>",
            thread_html(real),
 
