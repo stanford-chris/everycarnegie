@@ -80,6 +80,20 @@ h2{font-size:18px;margin:38px 0 10px;padding-top:20px;border-top:1px solid var(-
 .fn{color:var(--muted);font-size:11.5px;margin-top:7px;word-break:break-word;
     line-height:1.4}
 .fn a{color:inherit}
+.note{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.35}
+.keep{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);cursor:pointer;
+      user-select:none}
+.card.on{outline:2px solid var(--ok);outline-offset:-2px}
+.card.on .keep{color:var(--ok);font-weight:600}
+.bar{position:sticky;bottom:0;background:var(--card);border:1px solid var(--line);
+     border-radius:12px;padding:11px 14px;margin:22px 0 10px;display:flex;gap:14px;
+     align-items:center;font-size:14px}
+.bar button{font:inherit;padding:5px 12px;border-radius:8px;border:1px solid var(--line);
+            background:var(--bg);color:var(--ink);cursor:pointer}
+textarea{width:100%;height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospace;
+         background:var(--card);color:var(--ink);border:1px solid var(--line);
+         border-radius:10px;padding:11px}
+h2{scroll-margin-top:20px}
 """
 
 
@@ -93,6 +107,8 @@ def main():
         r["_key"] = f"{i}:{r['name'][:40]}"
 
     uk = [r for r in rows if r["country"] == "United Kingdom"]
+    order = {"England": 0, "Scotland": 1, "Wales": 2, "Northern Ireland": 3}
+    uk.sort(key=lambda r: (order.get(r["region"], 9), r["name"]))
     review, confident, nothing = [], 0, 0
     for r in uk:
         got = names.get(r["_key"])
@@ -126,19 +142,49 @@ def main():
 
            "<h2>The candidates</h2>", "<div class=grid>"]
 
-    for r, title in review:
+    seen_region = None
+    for i, (r, title) in enumerate(review):
+        if r["region"] != seen_region:
+            seen_region = r["region"]
+            n = sum(1 for x, _ in review if x["region"] == seen_region)
+            doc.append(f"</div><h2>{html.escape(seen_region)} · {n}</h2><div class=grid>")
         f = title[5:] if title.startswith("File:") else title
-        date = f" · {r['date_opened']}" if r["date_opened"] else ""
+        date = f" · opened {r['date_opened']}" if r["date_opened"] else " · no date"
+        # The roster note is the best evidence a person has for judging whether
+        # the photograph belongs: "still in use as a library", "now a nursery",
+        # "demolished" all decide it faster than the picture does.
+        note = (r.get("notes") or "").strip()
         doc.append(
-            f"<div class=card>"
+            f"<div class=card data-i='{i}'>"
             f"<a href='{html.escape(file_page(title))}' target=_blank>"
             f"<img loading=lazy src='{html.escape(commons_thumb(title))}' alt=''></a>"
             f"<div class=meta><div class=nm>{html.escape(r['name'])}</div>"
             f"<div class=rg>{html.escape(r['region'])}{html.escape(date)}</div>"
-            f"<div class=fn><a href='{html.escape(file_page(title))}' target=_blank>"
-            f"{html.escape(f)}</a></div></div></div>")
+            + (f"<div class=note>{html.escape(note[:150])}</div>" if note else "")
+            + f"<div class=fn><a href='{html.escape(file_page(title))}' target=_blank>"
+            f"{html.escape(f)}</a></div>"
+            f"<label class=keep><input type=checkbox data-name=\"{html.escape(r['name'])}\" "
+            f"data-region=\"{html.escape(r['region'])}\" data-file=\"{html.escape(f)}\"> "
+            f"keep this one</label></div></div>")
 
-    doc += ["</div>", "</div>"]
+    doc += ["</div>",
+            "<div class=bar><span id=count>0 kept</span>"
+            "<button onclick='dump()'>Show the list</button></div>",
+            "<textarea id=out placeholder='The kept ones appear here. Select all, copy, "
+            "and paste them back into the chat.'></textarea>",
+            """<script>
+const boxes = () => [...document.querySelectorAll('.keep input')];
+function tally(){ document.getElementById('count').textContent =
+  boxes().filter(b=>b.checked).length + ' kept of ' + boxes().length; }
+document.addEventListener('change', e => { if (e.target.matches('.keep input')) {
+  e.target.closest('.card').classList.toggle('on', e.target.checked); tally(); } });
+function dump(){ document.getElementById('out').value =
+  boxes().filter(b=>b.checked)
+         .map(b=>`${b.dataset.name}\t${b.dataset.region}\t${b.dataset.file}`)
+         .join('\n') || '(nothing ticked yet)'; }
+tally();
+</script>""",
+            "</div>"]
     out = DATA / "uk_image_review.html"
     out.write_text("\n".join(doc), encoding="utf-8")
     print(f"wrote {out}")
