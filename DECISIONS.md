@@ -5,7 +5,13 @@ that were discarded and why. Decided items are at the bottom.
 
 ---
 
-## 1. Launch post ⬜ OPEN
+## 1. Launch post ✅ SUPERSEDED by item 10 — kept for the reasoning
+
+⚠️ This section is the working that led to the launch thread, and it is **out of
+date**: it argues for Dunfermline as a single post in three wordings, then for a
+three-post thread. What shipped is the two-post neutral version in item 10.
+Everything below is why, not what.
+
 
 Five approaches were considered. Only the last three were shown before.
 
@@ -316,3 +322,28 @@ the man); putting the harder material in the pinned post instead (doing quietly
 what the thread declined to do out loud is worse than either doing it or not);
 restoring the terms of the deal as a third post (a contract rather than a
 charge, and the best of the cut five, but it reopens the length question).
+
+## 12. The image manifest has not been rebuilt since Britain arrived ⬜ OPEN
+
+⚠️ **`data/carnegie_images.csv` holds 1,906 rows and the roster now holds 2,263.**
+The 245 British rows added on 19 August are in `carnegie_roster.csv` but not in
+the manifest, so they are **not postable**: 1,223 postable, none of them British.
+
+Britain enters the feed only when `carnegie_images.py` is re-run to resolve
+Commons photographs for the new rows. That is a network job over Commons, and it
+is a content decision as much as a technical one, so it has not been run.
+
+Two things to expect when it is:
+
+- **The British rows carry no image filename.** The Wikipedia bullets have none,
+  where the American tables supply one. Every British photograph therefore has
+  to be found by search rather than followed by name, so the hit rate will be
+  lower than the 64% the corpus manages overall. How much lower is unknown until
+  it runs.
+- **The rows are thin.** No addresses, no coordinates, no grant amounts, and no
+  date on 39 of the 245. A British post will usually be a name, a year, a
+  photograph and a credit. That is a live question for item 5, the thin posts,
+  which is still unruled.
+
+Nothing is urgent: the daily job is inert until 29 August, verified by reading
+the guard at `everycarnegie_post.py:492`.
