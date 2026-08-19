@@ -182,6 +182,16 @@ NAME_LIBRARYISH = re.compile(r"\b(?:librar\w*|carnegie|reading\s+room|institute)
 # hit rate read 30% when it was 84%.
 NAME_NEWER = re.compile(r"\b(new|modern|replacement|community hub)\b", re.I)
 NAME_SKIP_EXT = (".pdf", ".tif", ".tiff", ".djvu", ".svg")
+
+# ⚠️ Not a photograph. Wikipedia's list pages use spacer files to keep a column
+# aligned, and the parser reads them as the row's illustration like any other.
+# Renton and Sedro-Woolley were both postable with File:TransparentPlaceholder.png
+# — a blank image — and every stage upstream was working correctly: the file was
+# in the row, it resolved, it had a licence. Found on 20 August 2026 only because
+# the describer could not describe a transparent square.
+PLACEHOLDER = re.compile(
+    r"placeholder|transparent|no[_ -]?image|noimage|blank\.|spacer|1x1|"
+    r"^\s*image[_ ]?(?:missing|needed)", re.I)
 NAME_STOPWORDS = {"library", "public", "district", "central", "the"}
 REVIEW = os.path.join(DATA, "uk_image_review.json")
 
@@ -380,6 +390,7 @@ def main():
             "postable": ("yes" if (source and who
                                    and r["country"] not in HELD_COUNTRIES
                                    and f"{r['name']}|{r['city']}|{r['region']}" not in rejected
+                                   and not PLACEHOLDER.search(title or "")
                                    and (source in ("wikipedia-list", "hand-approved")
                                         or "carnegie" in (title or "").lower()))
                          else "no"),
