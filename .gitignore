@@ -2,9 +2,12 @@
 # and it would swamp every diff in this directory.
 data/pages/
 
-# Derived avatar proofs, regenerable with make_avatar.py --preview.
+# Derived avatar proofs, regenerable with make_avatar.py --preview and
+# make_avatar_options.py. The generators are tracked; their output is not.
 avatar/avatar_40px*.png
 avatar/avatar_proof.png
+avatar/options.html
+avatar/options/
 __pycache__/
 
 # Resolved Commons metadata and the describer's scratch space. Regenerable.
@@ -24,3 +27,4 @@ data/post2_year.html
 data/restructured.html
 data/final_thread.py
 data/preview_all.html
+data/launch_thread_stress.html
