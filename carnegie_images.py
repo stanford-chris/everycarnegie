@@ -202,9 +202,10 @@ APPROVED = os.path.join(DATA, "approved_images.json")
 
 def load_approved():
     if not os.path.exists(APPROVED):
-        return {}
+        return {}, {}
     with open(APPROVED, encoding="utf-8") as f:
-        return json.load(f).get("approved", {})
+        d = json.load(f)
+    return d.get("approved", {}), d.get("rejected", {})
 
 
 def _name_candidates(title, name):
@@ -301,9 +302,9 @@ def main():
     log(f"roster: {len(rows)} public libraries")
 
     state = load_state()
-    approved = load_approved()
+    approved, rejected = load_approved()
     if approved:
-        log(f"approvals: {len(approved)} photographs passed by hand")
+        log(f"approvals: {len(approved)} passed by hand, {len(rejected)} rejected")
 
     if args.stage in (None, "1"):
         titles = sorted({"File:" + r["image_file"] for r in rows if r["image_file"].strip()})
@@ -370,8 +371,15 @@ def main():
             # it ships only if the file itself says Carnegie. Otherwise the row
             # is held for review — the same rule as everywhere else here:
             # unsure means unpostable.
+            # ⚠️ A rejection binds, and it has to bind harder than a source.
+            # Sampling the wikipedia-list tier on 20 August 2026 turned up
+            # Aurora illustrated with its 2015 glass library and Charleston with
+            # the Charleston Library Society, a subscription library founded in
+            # 1748. Both came from the list itself, so every automatic test
+            # passed them. Only the person who looked can overrule that.
             "postable": ("yes" if (source and who
                                    and r["country"] not in HELD_COUNTRIES
+                                   and f"{r['name']}|{r['city']}|{r['region']}" not in rejected
                                    and (source in ("wikipedia-list", "hand-approved")
                                         or "carnegie" in (title or "").lower()))
                          else "no"),
