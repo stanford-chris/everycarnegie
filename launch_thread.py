@@ -111,7 +111,7 @@ img{width:100%;border-radius:10px;display:block;border:1px solid var(--line)}
 .alt{color:var(--muted);font-size:13px;margin:9px 0 0;padding-left:10px;border-left:2px solid var(--line)}
 .meta{color:var(--muted);font-size:12px;margin-top:9px}
 """
-    out = [f"<title>Carnegie — opening thread</title>", f"<style>{css}</style>", "<div class=wrap>",
+    out = ['<meta charset="utf-8">', f"<title>Carnegie — opening thread</title>", f"<style>{css}</style>", "<div class=wrap>",
            "<h1>Every Carnegie Library — opening thread</h1>",
            f"<p class=sub>29 August 2026. {len(POSTS)} posts, longest "
            f"{max(len(t) for t, _ in POSTS)} of 300.</p>", "<div class=thread>"]

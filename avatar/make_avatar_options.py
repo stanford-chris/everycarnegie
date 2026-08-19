@@ -437,7 +437,8 @@ h1{font-size:24px;margin:0 0 6px}
 .feed .real{image-rendering:auto}
 .feed span{color:var(--muted);font-size:12.5px}
 """
-    html = [f"<title>Carnegie avatar options</title><style>{css}</style>",
+    html = [f'<meta charset="utf-8">'
+            f"<title>Carnegie avatar options</title><style>{css}</style>",
             "<div class=wrap><h1>Every Carnegie Library — avatar options</h1>",
             "<p class=sub>Eight approaches. The strip at the foot of each card is the "
             "avatar at its real feed size of 40 px, then the same 40 px file magnified "

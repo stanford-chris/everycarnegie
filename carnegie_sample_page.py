@@ -74,7 +74,7 @@ def main():
     random.Random(args.seed).shuffle(rows)
     described = sum(1 for r in rows if lib_id(r) in alt)
 
-    parts = [f"<title>Carnegie — sample posts</title>", f"<style>{CSS}</style>", "<div class=wrap>",
+    parts = ['<meta charset="utf-8">', f"<title>Carnegie — sample posts</title>", f"<style>{CSS}</style>", "<div class=wrap>",
              "<h1>Every Carnegie Library — sample posts</h1>",
              f"<p class=sub>{args.count} of {len(rows):,} postable, drawn at random (seed {args.seed}). "
              f"{described:,} of those have a description so far.</p>"]

@@ -175,7 +175,8 @@ def main():
     have, wiki, clb_extra = 1910, WIKI_TOTAL, CLB["built"] - WIKI_TOTAL
     total = 2509
 
-    doc = [f"<title>Carnegie — getting Britain</title><style>{CSS}</style>",
+    doc = [f'<meta charset="utf-8">'
+           f"<title>Carnegie — getting Britain</title><style>{CSS}</style>",
            "<div class=wrap>",
            "<h1>How to get Britain’s Carnegie libraries</h1>",
            "<p class=sub>Re-examined 19 August 2026. Every source, including the ones "

@@ -266,7 +266,8 @@ def thread_html(posts, hot=()):
 
 def main():
     real = [t for t, _ in REAL]
-    doc = [f"<title>Carnegie — the cynical thread</title><style>{CSS}</style>",
+    doc = [f'<meta charset="utf-8">'
+           f"<title>Carnegie — the cynical thread</title><style>{CSS}</style>",
            "<div class=wrap>",
            "<h1>The opposite thread, and what it lands on</h1>",
            "<p class=sub>Every fact and every quotation below is from the two Wikipedia "

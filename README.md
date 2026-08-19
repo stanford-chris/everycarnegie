@@ -124,6 +124,24 @@ The full working, with counts and the licence question set out, is in
 python3 britain_options.py && open data/britain_options.html
 ```
 
+## ⚠️ Every generated page must declare its charset, first
+
+Safari reads a local `file://` page with no charset declaration as Latin-1, so
+every curly quote renders as `â€™`, every en dash as `â€“` and every ⚠️ as
+`âš ï¸`. Six of these pages shipped that way before it was noticed on 19 August
+2026. The declaration has to come **before** `<title>`, or the title is decoded
+before the parser reaches it:
+
+```python
+out = ['<meta charset="utf-8">', f"<title>…</title>", …]
+```
+
+`britain_options.py`, `carnegie_sample_page.py`, `launch_thread.py`,
+`launch_thread_stress.py`, `preview_all.py` and `avatar/make_avatar_options.py`
+all carry it now. Anything new that writes HTML needs it too: the files
+themselves are written UTF-8, so this is purely a declaration problem and it
+does not show up until someone opens one in Safari.
+
 ## Three parsing traps, all of the same species
 
 Each produced a file that looked complete and was quietly missing data. They are

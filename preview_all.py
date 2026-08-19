@@ -56,7 +56,8 @@ img{width:100%;border-radius:10px;display:block;border:1px solid var(--line)}
 .alt{color:var(--muted);font-size:13px;margin:9px 0 0;padding-left:10px;border-left:2px solid var(--line)}
 .meta{color:var(--muted);font-size:12px;margin-top:9px}
 """
-out = ["<title>Every Carnegie Library — everything it will post</title>",
+out = ['<meta charset="utf-8">',
+       "<title>Every Carnegie Library — everything it will post</title>",
        f"<style>{CSS}</style>", "<div class=wrap>",
        "<h1>Every Carnegie Library</h1>",
        "<p class=sub>Rendered from the live code. Links are real; character counts are exact.</p>"]
