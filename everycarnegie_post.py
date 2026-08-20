@@ -369,8 +369,13 @@ _lt = importlib.util.spec_from_file_location('lt', HERE / 'launch_thread.py')
 launch_thread = importlib.util.module_from_spec(_lt)
 _lt.loader.exec_module(launch_thread)
 
-# Dunfermline is NOT in the roster — Britain is held back — so the row for the
-# photograph is written out here in full, with its own credit and description.
+# The launch post's row is written out in full here rather than looked up, so it
+# carries its own credit and description and cannot be knocked out by a roster
+# rebuild. ⚠️ The comment that used to sit here said Dunfermline was not in the
+# roster because Britain was held back. Both halves stopped being true once the
+# British lists were parsed: carnegie_roster.csv now carries 245 U.K. public
+# rows, 145 of them postable, and Dunfermline Carnegie Library is one of them.
+# Ireland is the part still held back. Corrected 20 August 2026.
 LAUNCH_IMAGE = {
     'name': 'Dunfermline', 'city': 'Dunfermline', 'region': 'Fife',
     'country': 'United Kingdom',
