@@ -41,7 +41,34 @@ if [ $launch_rc -ne 0 ]; then
 fi
 
 say "--- removing this one-off job"
-launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
-rm -f "$HOME/Library/LaunchAgents/$LABEL.plist"
-notify "Posted. The daily job takes over at 21:00."
+# ⚠️ THE ORDER HERE IS LOAD-BEARING, and it used to be the other way round.
+#
+# `launchctl bootout` terminates this job's own processes, so the script dies
+# ON that line: with the bootout first, the rm, the notification and the final
+# log line never ran at all. The plist survived, and because
+# ~/Library/LaunchAgents is auto-loaded at login the "one-off" came back.
+# StartCalendarInterval has NO year field, so `Month 8, Day 29` is every
+# 29 August: this would have re-pinned the credits note and re-posted the
+# opening thread on 29 August 2027.
+#
+# The identical bug in emoji_audit_oneoff.sh ran on 31 July 2026 and was found
+# still loaded on 19 August, three weeks later, having looked perfectly
+# successful the whole time. See reference_launchd_self_removing_job.
+#
+# So: delete the plist and say everything worth saying FIRST. The bootout goes
+# last and is allowed to kill us, because by then nothing is left to do.
+PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
+rm -f "$PLIST"
+if [ -e "$PLIST" ]; then
+  # Deleting the plist is the half that actually matters, so a failure here is
+  # worth shouting about rather than assuming.
+  say "!! $PLIST is STILL THERE. Remove it by hand or this fires again on 29 Aug 2027."
+  notify "Posted, but the one-off job did not remove itself. See the log."
+else
+  say "    plist deleted; the job cannot reload at login"
+  notify "Posted. The daily job takes over at 21:00."
+fi
 say "=== done. The daily job posts the first library at 21:00. ==="
+
+# Last, deliberately: this terminates the script, so nothing may follow it.
+launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
