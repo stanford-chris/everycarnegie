@@ -61,17 +61,17 @@ LETTER = """Dear Professor Prizeman,
 
 I am creating a Bluesky bot that posts about Carnegie libraries, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia’s lists.
 
-Britain is the thin part of it. I have just finished parsing Wikipedia’s British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 39 of them. Your project’s map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
+Britain is the thin part of it. I have just finished parsing Wikipedia’s British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 37 of them. Your project’s map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
 
 I would like to use that gazetteer, and I am writing before rather than after.
 
-Your site provides its material under CC BY-NC-SA 4.0. The account is unfunded, carries no advertising and earns nothing, so I do not think the non-commercial term is a difficulty. Share-alike is the awkward one. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and no single file can satisfy both, since BY-SA does not allow the non-commercial restriction to be added and BY-NC-SA does not allow it to be dropped.
+Your site provides its material under CC BY-NC-SA 4.0. My bot is unfunded, carries no advertising and earns nothing, so the use is non-commercial in substance. It does post to Bluesky, which is a commercial platform, and I would rather name that than assume it away: if you read the non-commercial term as reaching that, I would want to know. Share-alike is the awkward one. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and no single file can satisfy both, since BY-SA does not allow the non-commercial restriction to be added and BY-NC-SA does not allow it to be dropped.
 
 That is workable as it stands. I would keep your records in their own file under your licence, credited as you require, rather than merging them into mine: a collection rather than an adaptation, which share-alike does not reach. It is what I will do if I do not hear back, and I would rather say so than write as though I were blocked.
 
 My question is whether you would rather it were simpler. Would you consider releasing the gazetteer data on its own — names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0? It would let the British records sit alongside the rest instead of in quarantine, and spare anyone else building on your work the same puzzle. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
 
-Either way I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], in the account’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com.
+Either way I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], in my bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com.
 
 One thing I can offer back. To post a building I have to find a freely licensed photograph of it and match it to the record, so if it is of any use I would happily send you the Commons photographs I identify for your 493 built entries, with their coordinates, as a plain CSV. Several hundred of them are likely to be images your project has not catalogued.
 
