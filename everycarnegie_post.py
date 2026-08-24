@@ -318,17 +318,25 @@ def build_credits():
             'https://en.wikipedia.org/wiki/'
             'List_of_Carnegie_libraries_in_the_United_States')
     tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n')
-    tb.text(f'\U0001f3db\ufe0f Included: the {postable:,} of 2,509 libraries with '
-            "a free photo. Britain and Ireland’s are not.\n")
+    # ⚠️ "Britain’s and Ireland’s are not." was dropped on 24 August 2026: it
+    # had become FALSE. 145 of the 1,367 are British (England 98, Scotland 26,
+    # Wales 18, Northern Ireland 3) and were queued to post, so the sentence
+    # contradicted the number in front of it. It was written when the roster
+    # genuinely held none, and uk_image_review.py has since put them in. The
+    # stale thing was the sentence, not the data.
+    # Ireland's half was still true — 56 rows, 0 with a usable photo — but a
+    # half-true admission is worse than none, so it goes with it.
+    tb.text(f'\U0001f3db\ufe0f Included: The {postable:,} of 2,509 libraries with '
+            'a free photo\n')
     tb.text('\U0001f916 Image descriptions are A.I.-written.')
 
     # ⚠️ The preview at line 421 checks the 300-character limit for library
     # posts; nothing checked it here, so an overflow in this note would have
     # surfaced only as a failed send_post on the day someone reworded it.
-    # There are 4 characters spare: the emoji leaders added on 24 August 2026
-    # spent 5 of the 9 that were there before. The postable count cannot eat
-    # them — it is 5 characters at every value it can take, to the 2,509
-    # ceiling.
+    # Headroom is comfortable again since the Britain sentence went; before
+    # that the emoji leaders had taken it down to 4 characters. The postable
+    # count cannot eat it: 5 characters at every value it can take, to the
+    # 2,509 ceiling.
     text = tb.build_text()
     if len(text) > 300:
         raise RuntimeError(f'Credits note too long ({len(text)} > 300 chars)')

@@ -32,9 +32,19 @@ image but no resolvable photographer is marked unpostable rather than shipped.
 
 Resumable: resolved metadata is cached in data/image_state.json.
 
+⚠️ **Every stage memoises its MISSES, permanently, and that made re-running
+this pointless until 24 August 2026.** A photograph uploaded to Commons last
+week could never be found, because the library it belongs to was marked swept
+months ago and skipped for ever. `--recheck-misses` expires those memos, for
+libraries that still have nothing; `everycarnegie_monthly.sh` runs it on the
+2nd. Measured against the real state the day it was added: 744 memos reopened
+(165 geosearch, 568 namesearch, 11 unresolvable filenames) and all 1,406
+already-illustrated libraries untouched.
+
 Usage:
     python3 carnegie_images.py             # both stages
     python3 carnegie_images.py --stage 1
+    python3 carnegie_images.py --recheck-misses
     python3 carnegie_images.py --reset
 """
 
@@ -295,10 +305,116 @@ def namesearch(rows, state):
         time.sleep(DELAY)
 
 
+def candidate_titles(r, state, approved):
+    """Every Commons title this library could ship, at any rank."""
+    out = set()
+    ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
+    if ok:
+        out.add("File:" + ok)
+    if r["image_file"].strip():
+        out.add("File:" + r["image_file"])
+    g = state["geo"].get(r["_key"])
+    if g:
+        out.add(g["title"])
+    nm = state.get("name", {}).get(r["_key"])
+    if nm and nm.get("title"):
+        out.add(nm["title"])
+    return out
+
+
+def resolve_source(r, state, approved):
+    """Which photograph this library would ship, and from where.
+
+    ⚠️ Checked hand-approved FIRST, and that is deliberate. A person choosing a
+    photograph beats every automatic route, and the proximity matches under
+    review already have a source set — so an approval tested last would never
+    fire for exactly the rows that most need it.
+
+    Pulled out of main() on 24 August 2026 so expire_misses() can ask the same
+    question. If the two ever disagreed about "does this library already have a
+    picture", the sweep would re-ask about one that does — see expire_misses().
+    """
+    ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
+    if ok and state["imageinfo"].get("File:" + ok):
+        return "hand-approved", "File:" + ok
+    if r["image_file"].strip():
+        t = "File:" + r["image_file"]
+        if state["imageinfo"].get(t):
+            return "wikipedia-list", t
+    g = state["geo"].get(r["_key"])
+    if g and state["imageinfo"].get(g["title"]):
+        return "commons-geosearch", g["title"]
+    nm = state.get("name", {}).get(r["_key"])
+    if nm and nm.get("title") and state["imageinfo"].get(nm["title"]):
+        return "commons-namesearch", nm["title"]
+    return None, None
+
+
+def expire_misses(state, rows, approved):
+    """Forget the "we looked and there was nothing" memos, for libraries that
+    still have nothing. Ported from everylibrary_images.py, 24 August 2026.
+
+    Each stage memoises its misses so a resumed run does not re-ask, which is
+    right within a run and wrong between them: a photograph uploaded to Commons
+    last week can never be found, because the library it belongs to was marked
+    swept months ago and is skipped for ever. Nothing here looked twice until
+    this existed.
+
+    ⚠️ A library that ALREADY has a photograph is left entirely alone, and that
+    is a correctness rule, not a saving. The sources are ranked —
+    hand-approved, then wikipedia-list, then commons-geosearch, then
+    commons-namesearch — so a newly found one can OUTRANK the incumbent.
+    alt_text.json is keyed by library (sha1 of name|city|region) and not by
+    image, and carnegie_describe.py only fills entries that have no text, so a
+    swapped photograph keeps the description written for the one it replaced: a
+    fluent, confident, wrong description of a building nobody is looking at,
+    which nothing downstream can detect. Measured on everylibrary's real state
+    before its rule existed: re-asking Wikidata about every miss returned 140
+    photographs and exactly THREE belonged to a library that had none.
+
+    ⚠️ The imageinfo memo is the subtle one, because it is keyed by TITLE and
+    not by library. A None there means Commons had no such file. Expiring one
+    blindly can still swap an illustrated library's picture: if its
+    wikipedia-list filename resolved to None it fell through to geosearch and
+    IS illustrated, so re-resolving that filename could promote it a rank. So
+    every title belonging to an illustrated library is protected, whatever its
+    rank and whether or not it is the one being shipped.
+    """
+    illustrated = {r["_key"] for r in rows if resolve_source(r, state, approved)[0]}
+    protected = set()
+    for r in rows:
+        if r["_key"] in illustrated:
+            protected |= candidate_titles(r, state, approved)
+
+    geo_misses = [k for k, v in state["geo"].items()
+                  if not v and k not in illustrated]
+    for k in geo_misses:
+        del state["geo"][k]
+
+    name = state.setdefault("name", {})
+    name_misses = [k for k, v in name.items()
+                   if not (v and v.get("title")) and k not in illustrated]
+    for k in name_misses:
+        del name[k]
+
+    info_misses = [t for t, v in state["imageinfo"].items()
+                   if v is None and t not in protected]
+    for t in info_misses:
+        del state["imageinfo"][t]
+
+    log(f"recheck  {len(illustrated)} libraries already have a picture and are "
+        f"left alone; forgot {len(geo_misses)} geosearch misses, "
+        f"{len(name_misses)} namesearch misses and {len(info_misses)} "
+        f"unresolvable filenames")
+    save_state(state)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", choices=["1", "2", "3"])
     ap.add_argument("--reset", action="store_true")
+    ap.add_argument("--recheck-misses", action="store_true",
+                    help="forget the 'nothing found' memos so the stages look again")
     args = ap.parse_args()
 
     if args.reset and os.path.exists(STATE):
@@ -315,6 +431,9 @@ def main():
     approved, rejected = load_approved()
     if approved:
         log(f"approvals: {len(approved)} passed by hand, {len(rejected)} rejected")
+
+    if args.recheck_misses:
+        expire_misses(state, rows, approved)
 
     if args.stage in (None, "1"):
         titles = sorted({"File:" + r["image_file"] for r in rows if r["image_file"].strip()})
@@ -337,26 +456,7 @@ def main():
 
     out = []
     for r in rows:
-        # ⚠️ Checked first, and that is deliberate. A person choosing a
-        # photograph beats every automatic route, and the proximity matches
-        # under review already have a source set — so an approval tested last
-        # would never fire for exactly the rows that most need it.
-        source = title = None
-        ok = approved.get(f"{r['name']}|{r['city']}|{r['region']}")
-        if ok and state["imageinfo"].get("File:" + ok):
-            source, title = "hand-approved", "File:" + ok
-        if source is None and r["image_file"].strip():
-            t = "File:" + r["image_file"]
-            if state["imageinfo"].get(t):
-                source, title = "wikipedia-list", t
-        if source is None:
-            g = state["geo"].get(r["_key"])
-            if g and state["imageinfo"].get(g["title"]):
-                source, title = "commons-geosearch", g["title"]
-        if source is None:
-            nm = state.get("name", {}).get(r["_key"])
-            if nm and nm.get("title") and state["imageinfo"].get(nm["title"]):
-                source, title = "commons-namesearch", nm["title"]
+        source, title = resolve_source(r, state, approved)
         meta = state["imageinfo"].get(title) if title else None
         who = (meta or {}).get("artist", "")
         out.append({
