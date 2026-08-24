@@ -59,15 +59,15 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I run @everycarnegie.bsky.social, a Bluesky bot that posts one Carnegie library at a time with a freely licensed photograph and what is known about the grant. Its roster of 2,151 of the 2,509 buildings comes from parsing Wikipedia’s lists.
+I run @everycarnegie.bsky.social, a Bluesky bot that posts one Carnegie library at a time with a freely licensed photograph and what is known about the grant. Its roster of 2,151 of the 2,509 buildings comes from parsing Wikipedia’s lists, and Britain is the thin part: 245 entries against a documented 660, most with no date, address or coordinates.
 
-Britain is the thin part: 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 37 of them. Your project’s map is the authoritative record, and the layer behind it holds 621 entries with dates, architects, status and coordinates.
+Your gazetteer is the authoritative record and I would like to use it. I am writing before rather than after the bot starts posting.
 
-I would like to use it, and I am writing before rather than after. The obstacle is licensing: your CC BY-NC-SA 4.0 and my Wikipedia-derived CC BY-SA 4.0 are incompatible in both directions, so no single file can carry both. On the non-commercial term, the bot is unfunded and carries no advertising, though it does post to Bluesky, which is a commercial platform, and I would rather name that than assume it away.
+There is a licensing wrinkle I am happy to work around. Your CC BY-NC-SA 4.0 and my Wikipedia-derived CC BY-SA 4.0 cannot share a file, so I would keep your records separate and under your own licence, credited as © Cardiff University AHRC “Shelf Life” project [{grant}] in the bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. If you would rather it were simpler, would you consider releasing the gazetteer data alone, not the photographs, under CC BY-SA 4.0 or CC BY 4.0?
 
-Absent a reply I would keep your records in a separate file under your licence: a collection rather than an adaptation, which share-alike does not reach. Either way I would credit the project as © Cardiff University AHRC “Shelf Life” project [{grant}], in my bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. That works, and my question is only whether you would rather it were simpler: would you consider releasing the gazetteer data alone, not the photographs, under CC BY-SA 4.0 or CC BY 4.0?
+Either way I would rather have your yes or no than assume one.
 
-One offer back. I have to find a freely licensed photograph for each building, so I would gladly send you the Commons images I identify for your 493 built entries, with coordinates, as a CSV. Several hundred are likely to be ones your project has not catalogued.
+One offer back: I have to find a freely licensed photograph for each building, so I would gladly send you the Commons images I identify for your 493 built entries, with coordinates, as a CSV. Several hundred are likely to be ones your project has not catalogued.
 
 Thank you for making the material available at all: it is the only complete account of these buildings I have found.
 
@@ -84,10 +84,24 @@ NOTES = [
      "under its own licence and separately credited, read side by side at run time, is a "
      "collection and needs nobody’s permission. The draft then named that very workaround "
      "four paragraphs later, so it argued against itself — and an AHRC project with "
-     "licensing advice would have seen it. The letter now states the workaround itself and "
-     "asks whether they would rather it were simpler. ⚠️ It is a question, not a request to "
-     "be unblocked: overstating a difficulty to a specialist is the fastest way to lose "
-     "them, and it gives away the one thing worth having, which is their goodwill."),
+     "licensing advice would have seen it. The letter now names the workaround in one "
+     "sentence and asks whether they would rather it were simpler. ⚠️ It is a question, "
+     "not a request to be unblocked: overstating a difficulty to a specialist is the "
+     "fastest way to lose them, and it gives away the one thing worth having, which is "
+     "their goodwill.\n\n"
+     "⚠️ **Cut back hard on 24 August 2026, from 458 words to 262, and the reason "
+     "generalises.** The letter had grown three paragraphs of licence law — the BY-SA "
+     "and BY-NC-SA mechanics, Adapted Material against Collection, and UK database "
+     "right — because it was trying to JUSTIFY why it was writing. None of that "
+     "belonged in it. You do not need a legal theory to ask someone whether you may "
+     "use their work: “May I use this?” is a complete request, and the reasoning that "
+     "establishes why you are entitled to ask is for your own notes, not the reader’s. "
+     "Database right is still the strongest reason to ask rather than assume, and it is "
+     "recorded in README.md where it belongs. The whole of it is carried in the letter "
+     "by one line: “Either way I would rather have your yes or no than assume one.”\n\n"
+     "⚠️ The pre-emptive non-commercial defence went with it. Answering an objection "
+     "the reader has not made, in a letter she has not read, spends words arguing with "
+     "nobody. If she raises it, it is answered better in a reply."),
 
     ("Superseded: why the merge itself is impossible",
      "Because CC BY-NC-SA cannot be combined with the CC BY-SA the rest of the roster "
