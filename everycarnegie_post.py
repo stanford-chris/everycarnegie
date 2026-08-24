@@ -54,6 +54,26 @@ ROSTER = DATA / 'carnegie_roster.csv'
 STATE_FILE = DATA / 'post_state.json'
 ALT_PATH = DATA / 'alt_text.json'
 
+# ⚠️ The Cardiff trip-wire. Their gazetteer is CC BY-NC-SA and attribution is a
+# CONDITION of it, not a courtesy, and the letter sent on 24 August 2026 promises
+# the credit will appear "in the bot's pinned post and on every British library
+# it posts". Nothing enforced that promise: the credits note names Commons and
+# Wikipedia, correctly, because none of their data is in use — and it would go on
+# saying exactly that on the day someone dropped their records in.
+#
+# So the moment either of these exists, build_credits() REFUSES to build a note
+# that does not name them. A missing credit is invisible by nature: the post goes
+# out, looks right, and breaches a licence term silently.
+#
+# ⚠️ The wording is deliberately NOT prewritten here, because it depends on their
+# answer. Relicensed to CC BY-SA or CC BY, the credit is ordinary attribution and
+# their rows may share a file. Left at CC BY-NC-SA, it must reproduce their
+# required string verbatim beside a SEPARATE file under their own licence, since
+# share-alike reaches an adaptation and not a collection. Guessing which would
+# put a confident, wrong licence notice on a public post.
+CLB_DATA = DATA / 'clb_gazetteer.csv'          # their records, if they ever land
+CLB_CREDIT_TOKEN = 'Shelf Life'                # what the note must then contain
+
 HANDLE = 'everycarnegie.bsky.social'
 KEYCHAIN_SERVICE = 'everycarnegie-bluesky'
 USER_AGENT = ('everycarnegie-bot/0.1 (https://chris-stanford.com; '
@@ -340,6 +360,15 @@ def build_credits():
     text = tb.build_text()
     if len(text) > 300:
         raise RuntimeError(f'Credits note too long ({len(text)} > 300 chars)')
+
+    # See the note on CLB_DATA. Refuse rather than ship an uncredited note.
+    if CLB_DATA.exists() and CLB_CREDIT_TOKEN not in text:
+        raise RuntimeError(
+            f'{CLB_DATA.name} exists but the credits note does not name the '
+            f'{CLB_CREDIT_TOKEN} project. Attribution is a condition of their '
+            f'CC BY-NC-SA licence and was promised in writing on 24 August 2026. '
+            f'Add the credit before posting; the wording depends on their reply, '
+            f'so see the docstring in shelf_life_email.py.')
     return tb
 
 
