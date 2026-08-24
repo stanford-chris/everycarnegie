@@ -3,6 +3,23 @@
 shelf_life_email.py — the letter to the AHRC Shelf-Life project, and a page to
 read it on.
 
+✅ **SENT 24 August 2026**, by hand from Mail, to Shelf-lifeproject@cardiff.ac.uk
+cc prizemano@cardiff.ac.uk. Both addresses and the "Professor Oriel Prizeman"
+title were re-verified against their own contact page the same evening.
+
+⚠️ **This line exists because its absence cost a session.** The script only ever
+wrote two draft files and never had a send path, so a finished letter and a
+styled page to read it on sat in data/ looking exactly like work that had gone
+out. On 24 August it was believed sent and was not: a search of all 64 iCloud
+folders found nothing, and Drafts was empty. **Record the sending here, not in
+your memory of it.**
+
+⏳ No reply as of 24 August 2026. If they say yes, the Cardiff credit has to go
+into the pinned post BEFORE the first British library posts from their records:
+everycarnegie_post.py builds that note in build_credits(), and it names only
+Commons and Wikipedia today, correctly, because none of their data is in use.
+If they never reply, the two-file fallback stands and nothing needs doing.
+
 ⚠️ **The licence question is the whole point of writing, and the first version
 of this had it wrong.** The ArcGIS feature layer behind their map carries no
 copyrightText and no terms, which looked like an unlicensed dataset. The
