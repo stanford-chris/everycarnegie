@@ -14,7 +14,18 @@ out. On 24 August it was believed sent and was not: a search of all 64 iCloud
 folders found nothing, and Drafts was empty. **Record the sending here, not in
 your memory of it.**
 
-⏳ No reply as of 24 August 2026. If they say yes, the Cardiff credit has to go
+⏳ **Auto-reply the same evening: she is on annual leave until 1 September 2026**,
+so expect nothing before then. That bounce is also the proof of delivery this
+file previously lacked. Its three redirects — PhD admissions, the MSc in
+Sustainable Building Conservation, and RICHeS PERFFORM — are all unrelated;
+there is nobody else to write to and chasing one would be noise. Her signature
+confirms the salutation used: Professor Oriel Prizeman, she/her.
+
+⚠️ Do not read the silence before 1 September as a refusal, and do not chase
+before it. If nothing has come by mid-September, one short follow-up is
+reasonable; the fallback needs no permission in the meantime.
+
+If they say yes, the Cardiff credit has to go
 into the pinned post BEFORE the first British library posts from their records:
 everycarnegie_post.py builds that note in build_credits(), and it names only
 Commons and Wikipedia today, correctly, because none of their data is in use.
