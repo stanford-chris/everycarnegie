@@ -311,16 +311,27 @@ def build_credits():
 
     tb = client_utils.TextBuilder()
     tb.text(CREDITS_HEADING + '\n\n')
-    tb.text('Photos: ')
+    tb.text('\U0001f4f7 Photos: ')
     tb.link('Wikimedia Commons', 'https://commons.wikimedia.org')
-    tb.text('\n\nGrants and dates: ')
+    tb.text('\n\U0001f4d6 Grants and dates: ')
     tb.link("Wikipedia’s lists of Carnegie libraries",
             'https://en.wikipedia.org/wiki/'
             'List_of_Carnegie_libraries_in_the_United_States')
-    tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n\n')
-    tb.text(f'Included: the {postable:,} of 2,509 libraries with a free photo. '
-            "Britain and Ireland’s are not.\n\n")
-    tb.text('Image descriptions are A.I.-written.')
+    tb.text(' (CC BY-SA), drawn from Bobinski (1969) and Jones (1997)\n')
+    tb.text(f'\U0001f3db\ufe0f Included: the {postable:,} of 2,509 libraries with '
+            "a free photo. Britain and Ireland’s are not.\n")
+    tb.text('\U0001f916 Image descriptions are A.I.-written.')
+
+    # ⚠️ The preview at line 421 checks the 300-character limit for library
+    # posts; nothing checked it here, so an overflow in this note would have
+    # surfaced only as a failed send_post on the day someone reworded it.
+    # There are 4 characters spare: the emoji leaders added on 24 August 2026
+    # spent 5 of the 9 that were there before. The postable count cannot eat
+    # them — it is 5 characters at every value it can take, to the 2,509
+    # ceiling.
+    text = tb.build_text()
+    if len(text) > 300:
+        raise RuntimeError(f'Credits note too long ({len(text)} > 300 chars)')
     return tb
 
 
