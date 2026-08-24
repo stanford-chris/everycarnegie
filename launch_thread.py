@@ -73,7 +73,7 @@ Andrew Carnegie was born here in 1835, and later became the richest man in the w
 
 He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
- ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now. Britain’s 660 are not included yet.
+ ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now. Britain’s are thin: Wikipedia lists barely a third of its 660.
 
 Photos: Wikimedia Commons contributors, credited on every post. Image descriptions are A.I.-written.""", False),
 ]

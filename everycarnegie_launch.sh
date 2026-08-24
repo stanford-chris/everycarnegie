@@ -1,7 +1,7 @@
 #!/bin/bash
 # everycarnegie_launch.sh — the one-off opening, 29 August 2026.
 #
-# Pins the credits note, posts the seven-post thread, then removes its own
+# Pins the credits note, posts the two-post opening thread, then removes its own
 # launchd job so it can never fire again. The daily job takes over 15 minutes
 # later with the first library.
 #
