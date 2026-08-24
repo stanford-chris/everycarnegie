@@ -59,15 +59,15 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I run @everycarnegie.bsky.social, a Bluesky bot that posts one Carnegie library at a time with a freely licensed photograph and what is known about the grant. Its roster of 2,151 of the 2,509 buildings comes from parsing Wikipedia’s lists, and Britain is the thin part: 245 entries against a documented 660, most with no date, address or coordinates.
+I run @everycarnegie.bsky.social, a Bluesky bot that will post information about one Carnegie library at a time with a freely licensed photograph and what is known about the grant. Its roster of 2,151 of the 2,509 buildings comes from parsing Wikipedia’s lists, and Britain is the thin part: 245 entries against a documented 660, most with no date, address or coordinates.
 
-Your gazetteer is the authoritative record and I would like to use it. I am writing before rather than after the bot starts posting.
+Your gazetteer is the authoritative record and I would like to use it. I’m writing before rather than after the bot starts posting.
 
 There is a licensing wrinkle I am happy to work around. Your CC BY-NC-SA 4.0 and my Wikipedia-derived CC BY-SA 4.0 cannot share a file, so I would keep your records separate and under your own licence, credited as © Cardiff University AHRC “Shelf Life” project [{grant}] in the bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. If you would rather it were simpler, would you consider releasing the gazetteer data alone, not the photographs, under CC BY-SA 4.0 or CC BY 4.0?
 
 Either way I would rather have your yes or no than assume one.
 
-One offer back: I have to find a freely licensed photograph for each building, so I would gladly send you the Commons images I identify for your 493 built entries, with coordinates, as a CSV. Several hundred are likely to be ones your project has not catalogued.
+One offer back: I have to find a freely licensed photograph for each building, so I would gladly send you the Commons images that I identify for your 493 built entries, with coordinates, as a CSV. Several hundred are likely to be ones your project has not catalogued.
 
 Thank you for making the material available at all: it is the only complete account of these buildings I have found.
 
