@@ -59,23 +59,17 @@ SUBJECT = "Carnegie Libraries of Britain: licensing the gazetteer data for a pub
 
 LETTER = """Dear Professor Prizeman,
 
-I am creating a Bluesky bot that posts about Carnegie libraries, at @everycarnegie.bsky.social, with a photograph from Wikimedia Commons and what is known about the grant. It has a roster of 2,151 of the 2,509 buildings, built by parsing Wikipedia’s lists.
+I run @everycarnegie.bsky.social, a Bluesky bot that posts one Carnegie library at a time with a freely licensed photograph and what is known about the grant. Its roster of 2,151 of the 2,509 buildings comes from parsing Wikipedia’s lists.
 
-Britain is the thin part of it. I have just finished parsing Wikipedia’s British lists and they yield 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 37 of them. Your project’s map is plainly the authoritative record, and the layer behind it holds 621 records with dates, architects, status and coordinates.
+Britain is the thin part: 245 entries against a documented 660, with no addresses, no coordinates and no date at all on 37 of them. Your project’s map is the authoritative record, and the layer behind it holds 621 entries with dates, architects, status and coordinates.
 
-I would like to use that gazetteer, and I am writing before rather than after.
+I would like to use it, and I am writing before rather than after. The obstacle is licensing: your CC BY-NC-SA 4.0 and my Wikipedia-derived CC BY-SA 4.0 are incompatible in both directions, so no single file can carry both. On the non-commercial term, the bot is unfunded and carries no advertising, though it does post to Bluesky, which is a commercial platform, and I would rather name that than assume it away.
 
-Your site provides its material under CC BY-NC-SA 4.0. My bot is unfunded, carries no advertising and earns nothing, so the use is non-commercial in substance. It does post to Bluesky, which is a commercial platform, and I would rather name that than assume it away: if you read the non-commercial term as reaching that, I would want to know. Share-alike is the awkward one. My roster is derived from Wikipedia and is therefore CC BY-SA 4.0, and no single file can satisfy both, since BY-SA does not allow the non-commercial restriction to be added and BY-NC-SA does not allow it to be dropped.
+Absent a reply I would keep your records in a separate file under your licence: a collection rather than an adaptation, which share-alike does not reach. Either way I would credit the project as © Cardiff University AHRC “Shelf Life” project [{grant}], in my bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com. That works, and my question is only whether you would rather it were simpler: would you consider releasing the gazetteer data alone, not the photographs, under CC BY-SA 4.0 or CC BY 4.0?
 
-That is workable as it stands. I would keep your records in their own file under your licence, credited as you require, rather than merging them into mine: a collection rather than an adaptation, which share-alike does not reach. It is what I will do if I do not hear back, and I would rather say so than write as though I were blocked.
+One offer back. I have to find a freely licensed photograph for each building, so I would gladly send you the Commons images I identify for your 493 built entries, with coordinates, as a CSV. Several hundred are likely to be ones your project has not catalogued.
 
-My question is whether you would rather it were simpler. Would you consider releasing the gazetteer data on its own — names, dates, architects, statuses and coordinates, not the photographs — under CC BY-SA 4.0 or CC BY 4.0? It would let the British records sit alongside the rest instead of in quarantine, and spare anyone else building on your work the same puzzle. I am not asking for the images: they are your copyright, the bot takes its pictures from Wikimedia Commons, and I would not want them.
-
-Either way I would credit the project as your terms require, as © Cardiff University AHRC “Shelf Life” project [{grant}], in my bot’s pinned post and on every British library it posts, with a link to carnegielibrariesofbritain.com.
-
-One thing I can offer back. To post a building I have to find a freely licensed photograph of it and match it to the record, so if it is of any use I would happily send you the Commons photographs I identify for your 493 built entries, with their coordinates, as a plain CSV. Several hundred of them are likely to be images your project has not catalogued.
-
-Thank you for making the material available at all. It is a considerable piece of work and the only complete account of these buildings I have been able to find.
+Thank you for making the material available at all: it is the only complete account of these buildings I have found.
 
 With best wishes,
 
