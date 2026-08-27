@@ -53,10 +53,23 @@ omission it can defend; that was a positive claim it chose to include. What
 remains states what he was and what he paid for, and holds no view on either.
 Do not restore it without restoring something to balance it.
 
+⚠️ **"around the world" was added on 28 August 2026, and a COUNT was
+considered and rejected.** The thread's only geography was "Dunfermline,
+Scotland" and post 2's line about Britain, so it read as a Scottish account:
+1,791 of the roster's 2,263 rows are American, and the two daily slots are set
+to US Eastern for exactly that reason. This is the one place that gets said. A
+number would have been the better sentence and is not available honestly: the
+roster spans 16 countries, the true worldwide list is longer than the roster,
+and "a dozen countries" is under both. A vague phrase that is true beats a
+precise one that is not. It cost 17 characters, taking post 1 to 256 of 300.
+
 Every remaining claim is from the Andrew Carnegie and Carnegie library articles
 on Wikipedia, checked 18 August 2026: born Dunfermline 1835; richest man in the
 world; 2,509 buildings 1883-1929, which the post rounds to "more than 2,500";
-Dunfermline first, opened 29 August 1883.
+Dunfermline first, opened 29 August 1883. "Around the world" is the roster's
+own, measured 28 August 2026: 16 countries, from 1,791 American rows down to one
+each in Mauritius, the Seychelles, Barbados, Dominica, Guyana, Puerto Rico,
+Saint Lucia and Saint Vincent.
 
 Usage:
     python3 launch_thread.py          # print the thread, render the page
@@ -71,7 +84,7 @@ POSTS = [
 
 Andrew Carnegie was born here in 1835, and later became the richest man in the world.
 
-He paid for more than 2,500 public libraries. This was the first, opened 143 years ago today.""" + CREDIT, True),
+He paid for more than 2,500 public libraries around the world. This was the first, opened 143 years ago today.""" + CREDIT, True),
 
  ("""This account posts them one at a time: the building and what became of it, what Carnegie paid and what that money is worth now. Britain’s are thin: Wikipedia lists barely a third of its 660.
 
