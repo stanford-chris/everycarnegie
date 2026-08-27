@@ -2,8 +2,8 @@
 # everycarnegie_launch.sh — the one-off opening, 29 August 2026.
 #
 # Pins the credits note, posts the two-post opening thread, then removes its own
-# launchd job so it can never fire again. The daily job takes over 15 minutes
-# later with the first library.
+# launchd job so it can never fire again. The daily job takes over at 23:00
+# with the first library.
 #
 # ⚠️ Timing. This runs at 20:45 Asia/Seoul, which is 07:45 US Eastern and 12:45
 # in Britain — the 29th in all three. The other daily slot, 09:00 Seoul, would
@@ -66,9 +66,9 @@ if [ -e "$PLIST" ]; then
   notify "Posted, but the one-off job did not remove itself. See the log."
 else
   say "    plist deleted; the job cannot reload at login"
-  notify "Posted. The daily job takes over at 21:00."
+  notify "Posted. The daily job takes over at 23:00."
 fi
-say "=== done. The daily job posts the first library at 21:00. ==="
+say "=== done. The daily job posts the first library at 23:00. ==="
 
 # Last, deliberately: this terminates the script, so nothing may follow it.
 launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
