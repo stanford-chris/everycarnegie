@@ -15,8 +15,12 @@
   </dict>
   <!-- 20:45 Asia/Seoul on 29 August 2026 = 07:45 US Eastern, 12:45 in Britain.
        Fifteen minutes ahead of the daily job's 21:00 slot, so the thread is up
-       before the first library follows it. The script deletes this file and
-       boots the job out once the thread has posted. -->
+       before the first library follows it. Once the thread has posted the
+       script DELETES THIS FILE and then boots the job out, in that order:
+       bootout kills the script, so anything after it never runs. Until
+       23 August 2026 it was the other way round, and this plist would
+       have survived to fire again on 29 August 2027 -- StartCalendarInterval
+       has no year field. -->
   <key>StartCalendarInterval</key>
   <dict>
     <key>Month</key><integer>8</integer>
