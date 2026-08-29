@@ -396,12 +396,56 @@ def build_credits():
     return tb
 
 
-def pin_credits(dry_run=False):
+def current_pinned_count():
+    """The 'N of 2,509' figure already live on the pinned credits post, read
+    from the public API with no login needed.
+
+    None means there is no pin yet, or the pin is not the credits note —
+    both real reasons to go ahead and post. A failed READ is a different
+    thing and is raised rather than returned: confusing 'could not check'
+    with 'no pin' would let a network blip make the monthly re-sweep post an
+    unnecessary duplicate every time the check happened to fail.
+    """
+    r = requests.get('https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile',
+                     params={'actor': HANDLE}, timeout=15)
+    r.raise_for_status()
+    pin = r.json().get('pinnedPost')
+    if not pin:
+        return None
+    r2 = requests.get('https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread',
+                      params={'uri': pin['uri'], 'depth': 0}, timeout=15)
+    r2.raise_for_status()
+    text = r2.json()['thread']['post']['record']['text']
+    if not CREDITS_PATTERN.match(text):
+        return None
+    m = re.search(r'The ([\d,]+) of', text)
+    return int(m.group(1).replace(',', '')) if m else None
+
+
+def pin_credits(dry_run=False, force=False):
     tb = build_credits()
     text = tb.build_text()
     print('-' * 60)
     print(text)
     print(f'[{len(text)} chars]')
+
+    m = re.search(r'The ([\d,]+) of', text)
+    new_count = int(m.group(1).replace(',', '')) if m else None
+
+    # ⚠️ This is what lets the monthly re-sweep call --pin unconditionally
+    # every run without leaving a duplicate "Sources and credits" post on the
+    # feed the months nothing changed. See CLAUDE.md's everycarnegie section.
+    if not force:
+        try:
+            live_count = current_pinned_count()
+        except Exception as exc:
+            sys.exit(f'Could not read the live pinned post to check whether it '
+                     f'is already current ({exc}); refusing to guess. Rerun, '
+                     f'or pass --force to post regardless.')
+        if new_count is not None and live_count == new_count:
+            print(f'\nAlready pinned at {new_count:,}; nothing to do.')
+            return
+
     if dry_run:
         print('\nDry run: not posted, profile untouched.')
         return
@@ -556,12 +600,14 @@ def main():
     ap.add_argument('--dry-run', action='store_true', help='print the post without posting')
     ap.add_argument('--count', type=int, default=1, help='how many to post (default 1)')
     ap.add_argument('--pin', action='store_true', help='post the credits note and pin it')
+    ap.add_argument('--force', action='store_true',
+                    help='with --pin, repost even if the live pin already matches')
     ap.add_argument('--launch', action='store_true',
                     help='post the Dunfermline anniversary post (once, 29 August)')
     args = ap.parse_args()
 
     if args.pin:
-        pin_credits(dry_run=args.dry_run)
+        pin_credits(dry_run=args.dry_run, force=args.force)
         return
 
     if args.launch:

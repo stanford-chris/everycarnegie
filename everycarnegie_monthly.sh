@@ -1,7 +1,7 @@
 #!/bin/bash
 # everycarnegie_monthly.sh — the monthly photograph re-sweep.
 #
-# Two steps:
+# Three steps:
 #
 #   1. carnegie_images.py            Forgets the "nothing found" memos and looks
 #      --recheck-misses              again for photographs, then rebuilds the
@@ -9,6 +9,14 @@
 #   2. carnegie_describe.py          Alt text for whatever step 1 found. A new
 #                                    photograph with no description is not
 #                                    postable, so this is not optional.
+#   3. everycarnegie_post.py --pin   Refreshes the pinned "Sources and credits"
+#                                    post, whose "N of 2,509" line goes stale
+#                                    the moment step 1 finds anything. Added
+#                                    29 August 2026, so nobody has to remember
+#                                    to do this by hand every month. Safe to
+#                                    call even when nothing changed: it reads
+#                                    the count already live on the pin and
+#                                    reposts only when they disagree.
 #
 # ⚠️ This exists because nothing here ever looked twice. Every stage memoises
 # its misses permanently, so re-running carnegie_images.py found nothing however
@@ -69,6 +77,7 @@ PYEOF
 
 step "images --recheck-misses" "$PY" "$HERE/carnegie_images.py" --recheck-misses
 step "describe"               "$PY" "$HERE/carnegie_describe.py"
+step "pin"                    "$PY" "$HERE/everycarnegie_post.py" --pin
 
 after=$("$PY" - "$MANIFEST" <<'PYEOF'
 import csv, sys
