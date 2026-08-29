@@ -191,6 +191,30 @@ def next_library(postable, state, skip=()):
 # ---------------------------------------------------------------- the post
 
 
+# ⚠️ Bluesky only indexes a hashtag into a feed generator when the post carries
+# a genuine `tag` facet — plain text that merely starts with '#' is invisible
+# to feed generators even though every client renders it as a clickable tag.
+# See reference_bsky_discovery_hashtag_feeds. compose()'s tag line is always
+# the last line of the text, so it is split off here and re-emitted through
+# TextBuilder.tag() rather than passed through as plain text. This was found
+# 29 August 2026, checking all three posted records with facets=[]: none of
+# them carried a tag facet at all, so #CarnegieLibraries had been invisible to
+# every hashtag feed since launch.
+_TAG_LINE = re.compile(r'(#\w+(?:\s+#\w+)*)\Z')
+
+
+def _append_tagged(tb, text):
+    m = _TAG_LINE.search(text)
+    if not m:
+        tb.text(text)
+        return
+    tb.text(text[:m.start()])
+    for i, tok in enumerate(m.group(1).split(' ')):
+        if i:
+            tb.text(' ')
+        tb.tag(tok, tok[1:])
+
+
 def build_post(row, note):
     """The preview's exact text, rebuilt as a TextBuilder so the photographer
     can be a link.
@@ -224,11 +248,11 @@ def build_post(row, note):
     marker = f'📷 {who}'
     head, sep, tail = rest.partition(marker)
     if not sep or not row.get('credit_page'):
-        tb.text(rest)                     # no credit page, or the name moved
+        _append_tagged(tb, rest)           # no credit page, or the name moved
         return tb
     tb.text(head + '📷 ')
     tb.link(who, row['credit_page'])
-    tb.text(tail)
+    _append_tagged(tb, tail)
     return tb
 
 

@@ -291,7 +291,11 @@ def compose(row, note, with_address=True):
     lines.append(f"📷 {credit_name(row['photographer'])} · {row['licence']}")
     tag = re.sub(r"[^A-Za-z]", "", region_of(row))
     lines.append("")
-    lines.append(f"#CarnegieLibraries #{tag}" if tag else "#CarnegieLibraries")
+    # #Libraries added 29 August 2026: an established niche feed (matching
+    # everylibrary's own tag), where #CarnegieLibraries has no feed of its own
+    # to speak of. See reference_bsky_discovery_hashtag_feeds.
+    tags = ["CarnegieLibraries", "Libraries"] + ([tag] if tag else [])
+    lines.append(" ".join(f"#{t}" for t in tags))
     return typographic("\n".join(lines))
 
 
