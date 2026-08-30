@@ -54,7 +54,7 @@ Contributing building in Seth Lore and Irwinton Historic District
 
 📷 Rivers Langley; SaveRivers · CC BY-SA 3.0
 
-#CarnegieLibraries #Alabama
+#CarnegieLibraries #Libraries
 ```
 
 **The grant in today's money** comes from `data/cpi.json`, the Minneapolis
