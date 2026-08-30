@@ -35,3 +35,10 @@ data/shelf_life_email.html
 data/shelf_life_email.txt
 data/uk_image_review.html
 data/link_check.json
+
+# Posting cursor and running order. Not regenerable — it is the record of
+# what has already gone out — so this is state to keep off GitHub, not
+# output to throw away. Matches seoul-index's own seoul_index_state.json.
+data/post_state.json
+
+.DS_Store
