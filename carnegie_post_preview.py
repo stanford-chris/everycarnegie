@@ -296,12 +296,13 @@ def compose(row, note, with_address=True):
     elif lines[-1] == "":
         pass
     lines.append(f"📷 {credit_name(row['photographer'])} · {row['licence']}")
-    tag = re.sub(r"[^A-Za-z]", "", region_of(row))
     lines.append("")
     # #Libraries added 29 August 2026: an established niche feed (matching
     # everylibrary's own tag), where #CarnegieLibraries has no feed of its own
-    # to speak of. See reference_bsky_discovery_hashtag_feeds.
-    tags = ["CarnegieLibraries", "Libraries"] + ([tag] if tag else [])
+    # to speak of. See reference_bsky_discovery_hashtag_feeds. No per-state/
+    # region tag (dropped 30 August 2026): a state hashtag doesn't match any
+    # established feed the way #Libraries does, so it was pure noise on the post.
+    tags = ["CarnegieLibraries", "Libraries"]
     lines.append(" ".join(f"#{t}" for t in tags))
     return typographic("\n".join(lines))
 
