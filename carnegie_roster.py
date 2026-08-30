@@ -83,7 +83,7 @@ HEADER_MAP = {
     "date granted": "date_granted", "date of grant": "date_granted",
     "grant amount": "grant", "amount": "grant",
     "date opened": "date_opened", "year opened": "date_opened", "opened": "date_opened",
-    "notes": "notes", "status": "notes",
+    "notes": "notes", "status": "notes", "remarks": "notes",
 }
 
 FIELDS = ["name", "kind", "city", "region", "country", "date_granted", "grant",

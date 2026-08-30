@@ -49,7 +49,7 @@ python3 carnegie_roster.py --stdout    # report only, write nothing
 Eufaula Carnegie Library, Alabama 📚
 217 N Eufaula Ave.
 
-$10,000 from Andrew Carnegie, 2 February 1903 (about $358,000 today)
+$10,000 from Andrew Carnegie, February 2, 1903 (about $358,000 today)
 Contributing building in Seth Lore and Irwinton Historic District
 
 📷 Rivers Langley; SaveRivers · CC BY-SA 3.0
@@ -73,6 +73,37 @@ only the name is linked, never the region appended after it.
 lifts it to 91%, and those links go to the **town** — "Curepipe" the place,
 not its library. A post whose title links to a town article is quietly wrong,
 so the link is only ever taken from a genuine library-name column.
+
+**The date reads in the library's own country's style**, via `format_date()`
+in `carnegie_post_preview.py`: United States rows get "February 2, 1903";
+every other country gets "2 February 1903", the day-month-year convention the
+other 16 countries in this corpus share. Changed 30 August 2026 from a single
+UK-style rendering used everywhere.
+
+⚠️ **`HEADER_MAP` in `carnegie_roster.py` mapped only "notes" and "status" to
+the notes column until 30 August 2026, and Iowa's own page uses neither.**
+Iowa's tables header the column "Remarks", so all 108 of its rows — public and
+academic together — carried an empty note, silently dropping exactly the
+"razed in 1968" / "now the Cedar Rapids Museum of Art" / "demolished for
+construction of a new library" sentences a post exists to carry. `"remarks"`
+is now mapped too. Re-run `carnegie_roster.py` after any Wikipedia list page
+is added or refetched, and check the header list below for another
+unrecognised header before assuming the notes column is complete:
+```bash
+python3 -c "
+import glob, re
+from bs4 import BeautifulSoup
+headers = set()
+for fn in glob.glob('data/pages/*.html'):
+    soup = BeautifulSoup(open(fn, encoding='utf-8').read(), 'html.parser')
+    for table in soup.find_all('table', class_=re.compile('wikitable')):
+        row = table.find('tr')
+        if row:
+            headers |= {re.sub(r'\s+',' ', re.sub(r'\[\s*\d+\s*\]','',th.get_text())).strip().lower()
+                        for th in row.find_all('th')}
+print(sorted(headers))
+"
+```
 
 ## ⚠️ Britain is missing, and here is what it would take
 

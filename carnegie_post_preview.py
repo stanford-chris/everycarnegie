@@ -96,14 +96,20 @@ def in_todays_money(grant, raw_date):
     return f"about {shown} today"
 
 
-def uk_date(raw):
-    """'Feb 2, 1903' / 'January 20, 1908' / '2 Dec 1909' / '1886' -> UK style."""
+def format_date(raw, country=""):
+    """'Feb 2, 1903' / 'January 20, 1908' / '2 Dec 1909' / '1886' -> a date fit
+    to print, in the style the library's own country uses: US libraries get
+    'February 2, 1903', everyone else 'day Month year', which is the
+    convention this corpus's other 16 countries share.
+    """
     raw = (raw or "").strip().rstrip(".")
     if not raw:
         return ""
     for fmt in ("%b %d, %Y", "%B %d, %Y", "%d %b %Y", "%d %B %Y", "%b %d %Y"):
         try:
             d = datetime.strptime(raw, fmt)
+            if country.strip() == "United States":
+                return f"{MONTHS[d.month - 1]} {d.day}, {d.year}"
             return f"{d.day} {MONTHS[d.month - 1]} {d.year}"
         except ValueError:
             pass
@@ -259,7 +265,8 @@ def compose(row, note, with_address=True):
         lines.append(address)
     lines.append("")
 
-    granted, grant = uk_date(row["date_granted"]), grant_amount(row["grant"])
+    granted = format_date(row["date_granted"], row.get("country", ""))
+    grant = grant_amount(row["grant"])
     middle = []
     if grant and granted:
         today = in_todays_money(grant, row["date_granted"])
