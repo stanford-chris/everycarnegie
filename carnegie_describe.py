@@ -46,7 +46,11 @@ import requests
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
-sys.path.insert(0, str(HERE.parent / "everylibrary"))
+# everylibrary has not moved out of ~/Scripts, so this is an absolute
+# reference rather than a HERE.parent sibling lookup: everycarnegie's own
+# move to ~/Projects on 30 August 2026 broke the old sibling-relative form,
+# since ~/Projects/everylibrary does not exist.
+sys.path.insert(0, str(Path.home() / "Scripts" / "everylibrary"))
 import everylibrary_describe as ed          # noqa: E402
 import carnegie_post_preview as cp         # noqa: E402  (typographic)
 
