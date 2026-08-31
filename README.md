@@ -105,6 +105,29 @@ print(sorted(headers))
 "
 ```
 
+## Posting
+
+`everycarnegie_post.py` posts one library from `data/carnegie_images.csv` in a
+fixed shuffled order (`data/post_state.json` tracks position and posted ids).
+`--pin` instead refreshes the pinned "Sources and credits" post, keeping its
+"N of 2,509" line in sync with the roster.
+
+Scheduled via launchd:
+
+- **`com.chrisstanford.everycarnegie`** — the daily poster, twice a day
+  (11 p.m. and 9 a.m. Asia/Seoul, timed for a mostly-American audience).
+- **`com.chrisstanford.everycarnegie-launch`** — `everycarnegie_launch.sh`,
+  the one-off opening thread (29 August 2026, spent). Pins the credits note,
+  posts the two-post opening, then removes its own launchd job.
+- **`com.chrisstanford.everycarnegiemonthly`** — `everycarnegie_monthly.sh`,
+  a monthly re-sweep: re-check for photographs on libraries that had none
+  (`carnegie_images.py --recheck-misses`), describe whatever turns up
+  (`carnegie_describe.py`), then refresh the pinned credits count.
+
+`shelf_life_followup.sh` is a separate one-off (15 September 2026): a
+reminder email about the Britain gazetteer licensing request below. It
+self-deletes after sending.
+
 ## ⚠️ Britain is missing, and here is what it would take
 
 **The 660 British Carnegie libraries are not in this roster.** Wikipedia's Europe
@@ -140,24 +163,17 @@ copyright text, which reads as unlicensed; the project's site is explicit, and
 requires the credit `© [creator] Cardiff University AHRC "Shelf Life" project
 [AH/P002587/1]`. Checking the endpoint is not checking the licence.
 
-**CC BY-SA and CC BY-NC-SA cannot both be satisfied by one file.** ShareAlike
-runs in both directions: BY-SA forbids adding the non-commercial restriction, and
-BY-NC-SA forbids dropping it. `carnegie_roster.csv` is Wikipedia-derived and
-CC BY-SA, so merging their rows in would require the merged file to be both at
-once.
-
-⚠️ **The distinction that matters is Adapted Material versus a Collection.**
-ShareAlike binds an adaptation, not a collection of separate works. Two files
-kept apart, each under its own licence, read side by side at run time, is a
-collection and stays inside both licences. One CSV with the rows interleaved is
-an adaptation and does not. So the fallback works and it is the merge
-specifically that does not.
-
-⚠️ **And copyright is not the only right in play.** The individual facts are not
-copyrightable, but the UK has a separate database right protecting substantial
-investment in compiling and verifying a database, which is exactly what this is.
-Extracting a substantial part can infringe that even where no single fact is
-protected. It is the strongest reason to ask rather than to assume.
+⚠️ **CC BY-SA and CC BY-NC-SA cannot both be satisfied by one file, and the
+UK's separate database right raises the bar further.** ShareAlike runs both
+directions — BY-SA forbids adding the non-commercial restriction, BY-NC-SA
+forbids dropping it — so the gazetteer's rows cannot be merged into
+`carnegie_roster.csv` (CC BY-SA) under either licence. The distinction that
+saves the two-file approach is Adapted Material versus a Collection: two
+files kept apart, each under its own licence, read side by side at run time,
+is a collection and stays inside both; one CSV with the rows interleaved is
+an adaptation and does not. And since facts alone are not copyrightable but a
+compiled, verified database can carry the UK's separate database right, that
+is the stronger reason to ask rather than assume either way.
 
 The ask is therefore for the gazetteer data alone, under CC BY-SA or CC BY.
 Letter drafted in `shelf_life_email.py`.
