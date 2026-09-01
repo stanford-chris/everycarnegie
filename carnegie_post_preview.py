@@ -263,6 +263,16 @@ def compose(row, note, with_address=True):
     address = row["address"].strip()
     if with_address and address and address.lower() != head.split(",")[0].strip().lower():
         lines.append(address)
+
+    # Same pattern as everylibrary: a "📍 Map" line built from the roster's own
+    # lat/lon, no new geocoding needed. Tied to with_address, not to whether an
+    # address line was actually printed, so an Irish entry with no separate
+    # address line still gets a pin; and it drops together with the address in
+    # build()'s last-resort trim, since a pin with no address above it to
+    # explain it is not worth the characters it costs.
+    lat, lon = row.get("lat", "").strip(), row.get("lon", "").strip()
+    if with_address and lat and lon:
+        lines.append("📍 Map")
     lines.append("")
 
     granted = format_date(row["date_granted"], row.get("country", ""))

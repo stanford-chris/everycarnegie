@@ -244,6 +244,18 @@ def build_post(row, note):
         tb.link(subject, article)
         rest = text[len(subject):]
 
+    # Same as everylibrary: a "📍 Map" line built from the roster's own lat/lon.
+    # cp.compose() already decided whether to print it (and, in the trimmed
+    # case, whether it survived alongside the address); this just turns the
+    # literal marker it left behind into a link facet.
+    lat, lon = (row.get('lat') or '').strip(), (row.get('lon') or '').strip()
+    map_marker = '📍 Map'
+    if lat and lon and map_marker in rest:
+        head, sep, tail = rest.partition(map_marker)
+        tb.text(head)
+        tb.link('📍 Map', f'https://www.google.com/maps?q={lat},{lon}')
+        rest = tail
+
     who = cp.typographic(cp.credit_name(row['photographer']))
     marker = f'📷 {who}'
     head, sep, tail = rest.partition(marker)
