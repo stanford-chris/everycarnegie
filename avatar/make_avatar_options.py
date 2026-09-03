@@ -51,9 +51,9 @@ def canvas(size, bg):
 
 
 def fit_circle(img, bg, safe=0.455):
-    """Recentre on the drawn content and scale it inside the crop disc.
+    """Re-center on the drawn content and scale it inside the crop disc.
 
-    What matters is not the bounding box but the distance from the centre to
+    What matters is not the bounding box but the distance from the center to
     the furthest drawn pixel, because Bluesky crops to a disc. Eyeballing this
     left the first version's steps grazing the crop while the top third sat
     empty.
@@ -105,7 +105,7 @@ def facade(d, u, body, shade, door_fill, base=762, lamp_post=True, lamp_lit=True
     learning', and most had 'a lamp post or lantern installed near the
     entrance, meant as a symbol of enlightenment'.
 
-    Returns the lamp's lantern centre so the caller can put a glow there.
+    Returns the lamp's lantern center so the caller can put a glow there.
     """
     CX = 512
 
@@ -202,7 +202,7 @@ def opt_b(size):
     d.polygon([(lx - 44) * u, 212 * u, (lx + 44) * u, 212 * u,
                (lx + 22) * u, 168 * u, (lx - 22) * u, 168 * u], fill=STONE)
     d.ellipse([(lx - 15) * u, 138 * u, (lx + 15) * u, 172 * u], fill=STONE)
-    # Glazing bars, so the head reads as a lantern rather than a wedge of colour.
+    # Glazing bars, so the head reads as a lantern rather than a wedge of color.
     for gx in (lx - 14, lx + 14):
         d.line([gx * u, 372 * u, (lx + (gx - lx) * 0.55) * u, 210 * u],
                fill=STONE_DARK, width=int(7 * u))
@@ -213,7 +213,7 @@ def opt_b(size):
 def opt_c(size):
     """C — the same building by day: ink on limestone, no glow.
 
-    A colourway, not a new drawing, but inverting the ground is the single
+    A colorway, not a new drawing, but inverting the ground is the single
     biggest change available at 40 px, so it earns a place on the sheet.
     """
     img, d, S, u = canvas(size, PAPER)
@@ -356,7 +356,7 @@ OPTIONS = [
      "Built like everylibrary's mark, so the two accounts read as a pair.",
      "The backstory is the sibling bot's, not this one's: the rubber-stamped impression on "
      "the return slip inside the front cover of a British library book. It suits an avatar "
-     "because the artefact is already a circle. It has nothing to do with Carnegie, and "
+     "because the artifact is already a circle. It has nothing to do with Carnegie, and "
      "the borrowed date stamp is British where this corpus is 88% American.", False, opt_e),
 
     ("F", "The lit doorway",

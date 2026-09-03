@@ -50,7 +50,7 @@ def draw(size):
     def box(x0, y0, x1, y1, fill):
         d.rectangle([x0 * u, y0 * u, x1 * u, y1 * u], fill=fill)
 
-    CX, BASE = 512, 762                   # centre line and the ground line
+    CX, BASE = 512, 762                   # center line and the ground line
 
     # ---- steps
     for i, (w, y0, y1) in enumerate([(214, 654, 690), (250, 690, 726), (288, 726, BASE)]):
@@ -101,9 +101,9 @@ def draw(size):
 
     # ---- fit to the circle, measured rather than eyeballed.
     # Bluesky crops to a disc, so what matters is not the bounding box but the
-    # distance from the centre to the furthest drawn pixel. The composition is
+    # distance from the center to the furthest drawn pixel. The composition is
     # wide and low, so hand-placing it left the steps grazing the crop while the
-    # top third sat empty. Recentre on the actual content, then scale so the
+    # top third sat empty. Re-center on the actual content, then scale so the
     # furthest corner lands inside a safe radius.
     bg = Image.new("RGB", img.size, INK)
     bbox = ImageChops.difference(img, bg).convert("L").getbbox()

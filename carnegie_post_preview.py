@@ -140,7 +140,7 @@ def grant_amount(raw):
 
 
 def clean_note(s):
-    """The Notes column arrives with the spacing artefacts of stripped markup."""
+    """The Notes column arrives with the spacing artifacts of stripped markup."""
     s = re.sub(r"\[\s*\d+\s*\]", "", s or "")        # footnote markers
     s = re.sub(r"\s+([,.;])", r"\1", s)              # " , " -> ", "
     s = re.sub(r"\s+", " ", s).strip().rstrip(".")

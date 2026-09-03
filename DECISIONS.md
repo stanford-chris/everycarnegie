@@ -194,8 +194,8 @@ Image descriptions are A.I.-written. Not yet complete: see the reply.
 
 | | Target | Trade |
 |---|---|---|
-| a ⭐ | `List_of_Carnegie_libraries_in_the_United_States` | Where most of the data came from; under-sells the other 15 countries. Current behaviour. |
-| b | `Carnegie_library` | Covers the whole programme; is not the source of the data. |
+| a ⭐ | `List_of_Carnegie_libraries_in_the_United_States` | Where most of the data came from; under-sells the other 15 countries. Current behavior. |
+| b | `Carnegie_library` | Covers the whole program; is not the source of the data. |
 | c | Both, as two links | Truthful, but three links in one short post. |
 
 ## 4. Cadence and times ✅ DECIDED 19 August 2026 — two a day, 23:00 and 09:00 Seoul
@@ -327,7 +327,7 @@ would be padding.
 
 Of the 20 with a photograph, about 14 are right. Blackrock matched the **town
 hall**, Waterford matched a **historic photograph of men laying a foundation
-stone**, Sandyford matched a community centre, and Limerick matched the City
+stone**, Sandyford matched a community center, and Limerick matched the City
 Gallery of Art, which is the former Carnegie building under its current name.
 
 Restoring Ireland means fixing the duplication, dropping the lighthouse, and
@@ -353,7 +353,7 @@ Regenerate the sheet with `python3 avatar/make_avatar_options.py`.
 |---|---|---|
 | **A** ⭐ | **Night facade, lit lamp post** | **Kept.** Reads at 40 px, and both of its motifs are documented. |
 | B | The lamp alone | Survives 40 px well, and the enlightenment lantern is the one motif Carnegie's office attached a meaning to. Says "light", not "library". |
-| C | The same facade by day, ink on limestone | The strongest alternative: inverting the ground is the biggest change available at thumbnail size. Rejected as a colourway, not a new idea. |
+| C | The same facade by day, ink on limestone | The strongest alternative: inverting the ground is the biggest change available at thumbnail size. Rejected as a colorway, not a new idea. |
 | D | The carved lintel, "CARNEGIE LIBRARY" | ⚠️ Illegible at 40 px, **and wrong**: the article says it "was not necessary to put Andrew Carnegie's name on the building". |
 | E | A date stamp, built like everylibrary's | Ring text turns to mush at 40 px, exactly as it does on the sibling. Its backstory is a British library book's return slip, and this corpus is 88% American. |
 | F | The lit doorway, light falling down the steps | Runner-up, and the only candidate that says something new: the entrance staircase is also the standing criticism of these buildings. |
@@ -428,7 +428,7 @@ defend. Two things are still live, neither of them for launch day:
 | "A feed of handsome buildings" | no action | The cynic's closing line, and the one charge a neutral launch cannot answer on launch day, because the answer is what the daily posts turn out to contain. |
 
 Rejected and recorded so the ground is not re-covered: going back to seven posts
-(neutrality was the instruction, and five of those posts existed to characterise
+(neutrality was the instruction, and five of those posts existed to characterize
 the man); putting the harder material in the pinned post instead (doing quietly
 what the thread declined to do out loud is worse than either doing it or not);
 restoring the terms of the deal as a third post (a contract rather than a
@@ -471,7 +471,7 @@ guess, however good the filter.
 
 ⚠️ **This was found by auditing, not by a bug report, and 32 wrong buildings
 were already cleared to post.** The geosearch tier's whole test was "*librar* in
-the title, within 250 metres". Among what it had approved: Whitby matched
+the title, within 250 meters". Among what it had approved: Whitby matched
 `Librarian, Marie Bracey, 1952.jpg`, a photograph of a person; St Catharines a
 homeless man in a hammock outside the building; Sault Ste. Marie a hiking trail;
 Port Elgin and St Marys interiors; and Berlin, Ontario matched **Kitchener's

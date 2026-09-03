@@ -118,7 +118,7 @@ EXPOSURE = [
     ("Homestead, 1892: ten dead, and the Homestead library owned by Carnegie Steel",
      "Not mentioned.",
      "low",
-     "Downgraded by the cut above. While post 1 characterised the man, its silence on "
+     "Downgraded by the cut above. While post 1 characterized the man, its silence on "
      "Homestead was selective; now the thread says only what he was and what he paid for, "
      "and a launch that plainly does not attempt a biography is not concealing one."),
 
@@ -166,7 +166,7 @@ OPTIONS = [
     ("4", "Go back to seven posts.", "rejected",
      "Recorded so the ground is not re-covered. It was a good thread and it is in "
      "`git log`. Neutrality was the instruction, and five of those posts existed to "
-     "characterise the man."),
+     "characterize the man."),
 
     ("5", "Restore the 90 percent line.", "rejected",
      "⚠️ Recorded because it is the obvious thing to reach for if the thread ever looks "
