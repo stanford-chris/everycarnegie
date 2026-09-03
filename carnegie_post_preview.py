@@ -15,9 +15,11 @@ the roster. The second line is the "Notes" column, which is where the interest
 lives: what the building became. A museum, artist studios, a restaurant, or
 nothing at all because it was demolished in 1978.
 
-Dates are rewritten to UK style. The sources are American and write "Feb 2,
-1903"; the house style is "2 February 1903", and the lists also carry British
-and New Zealand orderings, so all three have to be parsed rather than assumed.
+Dates are rewritten in the style the library's own country uses: US libraries
+get "February 2, 1903", everyone else "2 February 1903". The sources mix all
+of "Feb 2, 1903", "January 20, 1908" and "2 Dec 1909" depending on which
+Wikipedia list a row came from, so all three have to be parsed rather than
+assumed.
 
 Usage:
     python3 carnegie_post_preview.py            # six samples
@@ -43,6 +45,8 @@ LIMIT = 300          # Bluesky's post length
 NOTE_MAX = 96        # keep the note to one line
 
 MONTHS = "January February March April May June July August September October November December".split()
+
+OPENED_DATE_RE = re.compile(r"^Opened\s+(.+)$", re.IGNORECASE)
 
 # The region is the Wikipedia page title, which is not always a place name:
 # "Washington (state)" disambiguates an article, and the continental pages give
@@ -297,7 +301,22 @@ def compose(row, note, with_address=True):
     if note:
         # These notes are the tail of a Wikipedia bullet, so they begin
         # mid-sentence in lower case: "brick and stone construction".
-        middle.append(note[0].upper() + note[1:] if note[:1].islower() else note)
+        printable = note[0].upper() + note[1:] if note[:1].islower() else note
+        # ⚠️ Nine US rows carry a Notes column that is nothing but an opening
+        # date ("Opened 29 Feb 1916"), copied verbatim from Wikipedia's own
+        # per-state tables — Illinois writes "29 Feb 1916", Iowa and South
+        # Dakota already write "March 21, 1906". Never reformatted before, so
+        # a US post could carry a grant date in house style beside a raw,
+        # differently-styled opening date in the same post (caught 3 September
+        # 2026: Marion, Illinois showed "February 13, 1909" next to "Opened 29
+        # Feb 1916"). Reuse format_date() so this note gets the same
+        # country-aware treatment as date_granted above.
+        opened = OPENED_DATE_RE.match(printable)
+        if opened:
+            formatted = format_date(opened.group(1), row.get("country", ""))
+            if formatted:
+                printable = f"Opened {formatted}"
+        middle.append(printable)
     # 19 rows have neither a grant nor a note. Without this the post carries an
     # empty middle and goes out with a double blank line in it.
     if middle:
