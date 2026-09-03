@@ -13,7 +13,7 @@ Three constraints drive the drawing:
   Bluesky crops avatars to a circle, so everything sits inside a disc of 90% of
   the width. The corners are dead space and nothing may rely on them.
   It has to read at 40 px in a feed, which is what most people will ever see.
-  That rules out windows, mouldings, lettering and any detail finer than a
+  That rules out windows, moldings, lettering and any detail finer than a
   column: at thumbnail size the whole thing has to work as one silhouette.
   PIL does not anti-alias its polygons, so everything is drawn at 4x and
   downsampled with LANCZOS, which is what actually produces clean diagonals on
