@@ -62,6 +62,23 @@ ALT_PATH = DATA / "alt_text.json"
 
 _lock = threading.Lock()
 
+# everylibrary_describe.py's describe() defaults to "a UK public library" /
+# British English, which is right for everylibrary (100% UK) and wrong for
+# this roster: 79% American, 13% UK/Ireland (measured 3 September 2026,
+# data/carnegie_roster.csv). Before this, every Carnegie photo — American,
+# Canadian, Trinidadian, whatever — was told to write British English, and
+# 152 of 1,399 stored descriptions already showed it (colour, centre, ...).
+# So spelling is chosen per row's own country, matching describe()'s two
+# override kwargs; everything else (unset here) still takes its default.
+UK_COUNTRIES = {"United Kingdom", "Ireland"}
+
+
+def spelling_for(row):
+    """(subject, spelling) for describe(), from the row's own country."""
+    if row.get("country") in UK_COUNTRIES:
+        return "a UK or Irish Carnegie library building", "British"
+    return "a Carnegie library building", "American"
+
 
 def library_id(row):
     """Stable identity, so descriptions survive a roster rebuild."""
@@ -108,7 +125,8 @@ def main():
     started = time.time()
 
     def work(row):
-        text = ed.describe(row, session, env)
+        subject, spelling = spelling_for(row)
+        text = ed.describe(row, session, env, subject=subject, spelling=spelling)
         with _lock:
             done[0] += 1
             if text:
