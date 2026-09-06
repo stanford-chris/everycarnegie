@@ -48,6 +48,7 @@ python3 carnegie_roster.py --stdout    # report only, write nothing
 ```
 Eufaula Carnegie Library, Alabama 📚
 217 N Eufaula Ave.
+📍 Map
 
 $10,000 from Andrew Carnegie, February 2, 1903 (about $358,000 today)
 Contributing building in Seth Lore and Irwinton Historic District
@@ -56,6 +57,12 @@ Contributing building in Seth Lore and Irwinton Historic District
 
 #CarnegieLibraries #Libraries
 ```
+
+**"📍 Map" links the row's own `lat`/`lon` to Google Maps** (`https://www.google.com/maps?q=<lat>,<lon>`),
+when the row has them — only 31% do (see the coverage table above), so most posts carry no pin.
+It follows the address and shares its fate: tied to `with_address` rather than to whether an
+address line actually printed, and dropped together with the address if `build()`'s last-resort
+length trim needs the room.
 
 **The grant in today's money** comes from `data/cpi.json`, the Minneapolis
 Fed's annual index, which splices the historical series onto CPI-U. CPI-U
@@ -134,10 +141,7 @@ self-deletes after sending.
 page carries Ireland as a proper table, which is captured; Britain is not in
 table form and the harvester reads tables.
 
-⚠️ **This section used to say the British entries were unparseable prose and
-that four sources had been tried and all failed. Both halves were wrong, and the
-error was load-bearing: it read as an argument for not looking again.** Checked
-against the live wikitext on 19 August 2026:
+The wikitext is not unparseable prose, it just isn't a table:
 
 - **Scotland, Wales and Northern Ireland are one library per bullet**, with a
   name, a year and usually a wikilink:
@@ -145,9 +149,8 @@ against the live wikitext on 19 August 2026:
 - **England is a two-level list**, branches nested under their city:
   `* [[Coventry]]` then `** [[Earlsdon]] Library 1913.`
 
-Not crammed prose. It reads that way only if the markup is stripped before it is
-parsed, which is probably where the claim came from. A second parser for lists,
-alongside the existing one for tables, yields **about 225 entries**: England 92
+A second parser for lists, alongside the existing one for tables, yields
+**about 225 entries**: England 92
 top-level plus 66 nested, Scotland 30, Wales 32, Northern Ireland 5.
 
 ⚠️ **And a gazetteer nobody had found is on a public endpoint.** The AHRC
@@ -228,11 +231,10 @@ library — and about four are probably the right building with an incomplete
 article. The check cannot tell those apart, so it blanks all nine and loses four
 useful links out of 1,262.
 
-⚠️ **The redirect trap inverted this result once.** Asking the API for an article
-by title returns the redirect page, not its target, and a redirect's entire
-content is one line. Without `redirects=1` the check reported **50** articles
-with no Carnegie mention; 46 were redirects and the true figure is 9. The wrong
-number was five times too high and looked completely plausible.
+⚠️ **Always request `redirects=1`.** Asking the API for an article by title
+without it returns the redirect page, not its target, and a redirect's entire
+content is one line — so a redirected library reads as an empty article with
+no Carnegie mention, inflating the miss count fivefold.
 
 ⚠️ **77% of rows link no article at all**, and for them the only evidence is the
 list row itself. A clean run means the checkable quarter checks out, not that
@@ -256,22 +258,18 @@ all carry it now. Anything new that writes HTML needs it too: the files
 themselves are written UTF-8, so this is purely a declaration problem and it
 does not show up until someone opens one in Safari.
 
-## Three parsing traps, all of the same species
+## Header parsing gotchas, in `header_text`
 
-Each produced a file that looked complete and was quietly missing data. They are
-commented at `header_text` because the naive version of each is the obvious one.
-
-- **Headers wrap with `<br>`.** Read without a separator, "City or<br>town"
-  fuses into `city ortown` and matches no key. The first run lost the grant
-  amount, the city and both dates on every US page while reporting 1,916 rows
-  and looking like a success.
-- **Adding the separator then breaks the footnote strip.** `Date granted[1]`
-  becomes `date granted [ 1 ]`, which a `\[\d+\]` pattern no longer catches, and
-  `date_granted` fell from 121 rows to 39. The `<sup>` elements are now removed
-  outright rather than matched.
-- **Parenthetical qualifiers space out too.** Canada's `Grant amount (US$)`
-  arrives as `grant amount ( us$ )`: zero of 125 rows. Parentheses are now
-  stripped generally, not matched literally.
+Three things bite header matching, and each one silently drops a whole column
+rather than erroring — a file that "looks complete" (right row count) can still
+be missing data, so check per-column fill rates after adding or refetching a
+page. **Headers wrap with `<br>`** (e.g. "City or<br>town"), so `<br>` needs an
+explicit separator or "or" and "town" fuse into one unmatched key. **Footnote
+markers use `<sup>`** (`Date granted[1]`), which must be stripped outright
+rather than pattern-matched: once a `<br>` separator inserts whitespace, a
+`\[\d+\]` regex no longer catches `[ 1 ]`. **Parenthetical qualifiers** like
+Canada's `Grant amount (US$)` need stripping generally rather than matching
+literally, for the same whitespace-insertion reason.
 
 ## Two more things worth knowing
 
