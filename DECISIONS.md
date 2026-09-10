@@ -540,5 +540,9 @@ fallback: **239 of 1,367 postable rows have no description and 6 of the first 24
 posts shipped the fallback.** The on-disk `alt_text.json` (1,145 entries) has
 never been committed; HEAD still holds the 1,399 British-worded ones, and the
 pre-removal copy is at `~/Library/Logs/carnegie-alt-text-backup-2026-09-03.json`.
-A probe of 8 undescribed rows today described 4, so a re-run recovers about half
-per pass. ⬜ Still OPEN: the remaining 239, and committing the store.
+Three describer passes the same morning (his call) recovered 221 of the 239:
+186, then 21, then 11, each pass retrying what the previous one dropped. The
+store is committed at 1,367 entries covering **1,349 of 1,367 postable rows**;
+the 18 still bare (16 American, one New Zealand, one New York branch) failed
+the verification gate three times and are left to the monthly re-sweep. ✅
+Closed at 98.7 percent, 11 September 2026.
