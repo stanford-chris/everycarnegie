@@ -45,18 +45,34 @@ python3 carnegie_roster.py --stdout    # report only, write nothing
 
 ## What a post carries
 
+Each library is a two-post thread: the photograph, place, grant and credit,
+then what became of the building as a reply of its own.
+
 ```
 Eufaula Carnegie Library, Alabama 📚
 217 N Eufaula Ave.
 📍 Map
 
 $10,000 from Andrew Carnegie, February 2, 1903 (about $358,000 today)
-Contributing building in Seth Lore and Irwinton Historic District
 
 📷 Rivers Langley; SaveRivers · CC BY-SA 3.0
 
 #CarnegieLibraries #Libraries
 ```
+```
+  ↳ Contributing building in Seth Lore and Irwinton Historic District.
+```
+
+**The note is always a reply, whether or not it would have fit on the first post**
+(11 September 2026). Until then it rode on the first post capped at 96 characters
+and cut again by the 300-character limit, so it went out mid-sentence:
+"Originally a public library on the Ohio…" on Athens, Ohio, with 38 characters still
+unused. A reply has the whole 300 to itself; 35 of the 1,004 notes exceed that and
+lose whole sentences from the end, never words. `note_post()` in
+`carnegie_post_preview.py` builds it, and a sentence is not allowed to end on an
+initial or an abbreviation ("Frank L. Packard", "Steel Co. and"). A row with no note
+gets no reply. Hashtags stay on the first post: hashtag feeds index top-level posts
+only.
 
 **"📍 Map" links the row's own `lat`/`lon` to Google Maps** (`https://www.google.com/maps?q=<lat>,<lon>`),
 when the row has them — only 31% do (see the coverage table above), so most posts carry no pin.

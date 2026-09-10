@@ -42,11 +42,15 @@ IMAGES = os.path.join(DATA, "carnegie_images.csv")
 ROSTER = os.path.join(DATA, "carnegie_roster.csv")
 
 LIMIT = 300          # Bluesky's post length
-NOTE_MAX = 96        # keep the note to one line
 
 MONTHS = "January February March April May June July August September October November December".split()
 
-OPENED_DATE_RE = re.compile(r"^Opened\s+(.+)$", re.IGNORECASE)
+# The date only, not the rest of the line: "Opened 19 Jan 1907, designed by
+# Chicago architect Victor Andre Matteson" used to match whole, fail to parse,
+# and go out with the raw date. A bare year is left to format_date's caller.
+OPENED_DATE_RE = re.compile(
+    r"^Opened\s+([A-Za-z]{3,9}\.? \d{1,2},? \d{4}|\d{1,2} [A-Za-z]{3,9}\.? \d{4})(.*)$",
+    re.IGNORECASE)
 
 # The region is the Wikipedia page title, which is not always a place name:
 # "Washington (state)" disambiguates an article, and the continental pages give
@@ -142,12 +146,13 @@ def grant_amount(raw):
 def clean_note(s):
     """The Notes column arrives with the spacing artifacts of stripped markup."""
     s = re.sub(r"\[\s*\d+\s*\]", "", s or "")        # footnote markers
+    # Page references left by a {{rp}} template: "Designed by Ernest
+    # Coxhead. : 9, 12" — eight San Francisco rows carry them, and one has
+    # prose after the numbers. Only after a full stop, so "Opened: 1921" and
+    # "Official name: Andrew Carnegie Free Library" are left alone.
+    s = re.sub(r"(?<=\.)\s*:\s*\d+(?:\s*,\s*\d+)*(?=\s|$)", "", s)
     s = re.sub(r"\s+([,.;])", r"\1", s)              # " , " -> ", "
-    s = re.sub(r"\s+", " ", s).strip().rstrip(".")
-    if len(s) > NOTE_MAX:
-        cut = s[:NOTE_MAX].rsplit(" ", 1)[0]
-        s = cut + "…"
-    return s
+    return re.sub(r"\s+", " ", s).strip().rstrip(".")
 
 
 def typographic(s):
@@ -258,7 +263,7 @@ def credit_name(who):
     return who
 
 
-def compose(row, note, with_address=True):
+def compose(row, with_address=True):
     head = place(row)
     lines = [head + " 📚"]
 
@@ -298,27 +303,9 @@ def compose(row, note, with_address=True):
     # the note as well.
     elif row.get("date_opened", "").strip():
         middle.append(f"Opened {row['date_opened'].strip()}")
-    if note:
-        # These notes are the tail of a Wikipedia bullet, so they begin
-        # mid-sentence in lower case: "brick and stone construction".
-        printable = note[0].upper() + note[1:] if note[:1].islower() else note
-        # ⚠️ Nine US rows carry a Notes column that is nothing but an opening
-        # date ("Opened 29 Feb 1916"), copied verbatim from Wikipedia's own
-        # per-state tables — Illinois writes "29 Feb 1916", Iowa and South
-        # Dakota already write "March 21, 1906". Never reformatted before, so
-        # a US post could carry a grant date in house style beside a raw,
-        # differently-styled opening date in the same post (caught 3 September
-        # 2026: Marion, Illinois showed "February 13, 1909" next to "Opened 29
-        # Feb 1916"). Reuse format_date() so this note gets the same
-        # country-aware treatment as date_granted above.
-        opened = OPENED_DATE_RE.match(printable)
-        if opened:
-            formatted = format_date(opened.group(1), row.get("country", ""))
-            if formatted:
-                printable = f"Opened {formatted}"
-        middle.append(printable)
-    # 19 rows have neither a grant nor a note. Without this the post carries an
-    # empty middle and goes out with a double blank line in it.
+    # The note is NOT here: it is its own reply, see note_post(). 19 rows have
+    # no grant line at all, and without this the post carries an empty middle
+    # and goes out with a double blank line in it.
     if middle:
         lines.extend(middle)
         lines.append("")
@@ -336,25 +323,89 @@ def compose(row, note, with_address=True):
     return typographic("\n".join(lines))
 
 
-def build(row, note):
-    """Fit the post to the limit by giving up the least valuable thing first.
+def build(row):
+    """The first post: place, address, pin, grant, credit, tags.
 
-    The grant and the credit are never sacrificed: the grant is the reason the
-    post exists and the credit is a licence condition. So the note shortens,
-    then goes, and only then does the address. Eight of 1,246 need any of this.
+    The note is never on it, however short — see note_post(). Without the
+    note the longest first post in the corpus is 264 characters, but the
+    last-resort trim stays for a row that has not been seen yet: the grant
+    is the reason the post exists and the credit is a licence condition, so
+    the address is the only thing that can go.
     """
-    text = compose(row, note)
+    text = compose(row)
+    if len(text) > LIMIT:
+        text = compose(row, with_address=False)
+    return text
+
+
+# A sentence ends at . ! or ? followed by a space, except after an initial
+# ("Frank L. Packard") or one of the abbreviations these notes actually use
+# ("c. 1962", "St. Louis", "Mt. Pleasant", "Dr. Smith", "No. 2", "Jr."), each
+# of which the naive split cut a sentence in half on.
+_NOT_A_SENTENCE_END = re.compile(
+    r"(?:\b[A-Z]|\b(?:St|Mt|Dr|Mrs?|Ms|Jr|Sr|No|Ave|Ft|Rd|Blvd|Co|Inc|c|ca|approx|vs|e\.g|i\.e))\.$")
+
+
+def sentences(s):
+    # A new sentence opens with a capital, a digit or a quote; "Steel Co. and
+    # governed" is one sentence however the abbreviation list reads.
+    parts = []
+    for piece in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\u201c\u2018\"'(\[])", s):
+        if parts and _NOT_A_SENTENCE_END.search(parts[-1]):
+            parts[-1] += " " + piece
+        else:
+            parts.append(piece)
+    return [p for p in parts if p]
+
+
+def note_post(row, note):
+    """The reply that says what became of the building, in full.
+
+    Until 11 September 2026 the note rode on the first post, capped at 96
+    characters "to keep it to one line" and then cut again by the 300-character
+    limit, so it went out mid-sentence: "Originally a public library on the
+    Ohio…" on Athens, Ohio, with 38 characters still unused. His call that day:
+    the note is a reply of its own, always, whether or not it would have fit.
+
+    A reply has the whole 300 to itself and only 35 of the 1,004 notes exceed
+    that. Those lose a whole SENTENCE at a time from the end, never a word,
+    and the ellipsis is the last resort, for a note whose first sentence alone
+    is over the limit — none in the corpus as of that date, so if one appears
+    it is a data problem worth looking at rather than a trim.
+
+    Returns "" for a row with no note, and the caller posts no reply.
+    """
+    if not note:
+        return ""
+    # These notes are the tail of a Wikipedia bullet, so they begin
+    # mid-sentence in lower case: "brick and stone construction".
+    printable = note[0].upper() + note[1:] if note[:1].islower() else note
+    # ⚠️ Nine US rows carry a Notes column that is nothing but an opening
+    # date ("Opened 29 Feb 1916"), copied verbatim from Wikipedia's own
+    # per-state tables — Illinois writes "29 Feb 1916", Iowa and South
+    # Dakota already write "March 21, 1906". Never reformatted before, so
+    # a US post could carry a grant date in house style beside a raw,
+    # differently-styled opening date (caught 3 September 2026: Marion,
+    # Illinois showed "February 13, 1909" next to "Opened 29 Feb 1916").
+    # Reuse format_date() so this gets the same country-aware treatment.
+    opened = OPENED_DATE_RE.match(printable)
+    if opened:
+        formatted = format_date(opened.group(1), row.get("country", ""))
+        if formatted:
+            printable = f"Opened {formatted}{opened.group(2)}"
+    if not printable.endswith((".", "!", "?", "…")):
+        printable += "."
+    text = typographic(printable)
     if len(text) <= LIMIT:
         return text
-
-    n = note
-    while n and len(text) > LIMIT:
-        cut = n[:-8].rsplit(" ", 1)[0] if len(n) > 12 else ""
-        n = (cut + "…") if cut else ""
-        text = compose(row, n)
-    if len(text) > LIMIT:
-        text = compose(row, n, with_address=False)
-    return text
+    parts = sentences(printable)
+    while len(parts) > 1:
+        parts = parts[:-1]
+        text = typographic(" ".join(parts))
+        if len(text) <= LIMIT:
+            return text
+    cut = parts[0][:LIMIT - 1].rsplit(" ", 1)[0].rstrip(",;:")
+    return typographic(cut + "…")
 
 
 def main():
@@ -370,28 +421,37 @@ def main():
         rows = [r for r in csv.DictReader(f) if r["postable"] == "yes"]
 
     random.Random(args.seed).shuffle(rows)
-    over = 0
-    for r in rows[:args.count]:
+
+    def pair(r):
         note = clean_note(notes.get((r["name"], r["city"], r["region"]), ""))
-        text = build(r, note)
+        return build(r), note_post(r, note), note
+
+    for r in rows[:args.count]:
+        text, reply, _ = pair(r)
         flag = "" if len(text) <= LIMIT else "   ⚠️ OVER LIMIT"
-        over += len(text) > LIMIT
         print("─" * 58)
         print(text)
         print(f"[{len(text)} chars]{flag}")
+        if reply:
+            print(f"  ↳ {reply}")
+            print(f"  [reply {len(reply)} chars]")
         print(f"[img] {r['image_url'][:88]}")
     print("─" * 58)
 
     # How often would the limit bite across the whole corpus?
-    longest = 0
+    longest = longest_reply = over = over_reply = trimmed = ellipsis = 0
     for r in rows:
-        t = build(r, clean_note(notes.get((r["name"], r["city"], r["region"]), "")))
-        longest = max(longest, len(t))
-        over += 0
-    too_long = sum(1 for r in rows
-                   if len(build(r, clean_note(notes.get((r["name"], r["city"], r["region"]), "")))) > LIMIT)
-    print(f"across all {len(rows)} postable rows: longest {longest} chars, "
-          f"{too_long} over the {LIMIT} limit")
+        text, reply, note = pair(r)
+        longest = max(longest, len(text))
+        over += len(text) > LIMIT
+        if reply:
+            longest_reply = max(longest_reply, len(reply))
+            over_reply += len(reply) > LIMIT
+            trimmed += len(reply) < len(typographic(note))
+            ellipsis += reply.endswith("…")
+    print(f"across all {len(rows)} postable rows: longest first post {longest} chars, "
+          f"{over} over the {LIMIT} limit; longest reply {longest_reply} chars, "
+          f"{over_reply} over, {trimmed} trimmed by a sentence, {ellipsis} cut mid-sentence")
 
 
 if __name__ == "__main__":

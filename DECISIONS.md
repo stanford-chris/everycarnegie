@@ -528,3 +528,17 @@ which is the real fix; and only if that cannot be finished before 29 August,
 soften the bio. Found by running `everycarnegie_post.py --dry-run`, which is not
 the same code path as `carnegie_post_preview.py` and had not been exercised
 today until then.
+
+
+**Update, 11 September 2026.** The describer was run over the corpus before
+launch, and on 3 September the 817 American rows with British-worded
+descriptions were removed and redone under per-country spelling. The overnight
+redo of 4 September described 0 of 608 (every call failed, no reason logged), and
+the rerun at 13:11 that day described 368 and dropped 240 at the verification
+gate. Nothing checked the outcome until today, when Athens, Ohio posted the bare
+fallback: **239 of 1,367 postable rows have no description and 6 of the first 24
+posts shipped the fallback.** The on-disk `alt_text.json` (1,145 entries) has
+never been committed; HEAD still holds the 1,399 British-worded ones, and the
+pre-removal copy is at `~/Library/Logs/carnegie-alt-text-backup-2026-09-03.json`.
+A probe of 8 undescribed rows today described 4, so a re-run recovers about half
+per pass. ⬜ Still OPEN: the remaining 239, and committing the store.

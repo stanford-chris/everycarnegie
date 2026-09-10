@@ -11,10 +11,18 @@ back: an uncredited CC BY-SA image breaches the licence, so a missing credit
 blocks the post rather than degrading it.
 
 ⚠️ The post text is NOT built here. carnegie_post_preview.build() is the single
-source of truth for wording, date style, the 300-character trimming order and
-the credit cleanup, and this module reconstructs that exact string as a
-TextBuilder so the photographer's name can carry a link. Two formatters would
-drift, and the one that drifts silently is the one nobody previews.
+source of truth for wording, date style and the credit cleanup, and this module
+reconstructs that exact string as a TextBuilder so the photographer's name can
+carry a link. Two formatters would drift, and the one that drifts silently is
+the one nobody previews.
+
+Each library is a two-post thread since 11 September 2026: the photograph,
+place, grant and credit first, then what became of the building — the roster's
+Notes column — as a reply of its own, built by carnegie_post_preview.note_post().
+It used to ride on the first post capped at 96 characters and cut again at 300,
+so it went out mid-sentence ("Originally a public library on the Ohio…"). His
+call: the note is always a reply, whether or not it would have fit. A row with
+no note gets no reply.
 
 State is data/post_state.json: posted ids plus the running order, so the
 sequence survives a roster rebuild.
@@ -215,7 +223,7 @@ def _append_tagged(tb, text):
         tb.tag(tok, tok[1:])
 
 
-def build_post(row, note):
+def build_post(row):
     """The preview's exact text, rebuilt as a TextBuilder so the photographer
     can be a link.
 
@@ -225,7 +233,7 @@ def build_post(row, note):
     and source. The licence stays in plain text so the terms are still readable
     without following anything.
     """
-    text = cp.build(row, note)
+    text = cp.build(row)
     tb = client_utils.TextBuilder()
 
     # Two links, where everylibrary deliberately carries one. There the second
@@ -245,9 +253,9 @@ def build_post(row, note):
         rest = text[len(subject):]
 
     # Same as everylibrary: a "📍 Map" line built from the roster's own lat/lon.
-    # cp.compose() already decided whether to print it (and, in the trimmed
-    # case, whether it survived alongside the address); this just turns the
-    # literal marker it left behind into a link facet.
+    # cp.compose() already decided whether to print it (and, in the last-resort
+    # trimmed case, whether it survived alongside the address); this just turns
+    # the literal marker it left behind into a link facet.
     lat, lon = (row.get('lat') or '').strip(), (row.get('lon') or '').strip()
     map_marker = '📍 Map'
     if lat and lon and map_marker in rest:
@@ -645,19 +653,23 @@ def main():
 
     client = None
     previewed = []            # dry runs write no state, so advance locally
+    reply_failures = []       # libraries posted whose note reply did not land
     for n in range(args.count):
         lib_id, row = next_library(postable, state, skip=previewed)
         if not row:
             print('Nothing left to post: the whole corpus has been through.')
             break
 
-        note = cp.clean_note(notes.get((row['name'], row['city'], row['region']), ''))
-        tb = build_post(row, note)
+        note = cp.note_post(row, cp.clean_note(
+            notes.get((row['name'], row['city'], row['region']), '')))
+        tb = build_post(row)
         alt = build_alt(row)
 
         print('-' * 60)
         print(tb.build_text())
         print(f'[alt] {alt}')
+        if note:
+            print(f'[reply, {len(note)} chars] {note}')
         print(f'[src] {row["image_source"]} · {row["credit_page"]}')
 
         if args.dry_run:
@@ -674,17 +686,33 @@ def main():
         with Image.open(io.BytesIO(image)) as im:
             ratio = models.AppBskyEmbedDefs.AspectRatio(width=im.width, height=im.height)
 
-        client.send_images(text=tb, images=[image], image_alts=[alt],
-                           image_aspect_ratios=[ratio], langs=['en'])
+        res = client.send_images(text=tb, images=[image], image_alts=[alt],
+                                 image_aspect_ratios=[ratio], langs=['en'])
         state.setdefault('posted', []).append(lib_id)
         save_state(state)
         print(f'Posted ({len(state["posted"])}/{len(postable)}).')
+
+        # The note, as a reply under the photograph. State is already saved
+        # above, so a reply that fails cannot cause the library to be posted
+        # twice: it is logged, the run goes on, and the exit code says so at
+        # the end (the worst-exit pattern, so launchd's last-exit-status and
+        # check 5 of harden_audit.sh both see it). No facets: it is prose.
+        if note:
+            ref = models.ComAtprotoRepoStrongRef.Main(uri=res.uri, cid=res.cid)
+            try:
+                client.send_post(text=note, langs=['en'],
+                                 reply_to=models.AppBskyFeedPost.ReplyRef(root=ref, parent=ref))
+            except Exception as e:           # noqa: BLE001 - any failure here is reported, never fatal mid-run
+                reply_failures.append(cp.place(row))
+                print(f'!! note reply FAILED for {cp.place(row)}: {e}')
 
         if n + 1 < args.count:
             time.sleep(2)
 
     if args.dry_run:
         print('\nDry run: nothing posted, no state written.')
+    if reply_failures:
+        sys.exit(f'Posted, but the note reply failed on: {", ".join(reply_failures)}')
 
 
 if __name__ == '__main__':
