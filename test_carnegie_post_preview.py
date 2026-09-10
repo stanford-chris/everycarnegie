@@ -112,6 +112,17 @@ class CleanNote(unittest.TestCase):
         self.assertEqual(cp.clean_note("Designed by G. Albert Lansburgh. : 9, 12 Today it is a library."),
                          "Designed by G. Albert Lansburgh. Today it is a library")
 
+    def test_a_trailing_as_of_stamp_is_dropped_but_a_bare_year_note_is_not(self):
+        self.assertEqual(cp.clean_note("Now the Academy of Visual Arts. (March 2015)"),
+                         "Now the Academy of Visual Arts")
+        self.assertEqual(cp.clean_note("Is still in use as the public library (July 2025)"),
+                         "Is still in use as the public library")
+        self.assertEqual(cp.clean_note("No longer a public library. (2013)"), "No longer a public library")
+        self.assertEqual(cp.clean_note("Part of the Monteith Historic District (info)"),
+                         "Part of the Monteith Historic District")
+        self.assertEqual(cp.clean_note("(1929)"), "(1929)")
+        self.assertEqual(cp.clean_note("Opened 1907 (Main library)"), "Opened 1907 (Main library)")
+
     def test_a_colon_that_is_not_a_page_reference_is_kept(self):
         self.assertEqual(cp.clean_note("Official name: Andrew Carnegie Free Library"),
                          "Official name: Andrew Carnegie Free Library")

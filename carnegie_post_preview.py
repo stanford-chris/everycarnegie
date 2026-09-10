@@ -152,7 +152,14 @@ def clean_note(s):
     # "Official name: Andrew Carnegie Free Library" are left alone.
     s = re.sub(r"(?<=\.)\s*:\s*\d+(?:\s*,\s*\d+)*(?=\s|$)", "", s)
     s = re.sub(r"\s+([,.;])", r"\1", s)              # " , " -> ", "
-    return re.sub(r"\s+", " ", s).strip().rstrip(".")
+    s = re.sub(r"\s+", " ", s).strip().rstrip(".")
+    # Wikipedia's own "as of" stamp on a status — "still used as the public
+    # library. (April 2011)", "No longer a public library. (2013)" — on 67
+    # rows, and a dead "(info)" link label on six. Only after some prose:
+    # four rows are nothing but "(1929)", and those are left as they are
+    # rather than emptied.
+    s = re.sub(r"(?<=\S)\s*\((?:(?:[A-Z][a-z]+ )?\d{4}|info)\)$", "", s)
+    return s.rstrip(".")
 
 
 def typographic(s):
