@@ -147,6 +147,14 @@ Scheduled via launchd:
   (`carnegie_images.py --recheck-misses`), describe whatever turns up
   (`carnegie_describe.py`), then refresh the pinned credits count.
 
+`carnegie_describe.py` makes no model call of its own: it imports
+everylibrary's describer from `~/Scripts/everylibrary`, whose every `claude -p`
+call runs `--restricted --tools Read` since 11 September 2026, with each image
+staged alone in a directory the model has as its cwd. Unconfined, `claude -p`
+is an agent with a shell, and it was found in a sibling bot running the
+project's own code. The staging also means the describer no longer depends on
+the directory it was launched from, which `everycarnegie_monthly.sh` never set.
+
 `shelf_life_followup.sh` is a separate one-off (15 September 2026): a
 reminder email about the Britain gazetteer licensing request below. It
 self-deletes after sending.

@@ -56,6 +56,14 @@ import carnegie_post_preview as cp         # noqa: E402  (typographic)
 
 ed.TMP_DIR = DATA / "_tmp"                  # see the warning above
 ed.TMP_DIR.mkdir(parents=True, exist_ok=True)
+# Since 11 September 2026 every `claude -p` call the describer makes runs
+# `--restricted --tools Read` with its cwd set to a directory holding the one
+# image (everylibrary_describe.CONFINED and _staged). This file makes no call
+# of its own, so there is nothing to add here: the confinement arrives with the
+# import, and so does independence from the launch directory. Before that date
+# the describer inherited the caller's cwd and named the image by absolute
+# path, and everycarnegie_monthly.sh runs this script without a cd, so where
+# the model could read from depended on whoever started the run.
 
 IMAGES = DATA / "carnegie_images.csv"
 ALT_PATH = DATA / "alt_text.json"
