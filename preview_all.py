@@ -81,13 +81,25 @@ for i, (text, has_img) in enumerate(ep.launch_thread.POSTS, 1):
 out.append("</div>")
 
 # 3. a daily post
-body, n = linkify(ep.build_post(example, note))
+body, n = linkify(ep.build_post(example))
 out += ["<h2>3 · A regular daily post</h2>",
-        "<p class=why>One of 1,223, twice a day from 21:00 Seoul on the 29th.</p>",
+        "<p class=why>One of 1,223, twice a day from 21:00 Seoul on the 29th. "
+        "Two posts since 11 September 2026: the note, if there is one, is "
+        "always a reply of its own, never on the first post.</p>",
         f"<div class=post><p class=text>{body}</p>"
         f'<img loading=lazy src="{html.escape(example["image_url"])}" alt="">'
         f'<p class=alt><b>Alt:</b> {html.escape(ep.build_alt(example))}</p>'
-        f"<p class=meta>{n} of 300 · {html.escape(example['licence'])}</p></div>", "</div>"]
+        f"<p class=meta>{n} of 300 · {html.escape(example['licence'])}</p></div>"]
+
+# The note reply, if this example has one — carnegie_post_preview.note_post()
+# is the single source of truth for that text, same as build() is for the
+# first post.
+reply = ep.cp.note_post(example, note)
+if reply:
+    out.append(f'<div class=post><p class=text>↳ {html.escape(reply)}</p>'
+                f'<p class=meta>reply · {len(reply)} of 300</p></div>')
+
+out.append("</div>")
 
 (HERE/'data/preview_all.html').write_text("\n".join(out), encoding='utf-8')
 print(f"pinned {len(ep.build_credits().build_text())} · thread {len(ep.launch_thread.POSTS)} posts · "

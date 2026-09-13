@@ -33,7 +33,6 @@ Usage:
 
 import argparse
 import csv
-import hashlib
 import json
 import os
 import sys
@@ -88,10 +87,7 @@ def spelling_for(row):
     return "a Carnegie library building", "American"
 
 
-def library_id(row):
-    """Stable identity, so descriptions survive a roster rebuild."""
-    key = f"{row['name']}|{row['city']}|{row['region']}"
-    return hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
+library_id = cp.library_id          # canonical definition in carnegie_post_preview.py
 
 
 def load_alt():

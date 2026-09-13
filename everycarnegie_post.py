@@ -40,7 +40,6 @@ Usage:
 
 import argparse
 import csv
-import hashlib
 import importlib.util
 import io
 import json
@@ -146,10 +145,7 @@ def login_client(retries=4):
 # --------------------------------------------------------------------- state
 
 
-def library_id(row):
-    """Must match carnegie_describe.py, or every description orphans."""
-    key = f"{row['name']}|{row['city']}|{row['region']}"
-    return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12]
+library_id = cp.library_id          # canonical definition in carnegie_post_preview.py
 
 
 def load_state():

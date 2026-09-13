@@ -29,6 +29,7 @@ Usage:
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import random
@@ -56,6 +57,18 @@ OPENED_DATE_RE = re.compile(
 # "Washington (state)" disambiguates an article, and the continental pages give
 # a continent where the row's own country column is the useful thing.
 CONTINENTS = {"Africa", "Europe", "Oceania", "the Caribbean"}
+
+
+def library_id(row):
+    """Stable identity, so descriptions and post state survive a roster rebuild.
+
+    Canonical here: carnegie_describe.py and everycarnegie_post.py both import
+    this module already (for typographic()/build() etc.), so they take this
+    rather than each keeping their own copy. A drifted copy would silently
+    orphan every stored description or state entry keyed on the other.
+    """
+    key = f"{row['name']}|{row['city']}|{row['region']}"
+    return hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
 
 
 _CPI = None

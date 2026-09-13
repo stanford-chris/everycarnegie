@@ -66,10 +66,7 @@ def main():
         rows = [r for r in csv.DictReader(f) if r["postable"] == "yes"]
     alt = json.loads((DATA / "alt_text.json").read_text()) if (DATA / "alt_text.json").exists() else {}
 
-    import hashlib
-
-    def lib_id(r):
-        return hashlib.sha1(f"{r['name']}|{r['city']}|{r['region']}".encode()).hexdigest()[:12]
+    lib_id = cp.library_id
 
     random.Random(args.seed).shuffle(rows)
     described = sum(1 for r in rows if lib_id(r) in alt)
@@ -81,11 +78,19 @@ def main():
 
     for r in rows[:args.count]:
         note = cp.clean_note(notes.get((r["name"], r["city"], r["region"]), ""))
-        text = cp.build(r, note)
+        text = cp.build(r)
+        # Each library is a two-post thread since 11 September 2026: the note
+        # is never on the first post, always a reply of its own (see
+        # carnegie_post_preview.note_post()). Shown here as a second bare
+        # post so this page still reflects everything that would go out.
+        reply = cp.note_post(r, note)
         entry = alt.get(lib_id(r))
         alt_html = (f"<p class=alt><b>Alt:</b> A.I.-written description: "
                     f"{html.escape(entry['visual'])}</p>" if entry and entry.get("visual")
                     else "<p class='alt pending'><b>Alt:</b> description not generated yet</p>")
+        reply_html = (f"<div class=post><p class=text>↳ {html.escape(reply)}</p>"
+                      f"<p class=meta><span>{len(reply)} chars</span></p></div>"
+                      if reply else "")
         parts.append(
             "<div class=post>"
             f"<p class=text>{html.escape(text)}</p>"
@@ -94,7 +99,7 @@ def main():
             f"<p class=meta><span>{len(text)} chars</span>"
             f"<span>{html.escape(r['licence'])}</span>"
             f"<span>{html.escape(r['image_source'])}</span></p>"
-            "</div>")
+            "</div>" + reply_html)
 
     parts.append("</div>")
     OUT.write_text("\n".join(parts), encoding="utf-8")
