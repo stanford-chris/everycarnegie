@@ -25,6 +25,17 @@ confirms the salutation used: Professor Oriel Prizeman, she/her.
 before it. If nothing has come by mid-September, one short follow-up is
 reasonable; the fallback needs no permission in the meantime.
 
+✅ **FOLLOW-UP SENT 15 September 2026**, same thread, same addresses. The
+`com.chrisstanford.shelflifefollowup` job fired at 09:00 as scheduled, mailed
+the reminder, deleted its own plist and boots itself out — confirmed gone from
+`launchctl list` and the plist absent from `~/Library/LaunchAgents` afterwards,
+so it will not nag again next September. Text as actually sent is in
+`data/shelf_life_followup_email.txt`; it drops the "back from leave" clause
+(unverified — Cardiff's term dates were never checked) and merges the no-rush
+sentence with a semicolon rather than two sentences. No reply yet. Per the
+job's own reasoning: one follow-up is reasonable, a second would not be — the
+two-file fallback stands if this goes unanswered too.
+
 If they say yes, the Cardiff credit has to go
 into the pinned post BEFORE the first British library posts from their records:
 everycarnegie_post.py builds that note in build_credits(), and it names only

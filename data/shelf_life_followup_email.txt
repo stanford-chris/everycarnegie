@@ -1,0 +1,16 @@
+To: Shelf-lifeproject@cardiff.ac.uk
+Cc: prizemano@cardiff.ac.uk
+Subject: Re: Carnegie Libraries of Britain: licensing the gazetteer data for a public-interest bot
+
+Dear Professor Prizeman,
+
+I wrote to you on 24 August about licensing the Carnegie Libraries of Britain gazetteer data for @everycarnegie.bsky.social, and wanted to check back.
+
+To recap briefly: I’m asking whether Cardiff would consider releasing the gazetteer data alone, not the photographs, under CC BY-SA 4.0 or CC BY 4.0, so it can sit alongside the Wikipedia-derived roster the bot already uses. If you’d rather keep your own licence on it, I’m just as happy to credit the project separately and keep the two files apart, as I said in the first letter.
+
+There’s no rush on this from my side; I just wanted to make sure the message reached you.
+
+With best wishes,
+
+Chris Stanford
+chris-stanford.com
