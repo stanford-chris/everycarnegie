@@ -388,7 +388,9 @@ def build_credits():
     # half-true admission is worse than none, so it goes with it.
     tb.text(f'\U0001f3db\ufe0f Included: The {postable:,} of 2,509 libraries with '
             'a free photo\n')
-    tb.text('\U0001f916 Image descriptions are A.I.-written.')
+    tb.text('\U0001f916 Image descriptions are A.I.-written.\n')
+    tb.text('\U0001f4bb Source: ')
+    tb.link('GitHub', 'https://github.com/stanford-chris/everycarnegie')
 
     # ⚠️ The preview at line 421 checks the 300-character limit for library
     # posts; nothing checked it here, so an overflow in this note would have
