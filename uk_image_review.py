@@ -34,7 +34,6 @@ Usage:
 import csv
 import html
 import json
-import os
 import urllib.parse
 from pathlib import Path
 

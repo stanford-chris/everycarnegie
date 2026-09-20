@@ -203,7 +203,6 @@ PLACEHOLDER = re.compile(
     r"placeholder|transparent|no[_ -]?image|noimage|blank\.|spacer|1x1|"
     r"^\s*image[_ ]?(?:missing|needed)", re.I)
 NAME_STOPWORDS = {"library", "public", "district", "central", "the"}
-REVIEW = os.path.join(DATA, "uk_image_review.json")
 
 # ⚠️ The one way a photograph gets in without the word Carnegie on it: somebody
 # looked. `data/approved_images.json` is written by hand after going through

@@ -6,7 +6,7 @@ Built from the live code, not from copies: the pinned note comes from
 build_credits(), the thread from launch_thread.POSTS, and the daily example
 from build_post() on a real row. What you read here is what would go out.
 """
-import html, importlib.util, json, hashlib, csv
+import html, importlib.util, json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent

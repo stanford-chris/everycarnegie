@@ -34,7 +34,6 @@ Usage:
 import argparse
 import csv
 import json
-import os
 import sys
 import threading
 import time
