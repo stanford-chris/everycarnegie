@@ -129,5 +129,22 @@ class CleanNote(unittest.TestCase):
         self.assertEqual(cp.clean_note("Opened: 1921"), "Opened: 1921")
 
 
+class DotAbbreviations(unittest.TestCase):
+    def test_the_cahuenga_address(self):
+        self.assertEqual(
+            cp.dot_abbreviations("4591 W Santa Monica Blvd, Los Angeles, CA 90029"),
+            "4591 W. Santa Monica Blvd., Los Angeles, CA 90029")
+
+    def test_a_lettered_street_is_not_a_direction(self):
+        self.assertEqual(cp.dot_abbreviations("464 B St, Biggs, CA 95917"),
+                         "464 B St., Biggs, CA 95917")
+        self.assertEqual(cp.dot_abbreviations("E St and 5th Ave"), "E St. and 5th Ave.")
+
+    def test_already_dotted_quadrants_and_states_are_left_alone(self):
+        for a in ("2 King St.", "200 Hand Ave. W.", "1360 Oak Avenue, St. Helena, CA 94574"):
+            self.assertEqual(cp.dot_abbreviations(a), a)
+        self.assertEqual(cp.dot_abbreviations("104 1st Ave NE"), "104 1st Ave. NE")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -283,13 +283,30 @@ def credit_name(who):
     return who
 
 
+# Street abbreviations take a period, his call on 25 September 2026 ("4591 W.
+# Santa Monica Blvd."). The roster is mixed (663 "St." against 92 bare "St"), so
+# the address is normalised here rather than in the data. Quadrants (NW, SE) and
+# state codes (CA) stay bare, as the roster's own dotted rows write them.
+STREET_ABBREVS = ("St", "Sts", "Str", "Ave", "Av", "Blvd", "Rd", "Dr", "Ln", "Pl",
+                  "Pkwy", "Hwy", "Sq", "Ct", "Cir", "Ter", "Mt", "Ft", "Jr")
+_STREET_ABBREV_RE = re.compile(r"\b(%s)\b(?!\.)" % "|".join(STREET_ABBREVS))
+# A lone N/S/E/W is a direction, unless a street type follows it, when it is the
+# street's own name: "464 B St", "E St".
+_DIRECTION_RE = re.compile(r"\b([NSEW])\b(?![.'’])(?!\s+(?:%s)\b)" % "|".join(STREET_ABBREVS))
+
+
+def dot_abbreviations(address):
+    address = _STREET_ABBREV_RE.sub(r"\1.", address)
+    return _DIRECTION_RE.sub(r"\1.", address)
+
+
 def compose(row, with_address=True):
     head = place(row)
     lines = [head + " 📚"]
 
     # Irish entries are identified by their street, so name and address are the
     # same string and the post said "Dingle" twice.
-    address = row["address"].strip()
+    address = dot_abbreviations(row["address"].strip())
     if with_address and address and address.lower() != head.split(",")[0].strip().lower():
         lines.append(address)
 
