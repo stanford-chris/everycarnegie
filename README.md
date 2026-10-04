@@ -32,10 +32,10 @@ Two independent checks say the US harvest is right: 1,681 against the documented
 1,689, and Indiana at 164, the figure Indiana is known for. Canada matches its
 documented 125 exactly.
 
-⚠️ Britain arrived on 19 August 2026 and is **partial by nature**: 245 public
-rows against a documented 660 for Britain and Ireland. It comes from bullet
-lists rather than tables, so it carries no addresses, no coordinates and no
-images, and 39 of the 247 have no date. See the Britain section below.
+⚠️ Britain is **partial by nature**: 245 public rows against a documented 660
+for Britain and Ireland. It comes from bullet lists rather than tables, so it
+carries no addresses, no coordinates and no images, and 39 of the 247 have no
+date. See the Britain section below.
 
 ```bash
 python3 carnegie_roster.py             # harvest and write the csv
@@ -63,11 +63,8 @@ $10,000 from Andrew Carnegie, February 2, 1903 (about $358,000 today)
   ↳ Contributing building in Seth Lore and Irwinton Historic District.
 ```
 
-**The note is always a reply, whether or not it would have fit on the first post**
-(11 September 2026). Until then it rode on the first post capped at 96 characters
-and cut again by the 300-character limit, so it went out mid-sentence:
-"Originally a public library on the Ohio…" on Athens, Ohio, with 38 characters still
-unused. A reply has the whole 300 to itself; 35 of the 1,004 notes exceed that and
+**The note is always a reply, whether or not it would have fit on the first post**,
+so it has the whole 300 characters to itself; 35 of the 1,004 notes exceed that and
 lose whole sentences from the end, never words. `note_post()` in
 `carnegie_post_preview.py` builds it, and a sentence is not allowed to end on an
 initial or an abbreviation ("Frank L. Packard", "Steel Co. and"). A row with no note
@@ -75,7 +72,7 @@ gets no reply. Hashtags stay on the first post: hashtag feeds index top-level po
 only.
 
 **"📍 Map" links the row's own `lat`/`lon` to Google Maps** (`https://www.google.com/maps?q=<lat>,<lon>`),
-when the row has them — only 31% do (see the coverage table above), so most posts carry no pin.
+when the row has them: only 31% do (see the coverage table above), so most posts carry no pin.
 It follows the address and shares its fate: tied to `with_address` rather than to whether an
 address line actually printed, and dropped together with the address if `build()`'s last-resort
 length trim needs the room.
@@ -93,25 +90,22 @@ name points at its Wikipedia article on the 25% of rows that have one, and
 only the name is linked, never the region appended after it.
 
 ⚠️ That 25% is the honest figure. Taking the link from the city cell as well
-lifts it to 91%, and those links go to the **town** — "Curepipe" the place,
+lifts it to 91%, and those links go to the **town**: "Curepipe" the place,
 not its library. A post whose title links to a town article is quietly wrong,
 so the link is only ever taken from a genuine library-name column.
 
 **The date reads in the library's own country's style**, via `format_date()`
 in `carnegie_post_preview.py`: United States rows get "February 2, 1903";
 every other country gets "2 February 1903", the day-month-year convention the
-other 16 countries in this corpus share. Changed 30 August 2026 from a single
-UK-style rendering used everywhere.
+other 16 countries in this corpus share.
 
-⚠️ **`HEADER_MAP` in `carnegie_roster.py` mapped only "notes" and "status" to
-the notes column until 30 August 2026, and Iowa's own page uses neither.**
-Iowa's tables header the column "Remarks", so all 108 of its rows — public and
-academic together — carried an empty note, silently dropping exactly the
-"razed in 1968" / "now the Cedar Rapids Museum of Art" / "demolished for
-construction of a new library" sentences a post exists to carry. `"remarks"`
-is now mapped too. Re-run `carnegie_roster.py` after any Wikipedia list page
-is added or refetched, and check the header list below for another
-unrecognised header before assuming the notes column is complete:
+⚠️ **`HEADER_MAP` in `carnegie_roster.py` decides which column becomes the
+note**: "notes", "status" and "remarks" (Iowa's word) all do. A list page that
+names the column anything else silently loses every "razed in 1968" or "now the
+Cedar Rapids Museum of Art" sentence a post exists to carry. Re-run
+`carnegie_roster.py` after any Wikipedia list page is added or refetched, and
+check the header list below for another unrecognised header before assuming the
+notes column is complete:
 ```bash
 python3 -c "
 import glob, re
@@ -137,35 +131,35 @@ fixed shuffled order (`data/post_state.json` tracks position and posted ids).
 
 Scheduled via launchd:
 
-- **`com.chrisstanford.everycarnegie`** — the daily poster, twice a day
+- **`com.chrisstanford.everycarnegie`**: the daily poster, twice a day
   (11 p.m. and 9 a.m. Asia/Seoul, timed for a mostly-American audience).
-- **`com.chrisstanford.everycarnegie-launch`** — `everycarnegie_launch.sh`,
+- **`com.chrisstanford.everycarnegie-launch`**: `everycarnegie_launch.sh`,
   the one-off opening thread (29 August 2026, spent). Pins the credits note,
   posts the two-post opening, then removes its own launchd job.
-- **`com.chrisstanford.everycarnegiemonthly`** — `everycarnegie_monthly.sh`,
+- **`com.chrisstanford.everycarnegiemonthly`**: `everycarnegie_monthly.sh`,
   a monthly re-sweep: re-check for photographs on libraries that had none
   (`carnegie_images.py --recheck-misses`), describe whatever turns up
   (`carnegie_describe.py`), then refresh the pinned credits count.
 
 `carnegie_describe.py` makes no model call of its own: it imports
 everylibrary's describer from `~/Scripts/everylibrary`, whose every `claude -p`
-call runs `--restricted --tools Read` since 11 September 2026, with each image
-staged alone in a directory the model has as its cwd. Unconfined, `claude -p`
-is an agent with a shell, and it was found in a sibling bot running the
-project's own code. The staging also means the describer no longer depends on
-the directory it was launched from, which `everycarnegie_monthly.sh` never set.
+call runs `--restricted --tools Read`, with each image staged alone in a
+directory the model has as its cwd. Unconfined, `claude -p` is an agent with a
+shell. The staging also means the describer does not depend on the directory it
+was launched from.
 
-`shelf_life_followup.sh` is a separate one-off (15 September 2026): a
-reminder email about the Britain gazetteer licensing request below. It
-self-deletes after sending.
+`shelf_life_followup.sh` was a one-off reminder about the Britain gazetteer
+licensing request below; it fired on 15 September 2026 and removed itself.
 
-## ⚠️ Britain is missing, and here is what it would take
+## ⚠️ Britain is partial, and here is what it would take
 
-**The 660 British Carnegie libraries are not in this roster.** Wikipedia's Europe
-page carries Ireland as a proper table, which is captured; Britain is not in
-table form and the harvester reads tables.
+**Most of the 660 British Carnegie libraries are not in this roster.**
+Wikipedia's Europe page carries Ireland as a proper table, which is captured.
+Britain is bullet lists, not tables, and `parse_uk_lists()` in
+`carnegie_roster.py` reads them: 247 rows (245 public, 2 academic), with names
+and mostly years but no addresses, coordinates or images.
 
-The wikitext is not unparseable prose, it just isn't a table:
+The two list shapes it handles:
 
 - **Scotland, Wales and Northern Ireland are one library per bullet**, with a
   name, a year and usually a wikilink:
@@ -173,12 +167,8 @@ The wikitext is not unparseable prose, it just isn't a table:
 - **England is a two-level list**, branches nested under their city:
   `* [[Coventry]]` then `** [[Earlsdon]] Library 1913.`
 
-A second parser for lists, alongside the existing one for tables, yields
-**about 225 entries**: England 92
-top-level plus 66 nested, Scotland 30, Wales 32, Northern Ireland 5.
-
-⚠️ **And a gazetteer nobody had found is on a public endpoint.** The AHRC
-"Shelf-Life" project at Cardiff, *Carnegie Libraries of Britain*, serves its
+⚠️ **A fuller gazetteer is on a public endpoint.** The AHRC
+"Shelf-Life" project at Cardiff, "Carnegie Libraries of Britain", serves its
 whole map from an ArcGIS FeatureServer: **621 records**, built from research
 lists supplied by the Carnegie UK Trust plus the statutory lists. 128 were never
 built, leaving 493 buildings, 451 still standing, 492 of them with coordinates,
@@ -192,8 +182,8 @@ requires the credit `© [creator] Cardiff University AHRC "Shelf Life" project
 
 ⚠️ **CC BY-SA and CC BY-NC-SA cannot both be satisfied by one file, and the
 UK's separate database right raises the bar further.** ShareAlike runs both
-directions — BY-SA forbids adding the non-commercial restriction, BY-NC-SA
-forbids dropping it — so the gazetteer's rows cannot be merged into
+directions (BY-SA forbids adding the non-commercial restriction, BY-NC-SA
+forbids dropping it), so the gazetteer's rows cannot be merged into
 `carnegie_roster.csv` (CC BY-SA) under either licence. The distinction that
 saves the two-file approach is Adapted Material versus a Collection: two
 files kept apart, each under its own licence, read side by side at run time,
@@ -203,21 +193,23 @@ compiled, verified database can carry the UK's separate database right, that
 is the stronger reason to ask rather than assume either way.
 
 The ask is therefore for the gazetteer data alone, under CC BY-SA or CC BY.
-Letter drafted in `shelf_life_email.py`.
+The letter (`shelf_life_email.py`) went on 24 August 2026 and a follow-up on
+15 September 2026 (`data/shelf_life_followup_email.txt`); no reply is recorded.
+Until one arrives, nothing that posts reads the gazetteer.
 
 Its photographs are all "© Oriel Prizeman" and reserved. That costs nothing: the
 bot's pictures come from Commons and have to be freely licensed to post at all.
 
 | Source | Yield | Verdict |
 |---|---|---|
-| Wikipedia's Europe list, parsed as lists | ~225 | ⭐ do this: same CC BY-SA licence as the rest, asks nobody |
+| Wikipedia's Europe list, parsed as lists | 247 | ✅ in the roster: same CC BY-SA licence as the rest |
 | Carnegie Libraries of Britain gazetteer | 621 records, 493 built | ⭐ ask: authoritative, but CC BY-NC-SA, which the roster cannot absorb |
 | Historic England / HES / Cadw statutory lists | listed buildings only | Open Government Licence. Verification, not a roster |
 | Columbia's digitised Carnegie Corporation records | primary source | settles a disputed date; not for bulk |
-| Miller, *Carnegie Grants for Library Buildings 1890–1917* (1943) | authoritative | print only |
-| Wikidata | 66 UK items, mostly hockey clubs | rejected, re-confirmed 19 Aug 2026 |
-| Commons subcategories | ~79 | rejected, unchanged |
-| everylibrary's UK corpus, matched on name | 5 | rejected, unchanged |
+| Miller, "Carnegie Grants for Library Buildings 1890–1917" (1943) | authoritative | print only |
+| Wikidata | 66 UK items, mostly hockey clubs | rejected |
+| Commons subcategories | ~79 | rejected |
+| everylibrary's UK corpus, matched on name | 5 | rejected |
 
 ⚠️ **Every name-based approach fails for one structural reason**, and it is why
 Wikidata and the name-match come back near zero: **British Carnegie libraries are
@@ -232,8 +224,7 @@ python3 britain_options.py && open data/britain_options.html
 
 ## Does the premise hold? `carnegie_verify.py`
 
-Every row is Wikipedia's claim that a building was Carnegie-funded, and nothing
-tested that until 19 August 2026.
+Every row is Wikipedia's claim that a building was Carnegie-funded. This tests it.
 
 ```bash
 python3 carnegie_verify.py            # report only
@@ -250,14 +241,14 @@ the list that named the building, so agreement is real evidence.
 **9 of 499 articles never mention Carnegie**, and the script blanks those links
 rather than dropping the rows: a library whose article turns out to be about a
 park is still a Carnegie library, it is the link that is wrong. Two were plainly
-wrong — Seward Park pointed at the park and Charleston at a 1748 subscription
-library — and about four are probably the right building with an incomplete
+wrong (Seward Park pointed at the park and Charleston at a 1748 subscription
+library) and about four are probably the right building with an incomplete
 article. The check cannot tell those apart, so it blanks all nine and loses four
 useful links out of 1,262.
 
 ⚠️ **Always request `redirects=1`.** Asking the API for an article by title
 without it returns the redirect page, not its target, and a redirect's entire
-content is one line — so a redirected library reads as an empty article with
+content is one line, so a redirected library reads as an empty article with
 no Carnegie mention, inflating the miss count fivefold.
 
 ⚠️ **77% of rows link no article at all**, and for them the only evidence is the
@@ -267,10 +258,9 @@ the roster is verified.
 ## ⚠️ Every generated page must declare its charset, first
 
 Safari reads a local `file://` page with no charset declaration as Latin-1, so
-every curly quote renders as `â€™`, every en dash as `â€“` and every ⚠️ as
-`âš ï¸`. Six of these pages shipped that way before it was noticed on 19 August
-2026. The declaration has to come **before** `<title>`, or the title is decoded
-before the parser reaches it:
+every curly quote renders as `â€™` and every en dash as `â€“`. The declaration
+has to come **before** `<title>`, or the title is decoded before the parser
+reaches it:
 
 ```python
 out = ['<meta charset="utf-8">', f"<title>…</title>", …]
@@ -285,7 +275,7 @@ does not show up until someone opens one in Safari.
 ## Header parsing gotchas, in `header_text`
 
 Three things bite header matching, and each one silently drops a whole column
-rather than erroring — a file that "looks complete" (right row count) can still
+rather than erroring: a file that "looks complete" (right row count) can still
 be missing data, so check per-column fill rates after adding or refetching a
 page. **Headers wrap with `<br>`** (e.g. "City or<br>town"), so `<br>` needs an
 explicit separator or "or" and "town" fuse into one unmatched key. **Footnote
